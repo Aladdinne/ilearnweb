@@ -1,0 +1,15 @@
+<style>
+table, th, td {
+  border: 3px solid black;
+  padding: 0px;
+}
+</style>
+<table>
+{% for i in cc %}
+<tr>
+<td>
+{{i.daterdv|date('Y-m-d')}}
+</td>
+</tr>
+{% endfor %}
+</table>

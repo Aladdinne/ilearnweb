@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<style>
+table, th, td {
+  border: 3px solid black;
+  padding: 0px;
+}
+</style>
+<table style="width:0%">
+{% for i in u %}
+<tr>
+<td style="width:70%">
+{{i.iduser}}
+</td>
+<td style="width:70%">
+{{i.nom}}
+</td>
+<td style="width:10px">
+{{i.username}}
+</td>
+<td style="width:10%">
+{{i.userpwd}}
+</td>
+<td style="width:70%">
+{{i.daten|date('Y-m-d')}}
+</td>
+<td style="width:70%">
+{{i.email}}
+</td>
+<td style="width:70%">
+{{i.Role}}
+</td>
+<td style="width:70%">
+supprimer
+</td>
+<td style="width:70%">
+supprimer
+</td>
+<td style="width:70%">
+supprimer
+</td>
+<td style="width:70%">
+modiffier
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
