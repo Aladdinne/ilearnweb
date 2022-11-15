@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<table border="1">
+<tr> 
+    <th> IdArticle</th>
+    <th> NomArticle</th>
+    <th> IdCreateur</th> 
+    <th> DateCreation</th>
+    <th> Contenu</th>
+    <th> EtatArticle</th>
+    <th> Supprimer</th>
+    <th> Modifier</th>
+</tr>
+{% for i in arc %}
+<tr>
+<td>
+{{i.idarticle}}
+</td>
+<td>
+{{i.nomarticle}}
+</td>
+<td>
+{{i.idcreateur}}
+</td>
+<td>
+{{i.datecreation|date('Y-m-d')}}
+</td>
+<td>
+{{i.contenu}}
+</td>
+<td>
+{{i.etatarticle}}
+</td>
+<td>
+<a href="{{path('Deletearticle',{'id':i.idarticle})}}">Spprimer</a>
+</td>
+<td>
+<a href="{{path('modifierarticle',{'id':i.idarticle})}}">Modifier</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

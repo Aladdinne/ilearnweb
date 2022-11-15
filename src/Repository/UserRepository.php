@@ -38,6 +38,11 @@ class UserRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function RechercheUser($username,$userpwd){
+        $em=$this->getEntityManager();
+        $query=$em->createQuery('select u fromApp\Entity\User u where u.username=:username and u.userpwd=:userpwd');
+        return $query->getResult();
+    }
 
 //    /**
 //     * @return User[] Returns an array of User objects

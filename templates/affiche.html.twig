@@ -1,46 +1,50 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
+{% block username %}
+{% for i in u %}
+{{i.username}}
+{% endfor %}
+{% endblock %}
 {% block body %}
-<style>
-table, th, td {
-  border: 3px solid black;
-  padding: 0px;
-}
-</style>
-<table style="width:0%">
+<table border="1">
+<tr> 
+    <th> IdUser</th>
+    <th> Nom</th>
+    <th> Username</th> 
+    <th> Userpwd</th>
+    <th> DateNaissance</th>
+    <th> Email</th>
+    <th> Role</th>
+    <th> Supprimer</th>
+    <th> Modifier</th>
+</tr>
 {% for i in u %}
 <tr>
-<td style="width:70%">
+<td>
 {{i.iduser}}
 </td>
-<td style="width:70%">
+<td>
 {{i.nom}}
 </td>
-<td style="width:10px">
+<td>
 {{i.username}}
 </td>
-<td style="width:10%">
+<td>
 {{i.userpwd}}
 </td>
-<td style="width:70%">
+<td>
 {{i.daten|date('Y-m-d')}}
 </td>
-<td style="width:70%">
+<td>
 {{i.email}}
 </td>
-<td style="width:70%">
+<td>
 {{i.Role}}
 </td>
-<td style="width:70%">
-supprimer
+<td>
+<a href="{{path('Deleteuser',{'id':i.iduser})}}">Spprimer</a>
 </td>
-<td style="width:70%">
-supprimer
-</td>
-<td style="width:70%">
-supprimer
-</td>
-<td style="width:70%">
-modiffier
+<td>
+<a href="{{path('modifieruser',{'id':i.iduser})}}">Modifier</a>
 </td>
 </tr>
 {% endfor %}

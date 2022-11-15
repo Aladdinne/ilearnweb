@@ -1,0 +1,87 @@
+{{form_start(f,{'attr':{'novalidate':'novalidate'}})}}
+<fieldset>
+<legend><centre><h2><b>INSCRIPTION ILEARN</b></h2></centre></legend><br>
+<style>
+h2 {color:red;}
+fieldset{background-image:url("{{asset('bg-image-gradient.jpg')}}");
+margin-top:10px;
+margin-left:400px;
+margin-right:400px;
+margin-buttom:10px;}
+body {background-image:url("{{asset('ima.jpg')}}");}
+</style>
+<table>
+<tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <td>{{form_label(f.nom,"Nom")}}</td>
+        <td>{{form_widget(f.nom)}}</td>
+        <td>{{form_errors(f.nom)}}</td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <td>{{form_label(f.username,"Username")}}</td>
+        <td>{{form_widget(f.username)}}</td>
+        <td>{{form_errors(f.username)}}</td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <td>{{form_label(f.userpwd,"Userpwd")}}</td>
+        <td>{{form_widget(f.userpwd)}}</td>
+        <td>{{form_errors(f.userpwd)}}</td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <td>{{form_label(f.daten,"DateNaissance")}}</td>
+        <td>{{form_widget(f.daten)}}</td>
+        <td>{{form_errors(f.daten)}}</td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <td>{{form_label(f.email,"Email")}}</td>
+        <td>{{form_widget(f.email)}}</td>
+        <td>{{form_errors(f.email)}}</td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <td>{{form_label(f.role,"Role")}}</td>
+        <td>{{form_widget(f.role)}}</td>
+        <td>{{form_errors(f.role)}}</td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+</table>
+{{form_end(f)}}
