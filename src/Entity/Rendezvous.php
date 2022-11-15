@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RendezvousRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RendezvousRepository::class)]
 class Rendezvous
@@ -15,26 +16,32 @@ class Rendezvous
     private ?int $idrdv = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank(message: 'post.blank_content')]
     private ?\DateTimeInterface $daterdv = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: 'post.blank_content')]
     private ?string $dureerdv = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'post.blank_content')]
     private ?int $tel = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: 'post.blank_content')]
+    #[Assert\Length(min: 10, minMessage: 'post.too_short_content')]
     private ? string $motif = null;
 
     #[ORM\Column(length: 150)]
-    private ?string $etatrdv = null;
+    private ?string $etatrdv = "en attendant";
 
     
-    #[ORM\ManyToOne(inversedBy: 'user')]
-    private ?User $idformateur = null;
+    #[ORM\Column]
+    private ?int $idformateur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?User $idclient = null;
+    #[ORM\Column]
+    #[Assert\NotBlank(message: 'post.blank_content')]
+    private ?int $idclient = null;
 
     public function getIdrdv(): ?int
     {
@@ -101,24 +108,24 @@ class Rendezvous
         return $this;
     }
 
-    public function getIdformateur(): ?User
+    public function getIdformateur(): ?int
     {
         return $this->idformateur;
     }
 
-    public function setIdformateur(?User $idformateur): self
+    public function setIdformateur(?int $idformateur): self
     {
         $this->idformateur = $idformateur;
 
         return $this;
     }
 
-    public function getIdclient(): ?User
+    public function getIdclient(): ?int
     {
         return $this->idclient;
     }
 
-    public function setIdclient(?User $idclient): self
+    public function setIdclient(?int $idclient): self
     {
         $this->idclient = $idclient;
 

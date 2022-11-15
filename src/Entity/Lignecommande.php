@@ -17,12 +17,12 @@ class Lignecommande
     private ?float $prix = null;
 
     
-    #[ORM\ManyToOne(inversedBy: 'lignecom')]
-    private ?Command $idcommand =  null;
+    #[ORM\Column]
+    private ?int $idcommand =  null;
 
    
-    #[ORM\ManyToOne(inversedBy: 'lignecomman')]
-    private ?Formation $idformation = null;
+    #[ORM\Column]
+    private ?int $idformation = null;
 
     public function getIdlignecommand(): ?int
     {
@@ -41,24 +41,24 @@ class Lignecommande
         return $this;
     }
 
-    public function getIdcommand(): ?Command
+    public function getIdcommand(): ?int
     {
         return $this->idcommand;
     }
 
-    public function setIdcommand(?Command $idcommand): self
+    public function setIdcommand(?int $idcommand): self
     {
         $this->idcommand = $idcommand;
 
         return $this;
     }
 
-    public function getIdformation(): ?Formation
+    public function getIdformation(): ?int
     {
         return $this->idformation;
     }
 
-    public function setIdformation(?Formation $idformation): self
+    public function setIdformation(?int $idformation): self
     {
         $this->idformation = $idformation;
 
