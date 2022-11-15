@@ -6,31 +6,33 @@ use App\Repository\ReclamationRepository;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private $idreclamation;
+    private ?int $idreclamation = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $datereclamation = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "ecrire le contenue")]
     private ?string $contenu = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "ecrire le contenue")]
     private ?string $etatreclamation = 'non-traite';
 
-    
-    #[ORM\OneToOne(inversedBy: 'rec')]
-    private ?User $iduser = null;
+    #[ORM\Column]
+    #[Assert\NotBlank(message: "ecrire votre Id")]
+    private ?int  $iduser = null;
 
-    
-    #[ORM\ManyToOne(inversedBy: 'categoryrec')]
-    private ?Categoryrec $idcategory = null;
+    #[ORM\Column]
+   // #[Assert\NotBlank(message: "entre un id valide")]
+    private ?int $idcategory = null;
 
     public function getIdreclamation(): ?int
     {
@@ -73,24 +75,24 @@ class Reclamation
         return $this;
     }
 
-    public function getIduser(): ?User
+    public function getIduser(): ?int
     {
         return $this->iduser;
     }
 
-    public function setIduser(?User $iduser): self
+    public function setIduser(int $iduser): self
     {
         $this->iduser = $iduser;
 
         return $this;
     }
 
-    public function getIdcategory(): ?Categoryrec
+   public function getIdcategory(): ?int
     {
         return $this->idcategory;
     }
 
-    public function setIdcategory(?Categoryrec $idcategory): self
+    public function setIdcategory(int $idcategory): self
     {
         $this->idcategory = $idcategory;
 

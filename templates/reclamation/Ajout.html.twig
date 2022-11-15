@@ -1,0 +1,40 @@
+{#{{form(f)}}#}   
+{{form_start(f,{'attr':{'novalidate':'novalidate'}})}}
+<fieldset>
+<table>
+<style>
+  .error{
+    color: red;
+}
+</style>
+</head>
+<body>
+
+<h1>Ajouter un reclamation</h1>
+<form name="clubForm" method="post">
+
+
+    <tr>
+        <td>{{form_label(f.datereclamation,"Date")}}</td>
+        <td>{{form_widget(f.datereclamation)}}</td>
+        <td>{{form_errors(f.datereclamation)}}</td>
+    </tr>
+   {# <tr>
+        <td>{{form_label(f.etatreclamation,"changer l'etat")}}</td>
+        <td>{{form_widget(f.etatreclamation)}}</td>
+        <td>{{form_errors(f.etatreclamation)}}</td>
+    </tr> #}
+    <tr>
+        <td>{{form_label(f.contenu,"Contenue de votre reclamation")}}</td>
+        <td>{{form_widget(f.contenu)}}</td>
+        <td>{{form_errors(f.contenu)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(f.iduser,"Votre Id")}}</td>
+        <td>{{form_widget(f.iduser)}}</td>
+        <td>{{form_errors(f.iduser)}}</td>
+    </tr>
+ 
+</table>
+{{form_end(f)}} 
+ </fieldset>   

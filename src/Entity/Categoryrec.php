@@ -12,6 +12,7 @@ class Categoryrec
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $idcategory = null;
+    
 
     #[ORM\Column(length: 150)]
     private ?string $category = null;

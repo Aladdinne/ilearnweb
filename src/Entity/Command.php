@@ -25,7 +25,7 @@ class Command
     private ?string $etat = null;
 
     
-    #[ORM\ManyToOne(inversedBy: 'command')]
+    #[ORM\ManyToOne(inversedBy: 'comm')]
     private ?User $iduser;
 
     public function getIdcommand(): ?int

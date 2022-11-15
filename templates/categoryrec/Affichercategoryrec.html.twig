@@ -1,0 +1,28 @@
+<table border ="1">
+<tr>
+<th>idcategory</th>
+<th>iduser</th>
+<th>nom</th>
+<th>name</th>
+<th>category</th>
+<th>supprimer</th>
+<th>update</th>
+</tr>
+{% for i in cc %}
+
+    <tr>
+    <td>{{i.idcategory}}</td>
+    {% for j in ff %}
+    {% for r in rr %}
+{% if i.idcategory == r.idcategory and r.iduser == j.iduser  %}
+      <td>{{j.iduser}}</td>
+       <td>{{j.nom}}</td>
+    <td>{{j.username}}</td>
+    {% endif %}
+     {% endfor %}
+    {% endfor %}
+    <td>{{i.category}}</td>
+    <td><a href="{{path('DD1',{id:i.idcategory})}}">delete</td>
+    </tr>
+{% endfor %}
+</table>

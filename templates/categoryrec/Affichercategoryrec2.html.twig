@@ -1,0 +1,17 @@
+<table border ="1">
+<tr>
+<th>idcategory</th>
+<th>category</th>
+<th>Suprimer</th>
+<th>Modifier</th>
+</tr>
+{% for i in kk %}
+
+    <tr>
+    <td>{{i.idcategory}}</td>
+    <td>{{i.category}}</td>
+     <td><a href="{{path('DD12',{id:i.idcategory})}}">delete</td>
+    <td><a href="{{path('update1',{id:i.idcategory})}}">update</td>
+    </tr>
+{% endfor %}
+</table>
