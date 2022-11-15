@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\CommandRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
 class Command
@@ -25,8 +28,18 @@ class Command
     private ?string $etat = null;
 
     
-    #[ORM\ManyToOne(inversedBy: 'command')]
-    private ?User $iduser;
+    #[ORM\Column]
+   /* #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'iduser')]
+    #[ORM\JoinTable(
+        name: 'iduser',
+        joinColumns: [
+            new ORM\JoinColumn(name: 'command', referencedColumnName: 'iduser'),
+        ],
+        inverseJoinColumns: [
+            new ORM\JoinColumn(name: 'user', referencedColumnName: 'iduser'),
+        ],
+    )]*/
+    private int $iduser;
 
     public function getIdcommand(): ?int
     {
@@ -69,12 +82,12 @@ class Command
         return $this;
     }
 
-    public function getIduser(): ?User
+    public function getIduser(): ?int
     {
         return $this->iduser;
     }
 
-    public function setIduser(?User $iduser): self
+    public function setIduser(?int $iduser): self
     {
         $this->iduser = $iduser;
 

@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "indexs.html.twig" %}
 {% block body %}
 <style>
 table, tr, td ,th {
@@ -12,19 +12,13 @@ table{
 tr{
   height:30%;
 }
-.icon{
-  border: black;
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 30px 20px 620px 10px;
-  cursor: pointer;
-}
+
 </style>
+<h4>Votre Elements Commande.</h4>
 <table>
+<th>Prix</th>
+<th>Nom De Formation</th>
+<th>Action</th>
 {% for i in ll %}
 <tr>
 <td>
@@ -35,10 +29,10 @@ tr{
 <td>
 {{j.nomformation}}
 </td>
+<td><a href="{{path('removeLigne',{id:i.idlignecommand})}}">Remove</td>
 {% endif %}
 {% endfor %}
 </tr>
 {% endfor %}
 </table>
-<button class="icon"><a href="{{path('ffs')}}">Retour</button>
 {% endblock %}

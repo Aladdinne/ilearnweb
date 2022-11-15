@@ -1,0 +1,30 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+<style>
+table{
+    width:100%;
+    height:30%;
+    
+}
+td{
+    padding:10px;
+}
+h3{
+    color:black;
+    padding:10px;
+}
+label{
+    text-shadow: 2px  ;
+    color:black;
+}
+fieldset{
+    margin-left:400px;
+    margin-right:550px;
+    margin-bottom:1px;
+    padding:30px;
+}
+</style>
+<fieldset>
+{{form(ff)}}
+</fieldset>
+{% endblock %}
