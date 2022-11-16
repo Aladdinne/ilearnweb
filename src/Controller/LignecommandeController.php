@@ -62,6 +62,6 @@ class LignecommandeController extends AbstractController
         $em=$doctrine->getManager();
         $em->remove($lignecommande);
         $em->flush();
-        return $this->redirectToRoute('fff');
+        return $this->redirectToRoute('fcc');
     }
 }

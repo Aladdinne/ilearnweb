@@ -25,13 +25,14 @@ th{
 <th>Description</th>
 <th>Duree</th>
 <th>Action</th>
+{% set somme = 0 %}
 {% for i in ll %}
-<tr>
-<td>
-{{i.prix}}
-</td>
 {% for j in ff %}
 {% if i.idformation == j.idformation %}
+<tr>
+<td>
+{{j.prix}}
+</td>
 <td>
 {{j.nomformation}}
 </td>
@@ -42,10 +43,12 @@ th{
 {{j.duree}}
 </td>
 <td><a href="{{path('removeLigne',{id:i.idlignecommand})}}">Remove</td>
+{% set somme = somme+ j.prix %}
 {% endif %}
 {% endfor %}
 </tr>
 {% endfor %}
 </table>
+<h5>Total : {{somme}} DT</h5> 
 <button class="icon"><a href="{{path('fff')}}">Retour</button>
 {% endblock %}
