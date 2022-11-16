@@ -1,4 +1,4 @@
-{% extends "indexs.html.twig" %}
+{% extends "base.html.twig" %}
 {% block body %}
 <style>
 table, tr, td ,th {
@@ -17,7 +17,13 @@ th{
   text-shadow: 3px;
   background-color: #3215;
 }
+fieldset{
+    margin-right:200px;
+    padding:30px;
+}
 </style>
+<fieldset>
+<h3>Les RendezVous : </h3>
 <table>
 <tr>
 <th>Nom Client
@@ -31,11 +37,10 @@ th{
 <th>Motif</th>
 <th>Etat</th>
 <th>Modifier</th>
-<th>Supprimer</th>
 </tr>
 <tr>
-{% for i in rr %}
-{% for j in cc %}
+{% for i in rrr %}
+{% for j in ccc %}
 {% if i.idclient == j.iduser %}
 <td>
 {{j.nom}}
@@ -55,11 +60,10 @@ th{
 <td>
 {{i.etatrdv}}
 </td>
-        <td><a href="{{path('Updaterdv',{id:i.idrdv})}}">Modifier</td>
-        <td><a href="{{path('removerdv',{id:i.idrdv})}}">Remove</td>
+        <td><a href="{{path('Updaterdvv',{id:i.idrdv})}}">Modifier</td>
 </tr>
 {% endfor %}
 </table>
-<button type="button"><a href="{{path('ajoutrendezvous')}}">Ajoute</button>
+</fieldset>
 {% endblock %}
 

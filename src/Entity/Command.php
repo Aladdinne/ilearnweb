@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommandRepository;
 use DateTimeInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -22,9 +23,12 @@ class Command
     private ?DateTimeInterface $datecommand = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'post.blank_content')]
+    #[Assert\Length(min: 2, minMessage: 'post.too_short_content')]
     private ?int $total = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: 'post.blank_content')]
     private ?string $etat = null;
 
     

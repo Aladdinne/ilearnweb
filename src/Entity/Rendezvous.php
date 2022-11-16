@@ -25,6 +25,7 @@ class Rendezvous
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'post.blank_content')]
+    #[Assert\Length(min: 8,max: 8 ,maxMessage : 'post.too_long_content',minMessage: 'post.too_short_content')]
     private ?int $tel = null;
 
     #[ORM\Column(length: 150)]
@@ -33,6 +34,8 @@ class Rendezvous
     private ? string $motif = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: 'post.blank_content')]
+    #[Assert\Length(min: 5, minMessage: 'post.too_short_content')]
     private ?string $etatrdv = "en attendant";
 
     

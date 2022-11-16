@@ -46,6 +46,13 @@ class CommandController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('fff');
     }
+    #[Route('/DeleteCommande/{id}', name:'removeCommande')]
+    function delete1(ManagerRegistry $doctrine,Command $command){
+        $em=$doctrine->getManager();
+        $em->remove($command);
+        $em->flush();
+        return $this->redirectToRoute('ffs');
+    }
     #[Route('/Ajoutcommand',name:'ajoutcommand')]
     function Ajout(ManagerRegistry $doctrine,Request $request){
         $command=new Command;
@@ -81,7 +88,7 @@ class CommandController extends AbstractController
             $em=$doctrine->getManager();
             $em->persist($command);
             $em->flush();
-            return $this->redirectToRoute('ffs');
+            return $this->redirectToRoute('fff');
         }
         return $this->render('command/Ajoutclient.html.twig',['ff'=>$form->createView()]);
         
