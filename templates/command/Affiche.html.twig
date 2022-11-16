@@ -4,6 +4,11 @@
 table, tr, td ,th {
   border: 3px solid black;
   padding-left: 20px;  
+  text-align: center;
+}
+th{
+  background-color: #3215;
+  
 }
 table{
     width:100%;
@@ -12,8 +17,16 @@ table{
 tr{
   height:30%;
 }
+fieldset{
+  margin-left:300 px;
+  padding-right:200px;
+}
 
 </style>
+<fieldset>
+<h3>Les Commandes :
+
+</h3>
 <table>
 <tr>
 <th>User
@@ -26,7 +39,6 @@ tr{
 </th>
 <th>Detail</th>
 <th>Modifier</th>
-<th>Supprimer</th>
 </tr>
 {% for i in cc %}
 <tr>
@@ -48,10 +60,9 @@ tr{
 </td>
         <td><a href="{{path('fc',{id:i.idcommand})}}">Detail</td>
         <td><a href="{{path('Updatee',{id:i.idcommand})}}">Modifier</td>
-        <td><a href="{{path('removee',{id:i.idcommand})}}">Remove</td>
 </tr>
 {% endfor %}
 </table>
-<button type="button"><a href="{{path('ajoutcommand')}}">Ajoute</button>
+</fieldset>
 {% endblock %}
 

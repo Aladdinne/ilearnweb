@@ -18,13 +18,38 @@ label{
     color:black;
 }
 fieldset{
-    margin-left:400px;
+    margin-left:200px;
     margin-right:550px;
     margin-bottom:1px;
     padding:30px;
 }
 </style>
 <fieldset>
-{{form(ff)}}
+{{form_start(ff,{'attr':{'novalidate':'novalidate'}})}}
+<fieldset>
+<h3>    Ajouter Commande :</h3>
+<table>
+    <tr>
+        <td>{{form_label(ff.datecommand,"Date:  ")}}</td>
+        <td>{{form_widget(ff.datecommand)}}</td>
+        <td>{{form_errors(ff.datecommand)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(ff.total,"Total:  ")}}</td>
+        <td>{{form_widget(ff.total)}}</td>
+        <td>{{form_errors(ff.total)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(ff.etat,"Etat:  ")}}</td>
+        <td>{{form_widget(ff.etat)}}</td>
+        <td>{{form_errors(ff.etat)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(ff.iduser,"Iduser:   ")}}</td>
+        <td>{{form_widget(ff.iduser)}}</td>
+        <td>{{form_errors(ff.iduser)}}</td>
+    </tr>
+</table>
+{{form_end(ff)}}
 </fieldset>
 {% endblock %}

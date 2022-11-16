@@ -12,19 +12,21 @@ table{
 tr{
   height:30%;
 }
+th{
+  color:black;
+  text-shadow: 3px;
+  background-color: #3215;
+}
 .icon{
-  border: black;
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 30px 20px 620px 10px;
-  cursor: pointer;
+  margin: 40px 10px 700px 10px; 
 }
 </style>
+<h4>Elements Commande.</h4>
 <table>
+<th>Prix</th>
+<th>Nom De Formation</th>
+<th>Description</th>
+<th>Duree</th>
 {% for i in ll %}
 <tr>
 <td>
@@ -34,6 +36,12 @@ tr{
 {% if i.idformation == j.idformation %}
 <td>
 {{j.nomformation}}
+</td>
+<td>
+{{j.description}}
+</td>
+<td>
+{{j.duree}}
 </td>
 {% endif %}
 {% endfor %}

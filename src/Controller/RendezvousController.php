@@ -28,6 +28,12 @@ class RendezvousController extends AbstractController
         $rendezvous = $rep->findall();
         return $this->render('rendezvous/Affiche1.html.twig',['rr'=>$rendezvous,'cc'=>$user]);
     }
+    #[Route('/AfficheRendezvouss',name:'fffr')]
+    function Affiche1 (RendezvousRepository $rep,UserRepository $repp ){
+        $user = $repp->findAll();
+        $rendezvous = $rep->findall();
+        return $this->render('rendezvous/Affiche.html.twig',['rrr'=>$rendezvous,'ccc'=>$user]);
+    }
     #[Route('/Ajoutrendezvous',name:'ajoutrendezvous')]
     function Ajout(ManagerRegistry $doctrine,Request $request){
         $rendezvous=new Rendezvous;
@@ -67,5 +73,20 @@ class RendezvousController extends AbstractController
   return $this->redirectToRoute('ffr');
   }
   return $this->render('rendezvous/Ajoutrdv.html.twig',['ff'=>$form->createView()]);
+    }
+    #[Route('/Updaterdvv/{id}', name:'Updaterdvv')]
+    function Updatee(ManagerRegistry $doctrine,Rendezvous $rendezvous,Request $req){
+      $form=$this->createFormBuilder($rendezvous)
+      ->add('etatrdv')
+      ->add('Update',SubmitType::class)
+    ->getForm();  
+
+  $form->handleRequest($req);
+  if($form->isSubmitted() && $form->isValid()){
+      $em=$doctrine->getManager();
+      $em->flush();
+  return $this->redirectToRoute('fffr');
+  }
+  return $this->render('rendezvous/Ajoutrdvv.html.twig',['ff'=>$form->createView()]);
     }
 }

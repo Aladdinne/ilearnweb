@@ -80,7 +80,7 @@
                             <a href="detail.html" class="dropdown-item">Course Detail</a>
                             <a href="feature.html" class="dropdown-item">Our Features</a>
                             <a href="Afficheco" class="dropdown-item">Mes Commande</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="AfficheRendezvous" class="dropdown-item">Mes RendezVous</a>
                         </div>
                     </div>
                     <a href="Ajoutrendezvous" class="nav-item nav-link">Demande-Rendezvous!</a>
@@ -118,10 +118,10 @@
     </div>
     <!-- Header End -->
 
-
+    {% block body %}
     <!-- About Start -->
     <div class="container-fluid py-5">
-    {% block body %}
+    
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
@@ -164,10 +164,10 @@
                 </div>
             </div>
         </div>
-        {% endblock %}
+        
     </div>
     <!-- About End -->
-
+    {% endblock %}
 
     <!-- Feature Start -->
     <div class="container-fluid bg-image" style="margin: 90px 0;">
