@@ -1,16 +1,6 @@
-{% extends 'indexs.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block body %}
 {{form_start(f,{'attr':{'novalidate':'novalidate'}})}}
-<fieldset>
-<legend><centre><h2><b>INSCRIPTION ILEARN</b></h2></centre></legend><br>
-<style>
-h2 ,td{color:red;}
-fieldset{background-image:url("{{asset('image.jpg')}}");
-margin-top:10px;
-margin-left:400px;
-margin-right:400px;
-margin-buttom:10px;}
-</style>
 <table>
 <tr></tr>
     <tr></tr>
@@ -84,6 +74,5 @@ margin-buttom:10px;}
     <tr></tr>
     <tr></tr>
     <tr></tr>
-</table>
 {{form_end(f)}}
 {% endblock %}

@@ -76,7 +76,28 @@ class UserController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('AfficheUser');
         }
-        return $this->render('user/Ajouteuser.html.twig',['f'=>$form->createView()]);
+        return $this->render('user/AjouteuserAdmin.html.twig',['f'=>$form->createView()]);
+
+    }
+    #[Route('/aj')]
+    function AjoutUserAdmin(ManagerRegistry $doctrine,Request $request){
+        $user=new User();
+        $form=$this->createFormBuilder($user)->add('nom')
+        ->add('username')
+        ->add('userpwd',PasswordType::class)
+        ->add('daten')
+        ->add('email')
+        ->add('role',ChoiceType::class,['choices' => ['formateur','etudiant','admin',],])
+        ->add('Ajouter',SubmitType::class)
+        ->getForm();
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$doctrine->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('AfficheUser');
+        }
+        return $this->render('user/AjouteuserAdmin.html.twig',['f'=>$form->createView()]);
 
     }
     /*

@@ -75,12 +75,10 @@
                     <a href="about.html" class="nav-item nav-link">About</a>
                     <a href="course.html" class="nav-item nav-link">Courses</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Articles</a>
                         <div class="dropdown-menu m-0">
-                            <a href="detail.html" class="dropdown-item">Course Detail</a>
-                            <a href="feature.html" class="dropdown-item">Our Features</a>
-                            <a href="team.html" class="dropdown-item">Instructors</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="Ajoutearticle" class="dropdown-item">Ajouter</a>
+                            <a href="Articleaccepte" class="dropdown-item">Afficher</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -232,7 +230,7 @@
             <div class="courses-item position-relative">
                 <img class="img-fluid" src="{{asset('img/courses-1.jpg')}}" alt="">
                 <div class="courses-text">
-                    <h4 class="text-center text-white px-3">Web design & development courses for beginners</h4>
+                    <h4 class="text-center text-white px-3">{% block  article %}Web design & development courses for beginners {% endblock %}</h4>
                     <div class="border-top w-100 mt-3">
                         <div class="d-flex justify-content-between p-4">
                             <span class="text-white"><i class="fa fa-user mr-2"></i>Jhon Doe</span>
@@ -240,10 +238,11 @@
                         </div>
                     </div>
                     <div class="w-100 bg-white text-center p-4" >
-                        <a class="btn btn-primary" href="detail.html">Course Detail</a>
+                        <a class="btn btn-primary" href="detail.html">Article Detail</a>
                     </div>
                 </div>
             </div>
+            <!--
             <div class="courses-item position-relative">
                 <img class="img-fluid" src="{{asset('img/courses-2.jpg')}}" alt="">
                 <div class="courses-text">
@@ -319,6 +318,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
         <div class="row justify-content-center bg-image mx-0 mb-5">
             <div class="col-lg-6 py-5">

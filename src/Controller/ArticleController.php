@@ -41,7 +41,7 @@ class ArticleController extends AbstractController
         $article=new Article();
         $form=$this->createFormBuilder($article)->add('nomarticle')
         ->add('idcreateur')
-        ->add('datecreation')
+        //->add('datecreation')
         ->add('contenu')
         ->add('Ajout',SubmitType::class)
         ->getForm();
@@ -56,7 +56,8 @@ class ArticleController extends AbstractController
     }
     #[Route('/Modifierarticle/{id}',name:'modifierarticle')]
     function ModifierArticle(ManagerRegistry $doctrine,Request $request,Article $article){
-        $form=$this->createFormBuilder($article)->add('nomarticle')
+        $form=$this->createFormBuilder($article)->add('idarticle')
+        ->add('nomarticle')
         ->add('idcreateur')
         ->add('datecreation')
         ->add('contenu')
@@ -69,8 +70,15 @@ class ArticleController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('Affichearticle');
         }
-        return $this->render('Ajoute.html.twig',['f'=>$form->createView()]);
+        return $this->render('article/modifierarcadmin.html.twig',['f'=>$form->createView()]);
 
     }
-    
+    #[Route('/Articleaccepte')]
+    public function Articleaccepter(ArticleRepository $rep){
+        $article = new Article();
+        $etatarticle='accepté';
+        $article = $rep->articleaccepte($etatarticle);
+        return $this->render('article/articleaccepte.html.twig',['arc'=>$article]);
+
+    }
 }

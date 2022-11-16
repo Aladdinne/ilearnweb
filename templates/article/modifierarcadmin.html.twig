@@ -1,8 +1,18 @@
-{% extends 'indexs.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block body %}
 {{form_start(f,{'attr':{'novalidate':'novalidate'}})}}
 <table>
-<tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <td>{{form_label(f.idarticle,"IdArticle")}}</td>
+        <td>{{form_widget(f.idarticle)}}</td>
+        <td>{{form_errors(f.idarticle)}}</td>
+    </tr>
     <tr></tr>
     <tr></tr>
     <tr></tr>
@@ -29,6 +39,16 @@
     <tr></tr>
     <tr></tr>
     <tr>
+        <td>{{form_label(f.datecreation,"Date Creation")}}</td>
+        <td>{{form_widget(f.datecreation)}}</td>
+        <td>{{form_errors(f.datecreation)}}</td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
         <td>{{form_label(f.contenu,"Contenu")}}</td>
         <td>{{form_widget(f.contenu)}}</td>
         <td>{{form_errors(f.contenu)}}</td>
@@ -38,6 +58,16 @@
     <tr></tr>
     <tr></tr>
     <tr></tr>
-</table>
+     <tr>
+        <td>{{form_label(f.etatarticle,"Etat")}}</td>
+        <td>{{form_widget(f.etatarticle)}}</td>
+        <td>{{form_errors(f.etatarticle)}}</td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    </table>
 {{form_end(f)}}
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -16,6 +17,7 @@ class Article
     private ?int $idarticle = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message:"Doit saisir un Titre") ]
     private ?string $nomarticle = null;
 
     #[ORM\Column]
@@ -25,6 +27,7 @@ class Article
     private ?DateTimeInterface $datecreation = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message:"Doit saisir un contenu") ]
     private ?string $contenu = null;
 
     #[ORM\Column(length: 150)]
@@ -57,6 +60,12 @@ class Article
         $this->idcreateur = $idcreateur;
 
         return $this;
+    }
+    public function __construct()
+    {
+        $datetime=new \DateTime('now');
+        $this->date =date_format($datetime, 'Y-m-d');
+        // $this->date =  new \DateTime('now');
     }
 
     public function getDatecreation(): ?\DateTimeInterface

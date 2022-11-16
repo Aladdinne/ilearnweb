@@ -38,6 +38,13 @@ class ArticleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function articleaccepte(String $etat){
+        return $this->createQueryBuilder('a')
+        ->where('a.etatarticle = :etat')
+        ->setParameter('etat',$etat)
+        ->getQuery()
+        ->getResult();
+    }
 
 //    /**
 //     * @return Article[] Returns an array of Article objects
