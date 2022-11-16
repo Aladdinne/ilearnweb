@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\ReclamationRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\String_;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Date;
+
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
 {
@@ -15,8 +19,8 @@ class Reclamation
     #[ORM\Column]
     private ?int $idreclamation = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?DateTimeInterface $datereclamation = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?DateTime $datereclamation = null;
 
     #[ORM\Column(length: 150)]
     #[Assert\NotBlank(message: "ecrire le contenue")]
@@ -38,6 +42,12 @@ class Reclamation
     {
         return $this->idreclamation;
     }
+    public function __construct()
+{
+    $datetime=new \DateTime('now');
+    $this->date =date_format($datetime, 'Y-m-d');
+   // $this->date =  new \DateTime('now');
+}
 
     public function getDatereclamation(): ?\DateTimeInterface
     {
@@ -46,7 +56,7 @@ class Reclamation
 
     public function setDatereclamation(?\DateTimeInterface $datereclamation): self
     {
-        $this->datereclamation = $datereclamation;
+        $this->datereclamation =$datereclamation;
 
         return $this;
     }

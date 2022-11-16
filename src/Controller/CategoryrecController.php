@@ -81,7 +81,7 @@ class CategoryrecController extends AbstractController
            $em->persist($categoryrec);
            $em->flush();
 
-           return $this->redirectToRoute ('affic');
+           return $this->redirectToRoute ('ajoutreclamation');
        }
      return $this->render ('categoryrec/Ajoutcategoryrec.html.twig',['ff'=>$form->createView()]);
    }

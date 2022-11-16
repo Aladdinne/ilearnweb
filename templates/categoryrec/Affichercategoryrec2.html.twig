@@ -1,4 +1,6 @@
-<table border ="1">
+{% extends "indexs.html.twig" %}
+{% block body %}
+<table border ="1"style="border:1px solid black;margin-left:auto;margin-right:auto;" class="table table-striped table-dark">
 <tr>
 <th>idcategory</th>
 <th>category</th>
@@ -15,3 +17,4 @@
     </tr>
 {% endfor %}
 </table>
+{% endblock %}
