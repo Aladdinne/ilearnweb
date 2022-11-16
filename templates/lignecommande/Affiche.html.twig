@@ -8,6 +8,7 @@ table, tr, td ,th {
 table{
     width:100%;
     height:30%;
+    margin:20px;
 }
 tr{
   height:30%;
@@ -18,22 +19,28 @@ th{
   background-color: #3215;
 }
 .icon{
-  margin: 40px 10px 700px 10px; 
+  margin: 40px 100px 700px 300px; 
+}
+fieldset{
+  margin-right:300px;
 }
 </style>
+<fieldset>
 <h4>Elements Commande.</h4>
 <table>
 <th>Prix</th>
 <th>Nom De Formation</th>
 <th>Description</th>
 <th>Duree</th>
+{% set somme = 0 %}
 {% for i in ll %}
 <tr>
-<td>
-{{i.prix}}
-</td>
+
 {% for j in ff %}
 {% if i.idformation == j.idformation %}
+<td>
+{{j.prix}}
+</td>
 <td>
 {{j.nomformation}}
 </td>
@@ -43,10 +50,13 @@ th{
 <td>
 {{j.duree}}
 </td>
+{% set somme = somme+ j.prix %}
 {% endif %}
 {% endfor %}
 </tr>
 {% endfor %}
 </table>
+<h5>Total : {{somme}} DT</h5> 
 <button class="icon"><a href="{{path('ffs')}}">Retour</button>
+</fieldset>
 {% endblock %}

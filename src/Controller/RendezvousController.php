@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Rendezvous;
 use App\Form\RendezvousType;
+use App\Form\RendezvoussType;
 use App\Repository\UserRepository;
 use App\Repository\RendezvousRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -76,10 +77,8 @@ class RendezvousController extends AbstractController
     }
     #[Route('/Updaterdvv/{id}', name:'Updaterdvv')]
     function Updatee(ManagerRegistry $doctrine,Rendezvous $rendezvous,Request $req){
-      $form=$this->createFormBuilder($rendezvous)
-      ->add('etatrdv')
-      ->add('Update',SubmitType::class)
-    ->getForm();  
+      $form=$this->createForm(RendezvoussType::class,$rendezvous)
+      ->add('Update',SubmitType::class) ; 
 
   $form->handleRequest($req);
   if($form->isSubmitted() && $form->isValid()){
@@ -89,4 +88,5 @@ class RendezvousController extends AbstractController
   }
   return $this->render('rendezvous/Ajoutrdvv.html.twig',['ff'=>$form->createView()]);
     }
+
 }
