@@ -1,0 +1,11 @@
+{% extends "indexs.html.twig" %}
+
+{% form_theme ajoutevn 'bootstrap_5_horizontal_layout.html.twig' %}
+{% block body %}
+				<h2>Ajouter un Evenement </h2>
+
+{{ form_start(ajoutevn,{'attr': {'novalidate': 'novalidate'}} ) }}
+{{ form_widget(ajoutevn)}}
+{{ form_end(ajoutevn)}}
+
+{% endblock %}

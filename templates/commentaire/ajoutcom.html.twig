@@ -1,0 +1,17 @@
+
+
+{% extends "indexs.html.twig" %}
+
+{% form_theme ajoutcomm 'bootstrap_5_horizontal_layout.html.twig' %}
+{% block body %}
+
+				
+				<h2>Ajouter un commentaire </h2>
+
+{{ form_start(ajoutcomm,{'attr': {'novalidate': 'novalidate'}} ) }}
+{{ form_widget(ajoutcomm)}}
+{{ form_end(ajoutcomm)}}
+
+{% endblock %}
+
+

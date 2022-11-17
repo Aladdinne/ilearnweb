@@ -1,0 +1,69 @@
+
+
+
+
+
+
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+<style>
+table, tr, td ,th {
+  border: 3px solid black;
+  padding-left: 25px;  
+}
+table{
+    width:100%;
+    height:30%;
+}
+tr{
+  height:30%;
+}
+button{
+  padding-left:20px;
+  padding-top:120px;
+  padding-right:20px;
+}
+</style>
+
+<table>
+				<h2> Liste des événements </h2>
+
+<tr>
+<th>Type événement</th>
+<th>Sujet événement</th>
+<th>créateur dévènement</th>
+
+<th>lieux</th>
+<th>date</th>
+<th>heure</th>
+<th>Delete</th>
+<th>Update</th>
+</tr>
+{% for ev in afevn %}
+
+<tr>
+<td> {{ev.nomEvenement	}} </td>
+
+<td>  {{ev.sujetev}}     </td>
+ <td> {{ev.nomcreateurev}} </td>
+
+<td> {{ev.lieuev}} </td>
+<td> {{ev.dateev|date('Y-m-d')}} </td>
+<td> {{ev.heureev|date('h-i-s')}} </td>
+
+<td>    <a href="{{path('dlev',{id:ev.idevenement})}} "> Delete    </a>  </td>
+<td>    <a href="{{path('edev',{id:ev.idevenement})}} "> Update    </a>  </td>
+
+
+
+
+
+</tr>
+
+{% endfor %}
+</table>
+<button type="button"><a href="{{path('yes')}}">Ajoute</button>
+{% endblock %}

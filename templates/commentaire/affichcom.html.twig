@@ -1,0 +1,31 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+
+
+<h2>Liste des comentaires </h2>
+
+
+
+
+{% for x in xx %}
+
+
+                        <h3>Commentaire de {{x.nickname}}</h3>
+						<div>{{x.contentcommentaire}}</div>
+
+
+
+
+   <a href="{{path('dlcom',{id:x.idcommentaire})}} "> Delete    </a> 
+   <a href="{{path('edcom',{id:x.idcommentaire})}} "> Update    </a>  
+{% endfor %}
+ <button type="button"><a href="{{path('non')}}">Ajouter commentaire</button>
+
+{% endblock %}
+
+
+
+
+
+
+
