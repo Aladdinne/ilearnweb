@@ -16,26 +16,26 @@ class Rendezvous
     private ?int $idrdv = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank(message: 'post.blank_content')]
+    #[Assert\GreaterThan("today" )]
     private ?\DateTimeInterface $daterdv = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: 'post.blank_content')]
+    #[Assert\NotBlank(message: 'Ecrire une duree')]
     private ?string $dureerdv = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'post.blank_content')]
-    #[Assert\Length(min: 8,max: 8 ,maxMessage : 'post.too_long_content',minMessage: 'post.too_short_content')]
+    #[Assert\NotBlank(message: 'Ecrire votre numéro de telephone')]
+    #[Assert\Length(min: 8,max: 15 ,maxMessage : 'post.too_long_content',minMessage: 'contenu court min 8 caractere')]
     private ?int $tel = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: 'post.blank_content')]
-    #[Assert\Length(min: 10, minMessage: 'post.too_short_content')]
+    #[Assert\NotBlank(message: 'Ecrire un motif')]
+    #[Assert\Length(min: 10, minMessage: 'contenu court min 10 caractere')]
     private ? string $motif = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: 'post.blank_content')]
-    #[Assert\Length(min: 5, minMessage: 'post.too_short_content')]
+    #[Assert\NotBlank(message: 'Ecrire etat')]
+    #[Assert\Length(min: 5, minMessage: 'contenu court min 5 caractere')]
     private ?string $etatrdv = "en attendant";
 
     
@@ -134,6 +134,7 @@ class Rendezvous
 
         return $this;
     }
+    
 
 
 }

@@ -42,7 +42,7 @@ th{
 <td>
 {{j.duree}}
 </td>
-<td><a href="{{path('removeLigne',{id:i.idlignecommand})}}">Remove</td>
+<td><a href="{{path('removeLigne',{id:i.idlignecommand,idc:i.idcommand})}}">Remove</td>
 {% set somme = somme+ j.prix %}
 {% endif %}
 {% endfor %}
