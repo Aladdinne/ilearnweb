@@ -3,9 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -32,6 +33,9 @@ class User
 
     #[ORM\Column(length: 150)]
     private ?string $role = null;
+
+    #[ORM\OneToMany(targetEntity: Reclamation::class, mappedBy: 'iduser')]
+    private Collection $rec;
 
     public function getIduser(): ?int
     {
@@ -109,6 +113,20 @@ class User
 
         return $this;
     }
+    public function __construct()
+    {
+        $this->rec = new ArrayCollection();
+    }
+    
+    /**
+     * @return Collection<int, Reclamation>
+     */
+    public function getReclamation(): Collection
+    {
+        return $this->rec;
+    }
+   
+
 
 
 }

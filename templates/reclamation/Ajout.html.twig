@@ -1,0 +1,54 @@
+{#{{form(f)}}#} 
+ {% extends "indexs.html.twig" %}
+{% block body %} 
+{{form_start(f,{'attr':{'novalidate':'novalidate'}})}}
+<fieldset>
+<table>
+<legend><centre><h2><b>Ajouter un reclamation</b></h2></centre></legend><br>
+<style>
+h2 ,td{color:red;}
+fieldset{background-image:url("{{asset('image.jpg')}}");
+margin-top:10px;
+margin-left:400px;
+margin-right:400px;
+margin-buttom:10px;}
+#rc-anchor-content{
+    margin-left:700px;
+}
+</style>
+
+
+{#<h1>Ajouter un reclamation</h1>
+<form name="clubForm" method="post">#}
+
+
+    {#<tr>
+        <td>{{form_label(f.datereclamation,"Date")}}</td>
+        <td>{{form_widget(f.datereclamation)}}</td>
+        <td>{{form_errors(f.datereclamation)}}</td>
+    </tr>#}
+    {# <tr>
+        <td>{{form_label(f.etatreclamation,"changer l'etat")}}</td>
+        <td>{{form_widget(f.etatreclamation)}}</td>
+        <td>{{form_errors(f.etatreclamation)}}</td>
+    </tr> #}
+   <tr>
+        <td>{{form_label(f.contenu,"Contenue de votre reclamation")}}</td>
+        <td>{{form_widget(f.contenu)}}</td>
+        <td>{{form_errors(f.contenu)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(f.iduser,"Votre Id")}}</td>
+        <td>{{form_widget(f.iduser)}}</td>
+        <td>{{form_errors(f.iduser)}}</td>
+    </tr>
+     <tr>
+        
+        <td>{{form_widget(f.captcha)}}</td>
+        <td>{{form_errors(f.captcha)}}</td>
+    </tr>
+ 
+</table>
+{{form_end(f)}} 
+ </fieldset>   
+ {% endblock %}

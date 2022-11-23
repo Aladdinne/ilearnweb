@@ -129,6 +129,32 @@
                         <img class="position-absolute w-100 h-100" src="{{asset('img/about.jpg')}}" style="object-fit: cover;">
                     </div>
                 </div>
+                <script src="https://www.google.com/recaptcha/api.js?render=<siteKey>"></script>
+
+<script>
+const siteKey = '*****************-**-******-******';
+
+//either on page load
+grecaptcha.ready(function() {
+    grecaptcha.execute(siteKey, {
+        action: 'homepage'
+    }).then(function(token) {
+        //the token will be sent on form submit
+        $('[name="captcha"]').val(token);
+        //keep in mind that token expires in 120 seconds so it's better to add setTimeout.
+    });
+});
+
+//or on form post:
+grecaptcha.ready(function() {
+    grecaptcha.execute(siteKey, {
+        action: 'homepage'
+    }).then(function(token) {
+        //submit the form
+        return http.post(url, {email, captcha: token});
+    });
+});
+</script>
                 <div class="col-lg-7">
                     <div class="section-title position-relative mb-4">
                         <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">About Us</h6>
