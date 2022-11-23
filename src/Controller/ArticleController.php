@@ -3,10 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLabel;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceValue;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -37,10 +43,13 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('Affichearticle');
     }
     #[Route('/Ajoutearticle')]
-    function AjoutArticle(ManagerRegistry $doctrine,Request $request){
+    function AjoutArticle(ManagerRegistry $doctrine,Request $request,UserRepository $repo){
+        $user = new User();
+        $user = $repo->findAll();
         $article=new Article();
         $form=$this->createFormBuilder($article)->add('nomarticle')
         ->add('idcreateur')
+        //->add('idcreateur',EntityType::class,['class'=>User::class,'choice_label'=>'iduser',])
         //->add('datecreation')
         ->add('contenu')
         ->add('Ajout',SubmitType::class)
@@ -56,12 +65,12 @@ class ArticleController extends AbstractController
     }
     #[Route('/Modifierarticle/{id}',name:'modifierarticle')]
     function ModifierArticle(ManagerRegistry $doctrine,Request $request,Article $article){
-        $form=$this->createFormBuilder($article)->add('idarticle')
-        ->add('nomarticle')
-        ->add('idcreateur')
-        ->add('datecreation')
-        ->add('contenu')
-        ->add('etatarticle',ChoiceType::class,['choices' => ['non_traité','accepté','refusée',],])
+        $form=$this->createFormBuilder($article)->add('etatarticle',ChoiceType::class,['choices' => ['non_traité','accepté','refusée',],])
+        //>add('idarticle')
+        //->add('nomarticle')
+        //->add('idcreateur')
+        //->add('datecreation')
+        //->add('contenu')
         ->add('Modifier',SubmitType::class)
         ->getForm();
         $form->handleRequest($request);

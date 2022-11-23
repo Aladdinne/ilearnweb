@@ -14,6 +14,7 @@ use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class UserController extends AbstractController
 {
@@ -55,6 +56,37 @@ class UserController extends AbstractController
             $em=$doctrine->getManager();
             $em->persist($user);
             $em->flush();
+            $mail = new PHPMailer(true);
+
+            $mail->isSMTP();// Set mailer to use SMTP
+            $mail->CharSet = "utf-8";// set charset to utf8
+            $mail->SMTPAuth = true;// Enable SMTP authentication
+            $mail->SMTPSecure = 'tls';// Enable TLS encryption, ssl also accepted
+
+            $mail->Host = 'smtp.gmail.com';// Specify main and backup SMTP servers
+            $mail->Port = 587;// TCP port to connect to
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+            $mail->isHTML(true);// Set email format to HTML
+
+            $mail->Username = 'benabdallah.jalel@esprit.tn';// SMTP username
+            $mail->Password = '213JMT6794';// SMTP password
+
+            $mail->setFrom('benabdallah.jalel@esprit.tn', 'Benabdallah Jalel');//Your application NAME and EMAIL
+            $mail->Subject = 'Inscription ILEARN';//Message subject
+            //echo $request->request->get('nomA');
+           // $mail->MsgHTML('bien créer');// Message body
+            $mail->Body = '<h1>Inscription</h1>';
+
+            $mail->addAddress($user->getEmail());// Target email
+
+
+           $mail->send();
             return $this->redirectToRoute('AfficheUser',['u'=>$usera]);
         }
         return $this->render('user/Ajouteuser.html.twig',['f'=>$form->createView()]);
@@ -100,7 +132,8 @@ class UserController extends AbstractController
         return $this->render('user/AjouteuserAdmin.html.twig',['f'=>$form->createView()]);
 
     }
-    /*
+    
+    
     #[Route('/Auth')]
     public function auth(Request $req,UserRepository $rep){
         $user = new User();
@@ -111,11 +144,8 @@ class UserController extends AbstractController
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid()){
             $user1= new User();
-            $user1=$rep->RechercheUser($user->getUsername(),$user->getUserpwd());
-            if(strcmp($user1->getRole(),"admin"){
-                return $this->redirectToRoute('AfficheUser');
-            }
+            
         }
         return $this->render('user/auth.html.twig',['fo'=>$form->createView()]);
-    }*/
+    }
 }

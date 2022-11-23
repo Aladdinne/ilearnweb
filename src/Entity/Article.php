@@ -18,16 +18,24 @@ class Article
 
     #[ORM\Column(length: 150)]
     #[Assert\NotBlank(message:"Doit saisir un Titre") ]
+    #[Assert\Length(
+        min: 5,
+        max: 15,
+        minMessage:'le title doit contenir au min 5 caractère',
+        maxMessage:'e title doit contenir au min 15 caractère',)]
     private ?string $nomarticle = null;
 
     #[ORM\Column]
-    private $idcreateur;
+    private ?int $idcreateur;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $datecreation = null;
 
     #[ORM\Column(length: 150)]
     #[Assert\NotBlank(message:"Doit saisir un contenu") ]
+    #[Assert\Length(
+        min: 100,
+        minMessage:'l article doit contenir plus',)]
     private ?string $contenu = null;
 
     #[ORM\Column(length: 150)]
