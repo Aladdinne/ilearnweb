@@ -23,13 +23,13 @@ class Command
     private ?DateTimeInterface $datecommand = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'post.blank_content')]
-    #[Assert\Length(min: 2, minMessage: 'post.too_short_content')]
+    #[Assert\NotBlank(message: 'Ecrire total')]
+    #[Assert\Length(min: 2, minMessage: 'Contenue est vide')]
     private ?int $total = null;
 
     #[ORM\Column(length: 150)]
     #[Assert\NotBlank(message: 'post.blank_content')]
-    private ?string $etat = null;
+    private ?string $etat = "encour";
 
     
     #[ORM\Column]

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Rendezvous;
+use App\Entity\User;
 use App\Form\RendezvousType;
 use App\Form\RendezvoussType;
 use App\Repository\UserRepository;
@@ -12,7 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\HttpFoundation\Request;
+
+use function PHPSTORM_META\type;
 
 class RendezvousController extends AbstractController
 {
@@ -38,6 +43,7 @@ class RendezvousController extends AbstractController
     #[Route('/Ajoutrendezvous',name:'ajoutrendezvous')]
     function Ajout(ManagerRegistry $doctrine,Request $request){
         $rendezvous=new Rendezvous;
+        $user=new User;
         $form=$this->createFormBuilder($rendezvous)
             ->add('daterdv')
             ->add('dureerdv')

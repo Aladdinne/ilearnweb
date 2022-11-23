@@ -9,15 +9,20 @@ use App\Entity\User;
 use App\Repository\LignecommandeRepository;
 use App\Repository\FormationRepository;
 use App\Repository\CommandRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\Persistence\ManagerRegistry;
+use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class LignecommandeController extends AbstractController
 {
+    
     #[Route('/lignecommande', name: 'app_lignecommande')]
     public function index(): Response
     {
@@ -57,11 +62,89 @@ class LignecommandeController extends AbstractController
     }
     return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
       }
-      #[Route('/DeleteLignecommande/{id}', name:'removeLigne')]
-    function delete(ManagerRegistry $doctrine,Lignecommande $lignecommande){
+      #[Route('/DeleteLignecommande/{id}/{idc}', name:'removeLigne')]
+    function delete(ManagerRegistry $doctrine,Lignecommande $lignecommande,$id,$idc){
         $em=$doctrine->getManager();
         $em->remove($lignecommande);
         $em->flush();
-        return $this->redirectToRoute('fcc');
+        $pdo =  new PDO('mysql:host=localhost;dbname=ilearn;charset=utf8', 'root', '', [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
+        $sql="UPDATE `command` SET  `total` = (SELECT SUM(prix) FROM lignecommande WHERE idcommand = $idc) WHERE `command`.`idcommand` =$idc ;";
+        $smt = $pdo->query($sql);
+        
+        return $this->redirectToRoute('fcc',array('id'=> $idc));
     }
+    
+
+   /* public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }*/
+    
+    
+    #[Route('/Add/{id}', name:'addl')]
+    function add($id,SessionInterface $session){
+       /* $session = $this->requestStack->getSession();*/
+        $panier = $session->get('panier',[]);
+            
+        $pdo =  new PDO('mysql:host=localhost;dbname=ilearn;charset=utf8', 'root', '', [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
+
+        $sqll =  "SELECT MAX(idcommand)  FROM command ;";
+        $stm = $pdo->query($sqll);
+        $idc= $stm->fetch();
+        $sql ="INSERT INTO `lignecommande` (`idlignecommand`, `idcommand`, `idformation`, `prix`) VALUES (NULL,( SELECT MAX(idcommand)  FROM command ), $id, (SELECT prix FROM formation WHERE idformation=$id));";
+        
+        
+        if(!empty($panier[$id])){
+            
+            $panier[$id] = 1;
+            
+            
+        }else{
+            $panier[$id] = 1;
+            $smt = $pdo->query($sql);
+            
+        }
+        $session->set('panier',$panier);
+        /*dd($session->get('panier'));*/
+        return $this->redirectToRoute ('fmn');
+        
+    }
+    #[Route('/panier',name:'pan-cart')]
+    public function panier(SessionInterface $session,FormationRepository $formationRepository){
+        $panier = $session->get('panier',[]);
+        $panierWithData = [];
+        
+        foreach($panier as $id =>$quantity){
+            $panierWithData[] = [ 'product' => $formationRepository->find($id),
+                                   'qunatity' =>$quantity
+        ];
+                
+        }
+        $total=0;
+        foreach($panierWithData as $item){
+            $totalItem = $item['product']->getPrix();
+            $total += $totalItem;
+        }
+       /* dd($panierWithData);*/
+        return $this->render('lignecommande/elem.html.twig', ['items' => $panierWithData,'total' => $total]);
+    }
+
+    #[Route('/Removepanier/{id}', name:'removepanier')]
+    public function remove ($id,SessionInterface $session){
+        $panier = $session->get('panier',[]);
+        if(!empty($panier[$id])){
+            unset($panier[$id]);
+        }
+        $session->set('panier',$panier);
+
+        return $this->redirectToRoute("pan-cart");
+    }
+
+    
 }
