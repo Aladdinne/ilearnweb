@@ -6,8 +6,12 @@ use App\Repository\FormationRepository;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
+#[UniqueEntity('nomformation',message: "Cette formation existe déja")]
 class Formation
 {
     #[ORM\Id]
@@ -16,21 +20,33 @@ class Formation
     private ?int $idformation = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "veillez remplir ce champ ")]
+    #[Assert\Length(min: 6,minMessage: "veillez avoir au moins 6 charactère")]
     private ?string $nomformation = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "veillez remplir ce champ")]
+    #[Assert\Length(min: 8,minMessage: "veillez avoir au moins 8 charactère")]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\GreaterThanOrEqual('today',message: "veillez ")]
+
     private ?DateTimeInterface $datecreation = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "veillez remplir ce champ")]
+    #[Assert\Time(message: "vérifiez le format de la durée")]
     private ?string $duree = null;
 
     #[ORM\Column(length: 150)]
+
     private ?string $category = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "veillez remplir un prix")]
+    #[Assert\Positive(message: "veillez remplir un prix valide")]
+
     private ?float $prix = null;
 
     public function getIdformation(): ?int

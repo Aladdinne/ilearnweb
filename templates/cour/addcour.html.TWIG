@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+{% form_theme FormCour 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+
+    {{ form_start(FormCour, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(FormCour) }}
+    {{ form_end(FormCour) }}
+
+
+
+
+
+{% endblock  %}

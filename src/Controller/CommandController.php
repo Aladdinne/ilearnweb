@@ -50,12 +50,12 @@ class CommandController extends AbstractController
     function Ajout(ManagerRegistry $doctrine,Request $request){
         $command=new Command;
         $form=$this->createFormBuilder($command)
-        ->add('datecommand')
-        ->add('total')
-        ->add('etat', ChoiceType::class, [ 'choices' => [ 'passé', 'encour', 'expidié' , ], ])
-        ->add('iduser')
-        ->add('Ajout',SubmitType::class)
-        ->getForm();
+            ->add('datecommand')
+            ->add('total')
+            ->add('etat', ChoiceType::class, [ 'choices' => [ 'passé', 'encour', 'expidié' , ], ])
+            ->add('iduser')
+            ->add('Ajout',SubmitType::class)
+            ->getForm();
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em=$doctrine->getManager();
@@ -64,18 +64,18 @@ class CommandController extends AbstractController
             return $this->redirectToRoute('ffs');
         }
         return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
-        
-      }
-      #[Route('/Ajoutcommandd',name:'ajoutcommandd')]
+
+    }
+    #[Route('/Ajoutcommandd',name:'ajoutcommandd')]
     function Ajoutt(ManagerRegistry $doctrine,Request $request){
         $command=new Command;
         $form=$this->createFormBuilder($command)
-        ->add('datecommand')
-        ->add('total')
-        ->add('etat', ChoiceType::class, [ 'choices' => [ 'passé', 'encour', 'expidié' , ], ])
-        ->add('iduser')
-        ->add('Ajout',SubmitType::class)
-        ->getForm();
+            ->add('datecommand')
+            ->add('total')
+            ->add('etat', ChoiceType::class, [ 'choices' => [ 'passé', 'encour', 'expidié' , ], ])
+            ->add('iduser')
+            ->add('Ajout',SubmitType::class)
+            ->getForm();
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em=$doctrine->getManager();
@@ -84,20 +84,19 @@ class CommandController extends AbstractController
             return $this->redirectToRoute('ffs');
         }
         return $this->render('command/Ajoutclient.html.twig',['ff'=>$form->createView()]);
-        
-      }
-      #[Route('/Update/{id}', name:'Updatee')]
-      function Update(ManagerRegistry $doctrine,Command $command,Request $req){
-        $form=$this->createForm(CommandType::class,$command)
-        ->add('Update',SubmitType::class);       
-    $form->handleRequest($req);
-    if($form->isSubmitted() && $form->isValid()){
-        $em=$doctrine->getManager();
-        $em->flush();
-    return $this->redirectToRoute('ffs');
+
     }
-    return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
-      }
-  
+    #[Route('/Update/{id}', name:'Updatee')]
+    function Update(ManagerRegistry $doctrine,Command $command,Request $req){
+        $form=$this->createForm(CommandType::class,$command)
+            ->add('Update',SubmitType::class);
+        $form->handleRequest($req);
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$doctrine->getManager();
+            $em->flush();
+            return $this->redirectToRoute('ffs');
+        }
+        return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
     }
 
+}

@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+{% form_theme FormFormation 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+
+    {{ form_start(FormFormation, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(FormFormation) }}
+    {{ form_end(FormFormation) }}
+
+
+
+
+
+{% endblock  %}
