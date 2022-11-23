@@ -7,9 +7,9 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use PhpParser\Node\Expr\Cast\String_;
+//use PhpParser\Node\Expr\Cast\String_;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\Date;
+//use Symfony\Component\Validator\Constraints\Date;
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
@@ -24,12 +24,15 @@ class Reclamation
 
     #[ORM\Column(length: 150)]
     #[Assert\NotBlank(message: "ecrire le contenue")]
+    #[Assert\Length(min:8,max:150,maxMessage:'le contenue est trop long',minMessage:'Le contenue est tres court')]
     private ?string $contenu = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: "ecrire le contenue")]
+    #[Assert\NotBlank(message: "Modifier l'etat")]
     private ?string $etatreclamation = 'non-traite';
 
+    #[ORM\Column]
+     private ?string $captcha=null;
     #[ORM\Column]
     #[Assert\NotBlank(message: "ecrire votre Id")]
     private ?int  $iduser = null;
@@ -46,7 +49,7 @@ class Reclamation
 {
     $datetime=new \DateTime('now');
     $this->date =date_format($datetime, 'Y-m-d');
-   // $this->date =  new \DateTime('now');
+ 
 }
 
     public function getDatereclamation(): ?\DateTimeInterface
@@ -108,6 +111,23 @@ class Reclamation
 
         return $this;
     }
+     /**
+      * Get the value of captcha
+      */ 
+     public function getCaptcha()
+     {
+          return $this->captcha;
+     }
 
+     /**
+      * Set the value of captcha
+      *
+      * //return  self
+      */ 
+     public function setCaptcha($captcha)
+     {
+          $this->captcha = $captcha;
 
+          return $this;
+     }
 }

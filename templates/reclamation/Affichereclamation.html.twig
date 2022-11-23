@@ -27,6 +27,12 @@
     <td>{{i.contenu}}</td>
     <td>{{i.etatreclamation}}</td>
     <td><a href="{{path('DD',{id:i.idreclamation})}}">delete</td>
+    <td>
+    <select>
+    <option value ="nontraite">non-traite</option>
+    <option value ="traite">traite</option>
+    </select>
+    </td>
     <td><a href="{{path('updatereclamationuser',{id:i.idreclamation})}}">update</td>
     </tr>
 {% endfor %}

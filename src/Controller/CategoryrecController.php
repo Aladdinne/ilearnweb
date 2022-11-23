@@ -26,7 +26,7 @@ class CategoryrecController extends AbstractController
             'controller_name' => 'CategoryrecController',
         ]);
     }
-    /*#[Route('/Affichecateg',name:'aff1')]
+    #[Route('/Affichecateg',name:'aff1')]
     function Affichecateg(CategoryrecRepository $repo,UserRepository $repp,ReclamationRepository $rep1){
         $categoryrec = new Categoryrec();
         $user=new User();
@@ -36,7 +36,7 @@ class CategoryrecController extends AbstractController
         $reclamation=$rep1->findAll();
         return $this->render('categoryrec/Affichercategoryrec.html.twig',
        ['cc'=>$categoryrec,'ff'=>$user,'rr'=>$reclamation]);
-    }*/
+    }
     #[Route('/Affiche2',name:'affic')]
     function Affiche(ManagerRegistry $doctrine){
         $categoryrec=$doctrine->getRepository(Categoryrec::class)->findAll();
@@ -59,19 +59,19 @@ class CategoryrecController extends AbstractController
 
         return $this->redirectToRoute ('affic');
    }
-  /* #[Route('/Ajoutcate2')]
-   function Ajout2(CategoryrecRepository $repo,Request $req){
+  /*#[Route('/Ajoutcate2')]
+   function Ajoutcate2(CategoryrecRepository $repo1,Request $reque):Response {
        $categoryrec=new Categoryrec();
        $form=$this->createForm(CategoryrecType::class,$categoryrec)->add('Ajout',SubmitType::class);
-       $form->handleRequest($req);
+       $form->handleRequest($reque);
        if($form->isSubmitted() && $form->isValid()){
-          $repo->add($categoryrec,true);
+          $repo1->add($categoryrec,true);
 
          return $this->redirectToRoute ('affic');
        }
        return $this->render ('categoryrec/Ajoutcategoryrec.html.twig',['ff'=>$form->createView()]);   
    }*/
-   #[Route('/Ajout3')]
+   #[Route('/Ajout3',name:'ajoutcateg')]
    function Ajout(ManagerRegistry $doctrine,Request $request){
        $categoryrec=new Categoryrec();
        $form=$this->createFormBuilder($categoryrec)->add('category',ChoiceType::class, [ 'choices' => [ 'avis', 'feeeedback', 'rapport' ,'autre' ], ])->add('Ajout',SubmitType::class)->getForm();

@@ -1,4 +1,6 @@
 {#{{form(ff)}}       #}
+{% extends "indexs.html.twig" %}
+{% block body %}
 {{form_start(ff,{'attr':{'novalidate':'novalidate'}})}}
 <fieldset>
 <table>
@@ -16,3 +18,5 @@
 </table>
 {{form_end(ff)}} 
  </fieldset>   
+ <button type="button"><a href="{{path('affic')}}">Consuter les caregorie</button>
+ {% endblock %}

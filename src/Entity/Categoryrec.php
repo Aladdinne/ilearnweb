@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryrecRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CategoryrecRepository::class)]
 class Categoryrec
 {
@@ -15,6 +15,7 @@ class Categoryrec
     
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "selectionner le type")]
     private ?string $category = null;
 
     public function getIdcategory(): ?int

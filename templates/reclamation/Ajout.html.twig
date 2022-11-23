@@ -12,6 +12,9 @@ margin-top:10px;
 margin-left:400px;
 margin-right:400px;
 margin-buttom:10px;}
+#rc-anchor-content{
+    margin-left:700px;
+}
 </style>
 
 
@@ -38,6 +41,11 @@ margin-buttom:10px;}
         <td>{{form_label(f.iduser,"Votre Id")}}</td>
         <td>{{form_widget(f.iduser)}}</td>
         <td>{{form_errors(f.iduser)}}</td>
+    </tr>
+     <tr>
+        
+        <td>{{form_widget(f.captcha)}}</td>
+        <td>{{form_errors(f.captcha)}}</td>
     </tr>
  
 </table>
