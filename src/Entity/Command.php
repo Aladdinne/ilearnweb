@@ -33,16 +33,6 @@ class Command
 
     
     #[ORM\Column]
-   /* #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'iduser')]
-    #[ORM\JoinTable(
-        name: 'iduser',
-        joinColumns: [
-            new ORM\JoinColumn(name: 'command', referencedColumnName: 'iduser'),
-        ],
-        inverseJoinColumns: [
-            new ORM\JoinColumn(name: 'user', referencedColumnName: 'iduser'),
-        ],
-    )]*/
     private int $iduser;
 
     public function getIdcommand(): ?int
