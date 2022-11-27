@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+//include './vendor/autoload.php';
+
 use App\Entity\Rendezvous;
 use App\Entity\User;
 use App\Form\RendezvousType;
@@ -16,7 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Twilio\Rest\Client;
 use function PHPSTORM_META\type;
 
 class RendezvousController extends AbstractController
@@ -29,10 +32,12 @@ class RendezvousController extends AbstractController
         ]);
     }
     #[Route('/AfficheRendezvous',name:'ffr')]
-    function Affiche (RendezvousRepository $rep,UserRepository $repp ){
+    function Affiche (SessionInterface $session,RendezvousRepository $rep,UserRepository $repp ){
         $user = $repp->findAll();
+        $auth = $session->get('auth',[]);
+        $id = $auth->getIduser();
         $rendezvous = $rep->findall();
-        return $this->render('rendezvous/Affiche1.html.twig',['rr'=>$rendezvous,'cc'=>$user]);
+        return $this->render('rendezvous/Affiche1.html.twig',['rr'=>$rendezvous,'cc'=>$user,'ii'=>$id]);
     }
     #[Route('/AfficheRendezvouss',name:'fffr')]
     function Affiche1 (RendezvousRepository $rep,UserRepository $repp ){
@@ -41,24 +46,40 @@ class RendezvousController extends AbstractController
         return $this->render('rendezvous/Affiche.html.twig',['rrr'=>$rendezvous,'ccc'=>$user]);
     }
     #[Route('/Ajoutrendezvous',name:'ajoutrendezvous')]
-    function Ajout(ManagerRegistry $doctrine,Request $request){
+    function Ajout(SessionInterface $session,ManagerRegistry $doctrine,Request $request){
         $rendezvous=new Rendezvous;
+        $auth = $session->get('auth',[]);
         $user=new User;
         $form=$this->createFormBuilder($rendezvous)
             ->add('daterdv')
             ->add('dureerdv')
             ->add('tel')
             ->add('motif')
-            ->add('idclient')
+           // ->add('idclient') 
             ->add('Ajout',SubmitType::class)
         ->getForm();
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+          /*  $sid    = "AC40a2bf2c3b42a8ca159c39d88298e173"; 
+            $token  = "5cd0d08a1668034921f512ba9d316c75"; 
+            $twilio = new Client($sid, $token); 
+     
+            $twilio->messages 
+                      ->create("+21692108297", 
+                               array("from" => "+14302492629",    
+                                   "body" => "Votre demande a été traitée" 
+                               ) 
+                      ); */
+           $rendezvous->setIdclient($auth->getIduser());
             $em=$doctrine->getManager();
             $em->persist($rendezvous);
             $em->flush();
             return $this->redirectToRoute('ffr');
         }
+        /* 
+       
+ 
+        //print($message->sid);*/
         return $this->render('rendezvous/Ajoutrdv.html.twig',['ff'=>$form->createView()]);
         
       }

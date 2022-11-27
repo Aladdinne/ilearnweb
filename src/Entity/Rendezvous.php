@@ -43,7 +43,6 @@ class Rendezvous
     private ?int $idformateur = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'post.blank_content')]
     private ?int $idclient = null;
 
     public function getIdrdv(): ?int

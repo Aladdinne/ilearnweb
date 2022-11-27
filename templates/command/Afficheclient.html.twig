@@ -35,6 +35,7 @@ th{
 <th>Supprimer</th>
 </tr>
 {% for i in cc %}
+{% if i.iduser == ii %}
 <tr>
 {% for j in uu %}
 {% if i.iduser == j.iduser %}
@@ -56,8 +57,10 @@ th{
      {#}   <td><a href="{{path('Updatee',{id:i.idcommand})}}">Modifier</td>#}
         <td><a href="{{path('removee',{id:i.idcommand})}}">Remove</td>
 </tr>
+{% endif %}
 {% endfor %}
 </table>
 <button type="button"><a href="{{path('ajoutcommandd')}}">Ajoute</button>
+<button type="button"><a href="{{path('pdfcreate')}}">PDF</button>
 {% endblock %}
 

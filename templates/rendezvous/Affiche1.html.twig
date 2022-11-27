@@ -35,6 +35,7 @@ th{
 </tr>
 <tr>
 {% for i in rr %}
+{% if i.idclient == ii %}
 {% for j in cc %}
 {% if i.idclient == j.iduser %}
 <td>
@@ -58,6 +59,7 @@ th{
         <td><a href="{{path('Updaterdv',{id:i.idrdv})}}">Modifier</td>
         <td><a href="{{path('removerdv',{id:i.idrdv})}}">Remove</td>
 </tr>
+{% endif %}
 {% endfor %}
 </table>
 <button type="button"><a href="{{path('ajoutrendezvous')}}">Ajoute</button>

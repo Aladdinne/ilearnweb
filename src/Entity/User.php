@@ -6,9 +6,11 @@ use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+
+class User 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -109,6 +111,6 @@ class User
 
         return $this;
     }
-
+    
 
 }

@@ -131,16 +131,24 @@ class LignecommandeController extends AbstractController
             $totalItem = $item['product']->getPrix();
             $total += $totalItem;
         }
-       /* dd($panierWithData);*/
+       //dd($panierWithData);
         return $this->render('lignecommande/elem.html.twig', ['items' => $panierWithData,'total' => $total]);
     }
 
     #[Route('/Removepanier/{id}', name:'removepanier')]
     public function remove ($id,SessionInterface $session){
         $panier = $session->get('panier',[]);
+        $pdo =  new PDO('mysql:host=localhost;dbname=ilearn;charset=utf8', 'root', '', [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
+        $sqld=("DELETE FROM `lignecommande` WHERE idcommand = ( SELECT MAX(idcommand)  FROM lignecommande ) AND idformation = $id");
         if(!empty($panier[$id])){
+            
             unset($panier[$id]);
+            $smt = $pdo->query($sqld);
         }
+        
         $session->set('panier',$panier);
 
         return $this->redirectToRoute("pan-cart");

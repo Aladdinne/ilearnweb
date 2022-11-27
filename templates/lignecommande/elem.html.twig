@@ -1,13 +1,23 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
 <script src="https://kit.fontawesome.com/7574080bc2.js" crossorigin="anonymous"></script>
 <style>
 table,td,th {
   border: 1px solid black;
-  padding-left: 20px;  
+  padding-left: 20px;
+  margin: 20px;  
+}
+.h1{
+  margin-left: 30px;
+  width: 50%;
 }
 </style>
+<fieldset>
 <h1>Votre Elements Commandes</h1>
 
+
 {% if items | length > 0 %}
+
     <table>
         <thead>
             <tr>
@@ -42,7 +52,10 @@ table,td,th {
         </tfoot>
     </table>
     <button class="icon"><a href="{{path('validercommande',{'id':1})}}">validercommande</button>
+    <button type="button"><a href="{{path('fmn')}}">Retour</button>
+    
     {% else %}
     <p>Surprise,c'est vide !</p>
 {% endif %}
-
+</fieldset>
+{% endblock %}
