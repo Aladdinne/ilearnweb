@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="{{asset('assets/css/vertical-layout-light/style.css')}}">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
+
+  <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 </head>
 <body>
 {% block body1 %}
@@ -69,6 +71,8 @@
             {#<h3 class="welcome-sub-text">Your performance summary this week </h3>#}
           </li>
         </ul>
+        {% block search %}{% endblock %}
+        {% block trie %}{% endblock %}
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown d-none d-lg-block">
             <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
@@ -1265,6 +1269,12 @@
   <script src="{{asset('assets/js/dashboard.js')}}"></script>
   <script src="{{asset('assets/js/Chart.roundedBarCharts.js')}}"></script>
   <!-- End custom js for this page-->
+   <!-- Flashy depends on jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 
 </html>

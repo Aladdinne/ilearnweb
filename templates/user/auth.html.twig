@@ -1,1 +1,38 @@
-{{form(fo)}}
+{% extends 'indexs.html.twig' %}
+{% block body %}
+<fieldset>
+<legend><centre><h2><b>Authentification</b></h2></centre></legend><br>
+<style>
+h2 ,td{color:red;}
+fieldset{
+margin-top:10px;
+margin-left:400px;
+margin-right:400px;
+margin-buttom:10px;}
+</style>
+{{form_start(fo,{'attr':{'novalidate':'novalidate'}})}}
+<table>
+ <tr>
+        <td>{{form_label(fo.username,"UserName")}}</td>
+        <td>{{form_widget(fo.username)}}</td>
+        <td>{{form_errors(fo.username)}}</td>
+    </tr>
+    
+  
+    <tr>
+        <td>{{form_label(fo.userpwd,"Password")}}</td>
+        <td>{{form_widget(fo.userpwd)}}</td>
+        <td>{{form_errors(fo.userpwd)}}</td>
+    </tr>
+</table>
+You forget your password ??
+<br>
+<a href="{{path('forgetpwd')}}">Forgotten password?</a>
+<br>
+You don't have an account ??
+<br>
+<a href="{{path('ajouteuser')}}">Create New Account</a>
+{{form_end(fo)}}
+</fieldset>
+{% endblock %}
+

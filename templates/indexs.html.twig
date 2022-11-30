@@ -23,6 +23,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 </head>
 
 <body>
@@ -79,11 +81,12 @@
                         <div class="dropdown-menu m-0">
                             <a href="Ajoutearticle" class="dropdown-item">Ajouter</a>
                             <a href="Articleaccepte" class="dropdown-item">Afficher</a>
+                            <a href="mesarticles" class="dropdown-item">Mes Articles</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="{{path('ajouteuser')}}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
+                <a href="Auth" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
             </div>
         </nav>
     </div>
@@ -617,7 +620,7 @@
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <!--<a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>-->
 
 
     <!-- JavaScript Libraries -->
@@ -630,6 +633,12 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('js/main.js')}}"></script>
+     <!-- Flashy depends on jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 
 </html>

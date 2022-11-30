@@ -45,6 +45,17 @@ class ArticleRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+    public function accepterarticle(int $id){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('update a from App\Entity\Article a set a.etatarticle =:accepté where a.idarticle=: $id ');
+        $query->execute();
+    }
+    public function mesarticles($id){
+        return $this->createQueryBuilder('a')
+        ->where('a.idcreateur = :id')
+        ->setParameter('id',$id)
+        ->getQuery()->getResult();
+    }
 
 //    /**
 //     * @return Article[] Returns an array of Article objects

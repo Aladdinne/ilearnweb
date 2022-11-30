@@ -1,29 +1,25 @@
-{% extends 'base.html.twig' %}
+{% extends 'indexs.html.twig' %}
 {% block body %}
 <style> table,tr,td,th{border:1px solid black}</style>
-<table>
+<table class="table table-hover table-dark">
 <tr> 
-    <th> IdArticle</th>
+    
     <th> NomArticle</th>
-    <th> IdCreateur</th> 
+    
     <th> DateCreation</th>
     <th> Contenu</th>
     <th> EtatArticle</th>
     <th> Supprimer</th>
-    <th> Accepter</th>
-    <th> Refuse</th>
+    <th> Modifier</th>
+    
 </tr>
-{% for i in arc %}
+{% for i in article %}
 <tr>
-<td>
-{{i.idarticle}}
-</td>
+
 <td>
 {{i.nomarticle}}
 </td>
-<td>
-{{i.idcreateur}}
-</td>
+
 <td>
 {{i.datecreation|date('Y-m-d')}}
 </td>
@@ -37,10 +33,7 @@
 <a href="{{path('Deletearticle',{'id':i.idarticle})}}">Spprimer</a>
 </td>
 <td>
-<a href="{{path('accepterarticle',{'id':i.idarticle})}}">Accepter</a>
-</td>
-<td>
-<a href="{{path('refusearticle',{'id':i.idarticle})}}">Refuse</a>
+<a href="{{path('modifierarticle',{'id':i.idarticle})}}">Modifier</a>
 </td>
 </tr>
 {% endfor %}

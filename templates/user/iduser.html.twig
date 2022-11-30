@@ -1,3 +1,4 @@
-{% for i in u %}
-{{i.iduser}}
-{% endfor %}
+{% extends "base.html.twig" %} 
+{% block username %}
+{{user[0].username}}
+{% endblock %}

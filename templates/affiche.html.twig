@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
+{% block search %}
+<input type="text" id="search" class="form-control" placeholder="Search User">
+<a href="{{path('trie')}}">Trier</a>
+{% endblock %}
 {% block body %}
 <style> table,tr,td,th{border:1px solid black}</style>
-<table>
+<fieldset>
+
+<table id="t"  >
+<thead class="thead-dark" >
 <tr> 
     <th> IdUser</th>
     <th> Nom</th>
@@ -13,6 +20,7 @@
     <th> Supprimer</th>
     <th> Modifier</th>
 </tr>
+<tbody id="all">
 {% for i in u %}
 <tr>
 <td>
@@ -44,5 +52,43 @@
 </td>
 </tr>
 {% endfor %}
+</tbody>
+<tbody id="searchtab">
+</tbody>
 </table>
+</fieldset>
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$( document ).ready(function() {$("#search").keyup(function(e){
+var value = $(this).val();
+$.ajax({
+url : "{{ path('searchuser') }}",
+type : 'GET',
+data: {
+'searchValue' : value
+},
+success : function(retour){
+if(retour){
+$('#t tbody#searchtab').empty();
+$.each(JSON.parse(retour), function(i, obj) {
+$('#t tbody#all').hide();
+$('#t tbody#searchtab').append( '<tr><td> '+obj.iduser+'</td><td> '+obj.nom+' </td><td> '+obj.username+' </td><td> '+obj.userpwd+' </td><td> '+obj.daten+' </td><td>'+obj.email+' </td><td> '+obj.role+' </td>><td><a href="Deleteuser/'+obj.iduser+'">supprimer</a></td><td><a href="modifieruser/'+obj.iduser+'">modifier</a></td</tr>');
+});
+}
+else
+{
+$('#t tbody#all').show();
+$('#t tbody#searchtab').empty();
+$('#t tbody#searchtab').fadeIn('fast');
+}
+},
+});
+return false;
+});
+});
+</script>
 {% endblock %}
+
+
