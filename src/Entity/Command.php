@@ -25,8 +25,8 @@ class Command
     private ?string $etat = null;
 
     
-    #[ORM\Column]
-    private int $iduser;
+    #[ORM\ManyToOne(inversedBy: 'comm')]
+    private ?User $iduser;
 
     public function getIdcommand(): ?int
     {
@@ -69,12 +69,12 @@ class Command
         return $this;
     }
 
-    public function getIduser(): ?int
+    public function getIduser(): ?User
     {
         return $this->iduser;
     }
 
-    public function setIduser(?int $iduser): self
+    public function setIduser(?User $iduser): self
     {
         $this->iduser = $iduser;
 

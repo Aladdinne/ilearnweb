@@ -31,10 +31,9 @@ class Reclamation
     #[Assert\NotBlank(message: "Modifier l'etat")]
     private ?string $etatreclamation = 'non-traite';
 
+ 
     #[ORM\Column]
-     private ?string $captcha=null;
-    #[ORM\Column]
-    #[Assert\NotBlank(message: "ecrire votre Id")]
+    //#[Assert\NotBlank(message: "ecrire votre Id")]
     private ?int  $iduser = null;
 
     #[ORM\Column]
@@ -49,7 +48,6 @@ class Reclamation
 {
     $datetime=new \DateTime('now');
     $this->date =date_format($datetime, 'Y-m-d');
- 
 }
 
     public function getDatereclamation(): ?\DateTimeInterface
@@ -111,23 +109,7 @@ class Reclamation
 
         return $this;
     }
-     /**
-      * Get the value of captcha
-      */ 
-     public function getCaptcha()
-     {
-          return $this->captcha;
-     }
+      
 
-     /**
-      * Set the value of captcha
-      *
-      * //return  self
-      */ 
-     public function setCaptcha($captcha)
-     {
-          $this->captcha = $captcha;
-
-          return $this;
-     }
+     
 }

@@ -26,6 +26,7 @@ class CategoryrecController extends AbstractController
             'controller_name' => 'CategoryrecController',
         ]);
     }
+    
     #[Route('/Affichecateg',name:'aff1')]
     function Affichecateg(CategoryrecRepository $repo,UserRepository $repp,ReclamationRepository $rep1){
         $categoryrec = new Categoryrec();

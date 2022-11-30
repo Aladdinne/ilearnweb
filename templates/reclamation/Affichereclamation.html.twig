@@ -1,41 +1,74 @@
 {% extends "base.html.twig" %}
 {% block body %}
-<table border="1" style="border:1px solid black;margin-left:auto;margin-right:auto;" class="table table-striped table-dark">
+{% block serch %}
+
+ <input type="text" id="search" class="form-control" placeholder="Search">
+{% endblock %}
+<table border="1" id="t" style="border:1px solid black; margin-left:auto; margin-right:auto; " class="table table-striped table-dark">
+<thead class="thead-dark">
 <tr>
 <th>idreclamation</th>
 <th>iduser</th>
-<th>nom</th>
-<th>username</th>
+{#<th>nom</th>
+<th>username</th>#}
 <th>datereclamation</th>
 <th>contenu</th>
 <th>etatreclamation</th>
 <th>supprimer</th>
 <th>update</th>
+
 </tr>
+</thead>
+<tbody id="all"> 
 {% for i in cc %}
     <tr>
     <td>{{i.idreclamation}}</td>
     <td>{{i.iduser}}</td>
-{% for j in ff %}
+{#{% for j in ff %}
 {% if i.iduser == j.iduser %}
 <td>{{j.nom}}</td>
 <td>{{j.username}}</td>
 {% endif %}
-{% endfor %}
+{% endfor %}#}
     
     <td>{{i.datereclamation|date('Y-m-d')}}</td>
     <td>{{i.contenu}}</td>
     <td>{{i.etatreclamation}}</td>
-    <td><a href="{{path('DD',{id:i.idreclamation})}}">delete</td>
-    <td>
-    <select>
-    <option value ="nontraite">non-traite</option>
-    <option value ="traite">traite</option>
-    </select>
-    </td>
+    <td><a href="{{path('DD',{id:i.idreclamation})}}"class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i> </a></td>
+   
     <td><a href="{{path('updatereclamationuser',{id:i.idreclamation})}}">update</td>
     </tr>
 {% endfor %}
+</tbody>
+<tbody id="searchtab"> 
+</tbody>
 {#<button type="button"><a href="{{path('ajoutreclamation')}}">Ajoute</button>#}
 </table>
-{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+ <script> $( document ).ready(function() { 
+    $("#search").keyup(function(e){ 
+     var value = $(this).val();
+     $.ajax({
+      url : "{{ path('searchReclamation') }}", 
+      type : 'GET', 
+      data: {'searchValue' : value },
+        success : function(retour){
+             if(retour){
+                 $('#t tbody#searchtab').empty(); 
+                 $.each(JSON.parse(retour), function(i, obj) { 
+                 $('#t tbody#all').hide(); 
+        $('#t tbody#searchtab').append(
+        '<tr><td> '+obj.idreclamation+' </td><td> '+obj.iduser+' </td><td>'+obj.datereclamation+' </td><td>'+obj.contenu+' </td><td>'+obj.etatreclamation+' </td></tr>'); 
+        }); 
+        } else { $('#t tbody#all').show(); 
+                 $('#t tbody#searchtab').empty();
+                $('#t tbody#searchtab').fadeIn('fast');
+      } }, }); 
+      
+    return false;
+     });
+      });
+       </script>
+       {% endblock %}
+      

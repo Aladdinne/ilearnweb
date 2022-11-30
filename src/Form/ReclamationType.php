@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 
 class ReclamationType extends AbstractType
 {
@@ -17,7 +18,8 @@ class ReclamationType extends AbstractType
            // ->add('datereclamation')
             ->add('contenu')
            // ->add('etatreclamation',ChoiceType::class, [ 'choices' => [ 'non-traite', 'traite' ] ,])
-            ->add('iduser')
+            //->add('iduser')
+            ->add('captcha', ReCaptchaType::class)
             //->add('idcategory')
             //->add('enregistrer',SubmitType::class)
         ;
@@ -29,4 +31,5 @@ class ReclamationType extends AbstractType
             'data_class' => Reclamation::class,
         ]);
     }
+
 }

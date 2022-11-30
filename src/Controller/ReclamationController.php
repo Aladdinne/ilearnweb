@@ -9,19 +9,18 @@ use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
 use App\Repository\CategoryrecRepository;
 use App\Repository\UserRepository;
-
 use Doctrine\Persistence\ManagerRegistry;
-use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
-use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
-use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use PHPMailer\PHPMailer\PHPMailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request; 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 
 class ReclamationController extends AbstractController
 {
@@ -32,6 +31,7 @@ class ReclamationController extends AbstractController
             'controller_name' => 'ReclamationController',
         ]);
     }
+   
     #[Route('/Affichereclamation2',name:'aff')]
         function Affiche2(ReclamationRepository $repo,UserRepository $repp){
             $reclamation = new Reclamation();
@@ -42,13 +42,15 @@ class ReclamationController extends AbstractController
            ['cc'=>$reclamation,'ff'=>$user]);
         }
         #[Route('/Affichereclamtionclient2',name:'aff12')]
-        function Affiche3(ReclamationRepository $repo,UserRepository $repp){
+        function Affiche3(SessionInterface $session ,ReclamationRepository $repo,UserRepository $repp){
             $reclamation = new Reclamation();
             $user = new User();
+            $auth = $session->get('auth',[]);
             $reclamation=$repo->findAll();
             $user=$repp->findAll();
+            $id =$auth->getIduser();
             return $this->render('reclamation/Affichereclamationclient.html.twig',
-           ['kk'=>$reclamation,'aa'=>$user]);
+           ['kk'=>$reclamation,'aa'=>$user,'ii'=>$id]);
         }
 
         #[Route('/Delete/{id}',name:'DD')]
@@ -81,28 +83,28 @@ class ReclamationController extends AbstractController
     }*/
     ///////////////////////////////////////////////////////////
     #[Route('/Ajoutreclamation',name:'ajoutreclamation')]
-    function Ajout(ManagerRegistry $doctrine,Request $request,CategoryrecRepository $repo,Recaptcha3Validator $recaptcha3Validator){
+    function Ajout(ManagerRegistry $doctrine,Request $request,CategoryrecRepository $repo,FlashyNotifier $flashy,SessionInterface $session){
         $reclamation=new Reclamation;
         $form=$this->createFormBuilder($reclamation)
        // ->add('datereclamation')
         ->add('contenu')
-        ->add('iduser')
-        ->add('captcha', Recaptcha3Type::class, [
-            'constraints' => new Recaptcha3(),
-            'action_name' => 'homepage',
-           // 'script_nonce_csp' => $reclamation,
+        //->add('iduser')
 
-            
-        ])
+        ->add('captcha', ReCaptchaType::class)
         ->add('Ajout',SubmitType::class)
         ->getForm();
         $form->handleRequest($request);
+        
         if($form->isSubmitted() && $form->isValid()){
+            $auth=$session->get('auth',[]);
+            $authWithData = [];
+            //dd($session->get('auth',[]));
+            $reclamation->setIduser($auth->getIduser());
             $em=$doctrine->getManager();
             $reclamation->setIdcategory($this->getidtype($repo));
-            $score = $recaptcha3Validator->getLastResponse()->getScore();
             $em->persist($reclamation);
             $em->flush();
+            $flashy->success('Reclamation envoyer!', 'http://your-awesome-link.com');
             $mail = new PHPMailer(true);
 
             $mail->isSMTP();// Set mailer to use SMTP
@@ -153,7 +155,7 @@ class ReclamationController extends AbstractController
           return $this->render ('reclamation/Ajout.html.twig',['f'=>$form->createView()]);   
       }
       ////////////////////////////////////////////////////////////////////////////////////////////////////
-      #[Route('/updateetatrec/{id}',name:'updatereclamationuser')]
+     /* #[Route('/updateetatrec/{id}',name:'updatereclamationuser')]
     function Updateetatrec(ManagerRegistry $doctrine,Request $req,Reclamation $reclamation){
         //$reclamation=new Reclamation;
         $form=$this->createFormBuilder($reclamation)
@@ -167,7 +169,15 @@ class ReclamationController extends AbstractController
           return $this->redirectToRoute ('aff');
           }
           return $this->render ('reclamation/Ajoutreclamadmin.html.twig',['f'=>$form->createView()]);   
-        }
+        }*/
+        #[Route('/updateetatrec/{id}',name:'updatereclamationuser')]
+    function Updateetatrec(ManagerRegistry $doctrine,Reclamation $reclamation){
+        $reclamation->setEtatreclamation("traite");
+        $em=$doctrine->getManager();
+        $em->flush($reclamation);
+        return $this->redirectToRoute ('aff');
+    }
+
 
 
     function getidtype(CategoryrecRepository $repo){
@@ -177,5 +187,15 @@ class ReclamationController extends AbstractController
         }
         return $id;
     }  
+    #[Route('/searchReclamation', name: 'searchReclamation')]
+public function searchReclamation(Request $request,NormalizerInterface $Normalizer,ReclamationRepository $sr)
+ {
+ $repository = $this->getDoctrine()->getRepository(Reclamation::class);
+$requestString=$request->get('searchValue');
+$reclamation = $sr->findReclamationByContenu($requestString);
+$jsonContent = $Normalizer->normalize($reclamation, 'json',['groups'=>'reclamation']);
+$retour=json_encode($jsonContent);
+return new Response($retour);
+}
 
 }
