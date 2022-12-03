@@ -58,11 +58,19 @@ class UserRepository extends ServiceEntityRepository
         ->setParameter('username',$username)->setParameter('email',$email)->getQuery()->execute();
     }
     public function findUser($username){
-        return $this->createQueryBuilder('u')->where('u.username like :username')
-        ->setParameter('username', '%'.$username.'%')->getQuery()->getResult();
+        return $this->createQueryBuilder('u')->where('u.username LIKE :username')
+        ->setParameter('username','%' .$username. '%')->getQuery()->getResult();
     }
     public function trier(){
         return $this->createQueryBuilder('u')->orderBy('u.role')->getQuery()->getResult();
+    }
+    public function countuser(){
+        return $this->createQueryBuilder('u')->select('count(u.iduser)')->groupBy('u.role')
+        ->getQuery()->getResult();
+    }
+    public function countuser1($role){
+        return $this->createQueryBuilder('u')->select('count(u.iduser)')->where('u.role =:role')
+        ->setParameter('role',$role)->getQuery()->getResult();
     }
 //    /**
 //     * @return User[] Returns an array of User objects

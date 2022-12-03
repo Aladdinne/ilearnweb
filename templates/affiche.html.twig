@@ -5,9 +5,10 @@
 {% endblock %}
 {% block body %}
 <style> table,tr,td,th{border:1px solid black}</style>
+<script src="https://kit.fontawesome.com/7574080bc2.js" crossorigin="anonymous"></script>
 <fieldset>
 
-<table id="t"  >
+<table id="t">
 <thead class="thead-dark" >
 <tr> 
     <th> IdUser</th>
@@ -45,10 +46,10 @@
 {{i.Role}}
 </td>
 <td>
-<a href="{{path('Deleteuser',{'id':i.iduser})}}">Spprimer</a>
+<a href="{{path('Deleteuser',{'id':i.iduser})}}"class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
 </td>
 <td>
-<a href="{{path('modifieruser',{'id':i.iduser})}}">Modifier</a>
+<a href="{{path('modifieruser',{'id':i.iduser})}}"<i class="fa-sharp fa-solid fa-pen"></i></a>
 </td>
 </tr>
 {% endfor %}
@@ -89,6 +90,17 @@ return false;
 });
 });
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#all tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
 

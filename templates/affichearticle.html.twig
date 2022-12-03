@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<style> table,tr,td,th{border:1px solid black}</style>
+<script src="https://kit.fontawesome.com/7574080bc2.js" crossorigin="anonymous"></script>
+<style> table,tr,td,th{border:1px solid black}
+</style>
 <table>
 <tr> 
     <th> IdArticle</th>
     <th> NomArticle</th>
     <th> IdCreateur</th> 
     <th> DateCreation</th>
-    <th> Contenu</th>
+    
     <th> EtatArticle</th>
     <th> Supprimer</th>
     <th> Accepter</th>
@@ -28,19 +30,16 @@
 {{i.datecreation|date('Y-m-d')}}
 </td>
 <td>
-{{i.contenu}}
-</td>
-<td>
 {{i.etatarticle}}
 </td>
 <td>
-<a href="{{path('Deletearticle',{'id':i.idarticle})}}">Spprimer</a>
+<a href="{{path('Deletearticle',{'id':i.idarticle})}}"class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
 </td>
 <td>
-<a href="{{path('accepterarticle',{'id':i.idarticle})}}">Accepter</a>
+<a href="{{path('accepterarticle',{'id':i.idarticle})}}"<i class="fa-sharp fa-solid fa-check"></i></a>
 </td>
 <td>
-<a href="{{path('refusearticle',{'id':i.idarticle})}}">Refuse</a>
+<a href="{{path('refusearticle',{'id':i.idarticle})}}"<i class="fa-sharp fa-solid fa-xmark"></i></a>
 </td>
 </tr>
 {% endfor %}

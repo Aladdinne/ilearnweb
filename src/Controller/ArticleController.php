@@ -8,6 +8,7 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
@@ -44,7 +45,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('Affichearticle');
     }
     #[Route('/Ajoutearticle')]
-    function AjoutArticle(ManagerRegistry $doctrine,Request $request,UserRepository $repo,SessionInterface $session){
+    function AjoutArticle(ManagerRegistry $doctrine,Request $request,UserRepository $repo,SessionInterface $session,FlashyNotifier $flashy){
         $user = new User();
         $user = $repo->findAll();
         $article=new Article();
@@ -59,11 +60,12 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $auth = $session->get('auth',[]);
             $authWithData = [];
-           dd($session->get('auth',[]));
+           //dd($session->get('auth',[]));
             $article->setIdcreateur($auth->getIduser());
             $em=$doctrine->getManager();
             $em->persist($article);
             $em->flush();
+            $flashy->success('Article ajouté avec seccess !!', 'http://your-awesome-link.com');
         }
         return $this->render('Ajoute.html.twig',['f'=>$form->createView()]);
 

@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Options\PieChart\PieSlice;
 use Doctrine\Persistence\ManagerRegistry;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use PDO;
@@ -63,7 +67,7 @@ class UserController extends AbstractController
         $usera=$user;
         if($form->isSubmitted() && $form->isValid()){
             $userv = new User();
-            $userv = $rep->forgetpwd($user->getUsername(),$user->getEmail());
+            $userv = $rep->RechercheUser($user->getUsername(),$user->getUserpwd());
             $size =count($userv);
             if($size == 0){
             $em=$doctrine->getManager();
@@ -142,7 +146,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $userv = new User();
-            $userv = $rep->forgetpwd($user->getUsername(),$user->getEmail());
+            $userv = $rep->RechercheUser($user->getUsername(),$user->getUserpwd());
             $size =count($userv);
             if($size == 0){
             $em=$doctrine->getManager();
@@ -211,11 +215,11 @@ class UserController extends AbstractController
             //$username = $auth->getUsername();
             //dd($sesssionuserWithData);
             if($user1[0]->getRole() == 'admin'){
-                return $this->render('base.html.twig');
+                return $this->redirectToRoute('statistiqueuser');
             }elseif ($user1[0]->getRole() == 'formateur') {
                 return $this->render('indexs.html.twig',['user'=>$authWithData]);
             }elseif ($user1[0]->getRole() == 'etudiant') {
-                # code...
+                return $this->render('indexs.html.twig',['user'=>$authWithData]);
             }
            }else {
             $flashy->error('You don t have Account!', 'http://your-awesome-link.com');
@@ -257,7 +261,8 @@ class UserController extends AbstractController
     }
     #[Route('/searchuser',name:'searchuser')]
     public function searchuser(Request $request,NormalizerInterface $Normalizer,UserRepository $rep){
-        $repository = $this->getDoctrine()->getRepository(User::class);
+        $users = new User();
+        //$repository = $this->getDoctrine()->getRepository(User::class);
         $requestString=$request->get('searchValue');
         $users = $rep->findUser($requestString);
         $jsonContent = $Normalizer->normalize($users,'json',['groups'=>'users']);
@@ -269,5 +274,84 @@ class UserController extends AbstractController
         $user = new User();
         $user = $rep->trier();
         return $this->render('affiche.html.twig',['u'=>$user]);
+    }
+    #[Route('/statistiqueuser',name:'statistiqueuser')]
+    public function statistiqueuser(UserRepository $rep,ArticleRepository $repo){
+        $nt=0;
+        $na=0;
+        $nf=0;
+        $ne=0;
+        $items= new User();
+        $items = $rep->findAll();
+        foreach($items as $item){
+            if($item->getRole()=='admin'){
+                $na=$na+1;
+                $nt=$nt+1;
+            }elseif ($item->getRole()=='formateur') {
+                $nf=$nf+1;
+                $nt=$nt+1;
+            }else {
+               $ne=$ne+1;
+               $nt=$nt+1;
+            }
+        }
+        $pieChart = new PieChart();
+        $pieChart->getData()->setArrayToDataTable(
+        [
+            ['Pac Man', 'Percentage'],
+            ['Admin', $na*100/$nt],
+            ['Formateur', $nf*100/$nt],
+            ['Etudiant', $ne*100/$nt]
+        ]
+        );
+        $pieChart->getOptions()->setTitle('les nombres des utilisateur');
+        
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+       
+       /* $aa=0;
+        $ar=0;
+        $an=0;
+        $articles= new Article();
+        $articles = $repo->findAll();
+        foreach($articles as $article){
+            if($article->getEtatarticle()=='accepté'){
+                $aa=$aa+1;
+                
+            }elseif ($article->getEtatarticle()=='refusée') {
+                $ar=$ar+1;
+               
+            }else {
+               $an=$an+1;
+               
+            }
+        }
+        $pieChart1 = new PieChart();
+        $pieChart1->getData()->setArrayToDataTable(
+        [
+            ['Pac Man', 'Percentage'],
+            ['Accepté', $aa],
+            ['Refusé', $ar],
+            ['Non Traité', $an]
+        ]
+        );
+        $pieChart1->getOptions()->setTitle('les articles');
+        
+*/
+        
+        return $this->render('user/statistique.html.twig',array('pieChart' => $pieChart));
+    }
+    #[Route('/logout',name:'logout')]
+    public function logout(SessionInterface $session){
+        $auth = $session->get('auth',[]);
+        $session->clear();
+        dd($session->get('auth',[]));
+        return $this->render('indexs.html.twig');
+
     }
 }
