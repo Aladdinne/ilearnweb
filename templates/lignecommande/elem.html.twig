@@ -3,22 +3,57 @@
 <script src="https://kit.fontawesome.com/7574080bc2.js" crossorigin="anonymous"></script>
 <style>
 table,td,th {
-  border: 1px solid black;
+  border: 2px solid black;
   padding-left: 20px;
-  margin: 20px;  
+  margin: auto;
+  
 }
-.h1{
-  margin-left: 30px;
+fieldset{
+    margin:0 auto;
+      width:80%;
+    height:50%;
+    padding-top: 30px;
+ padding-bottom:30px;
+   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+h1{
+  margin: auto;
   width: 50%;
 }
+.iconn {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 150px;
+   position: absolute;
+  right: 200px;
+}
+.iconn:hover {
+  background-color: #3e8e41;
+}
+
+.icon {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 150px;
+   position: absolute;
+  right: 20px;
+}
+.icon:hover {
+  background-color: #e22221;
+}
 </style>
-<fieldset>
+<div class="panier">
 <h1>Votre Elements Commandes</h1>
+</br>
 
 
 {% if items | length > 0 %}
-
-    <table>
+<fieldset>
+    <table class"table">
         <thead>
             <tr>
                 <th>Nomformation</th>
@@ -28,7 +63,7 @@ table,td,th {
                 <th>Category</th>
                 <th>Prix</th>
             </tr>
-        <tbody>
+        <tbody id="myTable">
           {% for item in items %}
             
           
@@ -46,16 +81,18 @@ table,td,th {
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5" style=" text-align: right;">Total :   </td>
-                <td>{{ total }} Dt</td>
+                <td colspan="5" style=" text-align: right;"><h5>Total :</h5>    </td>
+                <td><h5>{{ total }} Dt</h5></td>
                 <td></td>
         </tfoot>
     </table>
-    <button class="icon"><a href="{{path('validercommande',{'id':1})}}">validercommande</button>
-    <button type="button"><a href="{{path('fmn')}}">Retour</button>
+    </fieldset>
+    </br>
+    <button class="iconn"><a href="{{path('validercommande',{'id':1})}}">validercommande</button>
+    <button class="icon"><a href="{{path('fmn')}}">Retour</button>
     
     {% else %}
     <p>Surprise,c'est vide !</p>
 {% endif %}
-</fieldset>
+</div>
 {% endblock %}

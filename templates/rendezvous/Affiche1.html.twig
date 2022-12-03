@@ -6,8 +6,10 @@ table, tr, td ,th {
   padding-left: 20px;  
 }
 table{
-    width:100%;
+    width:90%;
     height:30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      margin: auto;
 }
 tr{
   height:30%;
@@ -17,7 +19,19 @@ th{
   text-shadow: 3px;
   background-color: #3215;
 }
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+button{
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      margin: auto;
+}
 </style>
+<h2>->Votre liste de rendez vous</h2>
+</br>
 <table>
 <tr>
 <th>Nom Client
@@ -62,6 +76,8 @@ th{
 {% endif %}
 {% endfor %}
 </table>
+<div class="center">
 <button type="button"><a href="{{path('ajoutrendezvous')}}">Ajoute</button>
+</div>
 {% endblock %}
 

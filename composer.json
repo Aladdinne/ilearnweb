@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.13",
         "dompdf/dompdf": "^2.0",
+        "karser/karser-recaptcha3-bundle": "^0.1.23",
         "knplabs/knp-snappy-bundle": "^1.9",
         "mercuryseries/flashy-bundle": "^5.1",
         "mpdf/mpdf": "^6.1",

@@ -19,6 +19,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Twilio\Rest\Client;
 use function PHPSTORM_META\type;
 
@@ -60,7 +61,7 @@ class RendezvousController extends AbstractController
         ->getForm();
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-          /*  $sid    = "AC40a2bf2c3b42a8ca159c39d88298e173"; 
+            $sid    = "AC40a2bf2c3b42a8ca159c39d88298e173"; 
             $token  = "5cd0d08a1668034921f512ba9d316c75"; 
             $twilio = new Client($sid, $token); 
      
@@ -69,7 +70,7 @@ class RendezvousController extends AbstractController
                                array("from" => "+14302492629",    
                                    "body" => "Votre demande a été traitée" 
                                ) 
-                      ); */
+                      ); 
            $rendezvous->setIdclient($auth->getIduser());
             $em=$doctrine->getManager();
             $em->persist($rendezvous);
@@ -114,6 +115,17 @@ class RendezvousController extends AbstractController
   return $this->redirectToRoute('fffr');
   }
   return $this->render('rendezvous/Ajoutrdvv.html.twig',['ff'=>$form->createView()]);
+    }
+    #[Route('/searchRendezVous', name:'searchRendervous')]
+    public function searchStudentx(Request $request,NormalizerInterface $Normalizer,RendezvousRepository $sr)
+    {
+        $repository = $this->getDoctrine()->getRepository(Rendezvous::class);
+        $requestString=$request->get('searchValue');
+        $rendezvous = $sr->findRendezVousByDaterdv($requestString);
+        $jsonContent = $Normalizer->normalize($rendezvous,'json',['groups'=> 'rendezvous']);
+        $retour=json_encode($jsonContent);
+        return new Response($retour);
+
     }
 
 }

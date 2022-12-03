@@ -6,8 +6,10 @@ table, tr, td ,th {
   padding-left: 20px;  
 }
 table{
-    width:100%;
+    width:90%;
     height:30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      margin: auto;
 }
 tr{
   height:30%;
@@ -19,7 +21,8 @@ th{
 }
 
 </style>
-<h3>Affichage Les Commande:</h3>
+<h3> -> Affichage Les Commande:</h3>
+</br>
 <table>
 <tr>
 <th>User
@@ -55,12 +58,12 @@ th{
 </td>
         <td><a href="{{path('fcc',{id:i.idcommand})}}">Detail</td>
      {#}   <td><a href="{{path('Updatee',{id:i.idcommand})}}">Modifier</td>#}
-        <td><a href="{{path('removee',{id:i.idcommand})}}">Remove</td>
+        <td><a href="{{path('removee',{id:i.idcommand})}}">Supprimer</td>
 </tr>
 {% endif %}
 {% endfor %}
 </table>
-<button type="button"><a href="{{path('ajoutcommandd')}}">Ajoute</button>
-<button type="button"><a href="{{path('pdfcreate')}}">PDF</button>
+{#<button type="button"><a href="{{path('ajoutcommandd')}}">Ajoute</button>
+<button type="button"><a href="{{path('pdfcreate')}}">PDF</button>#}
 {% endblock %}
 

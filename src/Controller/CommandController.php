@@ -12,12 +12,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Repository\UserRepository;
 use App\Repository\CommandRepository;
+use App\Repository\FormationRepository;
+use App\Repository\LignecommandeRepository;
 use ContainerIt87oxJ\getMercuryseriesFlashy_FlashyNotifierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Mpdf\Mpdf;
 use Mpdf\Output\Destination;
@@ -143,11 +146,23 @@ class CommandController extends AbstractController
     return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
       }
       #[Route('/ValiderCommande/{id}', name:'validercommande')]
-      function ValiderC(SessionInterface $session,FlashyNotifier $flashy){
+      function ValiderC(SessionInterface $session,FlashyNotifier $flashy,LignecommandeRepository $lignecommande,CommandRepository $command,FormationRepository $formation){
         $pdo =  new PDO('mysql:host=localhost;dbname=ilearn;charset=utf8', 'root', '', [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
+        $auth = $session->get('auth',[]);
+        $id = $auth->getIduser();
+        $pdfOptions = new Options();
+        $dompdf = new Dompdf($pdfOptions);
+        $ligne= $lignecommande ->findAll();
+        $cm= $command ->findAll();
+        $fm= $formation ->findAll();
+        $html = $this->renderView('command/Pdf.html.twig', [
+            'll' => $ligne,'cc' => $cm ,'ff' =>$fm,'id' => $id ]);
+            $dompdf->loadHtml($html);
+            $dompdf->render();
+            $output = $dompdf->output();
         $mail = new PHPMailer(true);
 
             $mail->isSMTP();// Set mailer to use SMTP
@@ -176,14 +191,14 @@ class CommandController extends AbstractController
             $mail->Body = '<h1>Votre Commande est valider . ' . '</h1>';
 
             $mail->addAddress('aladin.hammouda@esprit.tn', 'Aladin hammouda');// Target email
-
+            $mail->AddStringAttachment($output,'information.pdf');
+        
 
            $mail->send();
-           $auth = $session->get('auth',[]);
-        $id = $auth->getIduser();
+           
         $sql="UPDATE `command` SET `iduser` = $id, `total` = (SELECT SUM(prix) FROM lignecommande WHERE idcommand = ( SELECT MAX(idcommand)  FROM command )),`datecommand`= NOW() WHERE `command`.`idcommand` = ( SELECT MAX(idcommand)  FROM command );";
         $smt = $pdo->query($sql);
-        $sqll="INSERT INTO `command` (`idcommand`, `iduser`, `datecommand`, `total`, `etat`) VALUES (NULL, 1, NOW(), NULL, 'passé');";
+        $sqll="INSERT INTO `command` (`idcommand`, `iduser`, `datecommand`, `total`, `etat`) VALUES (NULL, 1, NOW(), NULL, 'encour');";
         $smtt = $pdo->query($sqll);
         $flashy->success('Votre Commande est valider et un email a envoyer !', 'http://your-awesome-link.com');
         

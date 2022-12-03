@@ -1,13 +1,16 @@
 {% extends "indexs.html.twig" %}
 {% block body %}
+<script src="https://kit.fontawesome.com/7574080bc2.js" crossorigin="anonymous"></script>
 <style>
 table, tr, td ,th {
   border: 3px solid black;
   padding-left: 20px;  
 }
 table{
-    width:100%;
+    width:90%;
     height:30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      margin: auto;
 }
 tr{
   height:30%;
@@ -16,6 +19,12 @@ th{
   color:black;
   text-shadow: 3px;
   background-color: #3215;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
 }
 
 </style>
@@ -49,9 +58,12 @@ th{
 <td>
 {{i.prix}}
 </td>
-        <td><a href="{{path('addl',{id:i.idformation})}}">Ajoute a commande</td>
+        <td><a href="{{path('addl',{id:i.idformation})}}">Ajoute au panier</td>
 </tr>
 {% endfor %}
 </table>
+</br>
+<div class="center">
 <button type="button"><a href="{{path('pan-cart')}}">Panier</button>
+</div>
 {% endblock %}
