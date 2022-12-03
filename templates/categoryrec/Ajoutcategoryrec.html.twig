@@ -8,6 +8,10 @@
 </style>
 <body>
 <h1>choisir le type de votre reclamation</h1>
+<h4>0:avis </h4>
+<h4>1: feedback</h4>
+<h4>2:rapport</h4>
+<h4>3:autre</h4>
 <form name="clubForm" method="post">
      <tr>
         <td>{{form_label(ff.category,"changer l'etat")}}</td>
@@ -18,5 +22,5 @@
 </table>
 {{form_end(ff)}} 
  </fieldset>   
- <button type="button"><a href="{{path('affic')}}">Consuter les caregorie</button>
+{# <button type="button"><a href="{{path('affic')}}">Consuter les caregorie</button>#}
  {% endblock %}

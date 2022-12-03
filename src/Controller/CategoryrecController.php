@@ -9,6 +9,8 @@ use App\Form\CategoryrecType;
 use App\Repository\CategoryrecRepository;
 use App\Repository\ReclamationRepository;
 use App\Repository\UserRepository;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Options\PieChart\PieSlice;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -97,5 +99,64 @@ class CategoryrecController extends AbstractController
             return $this->redirectToRoute ('affic');
           }
           return $this->render ('categoryrec/Ajoutcategoryrec.html.twig',['ff'=>$form->createView()]);   
-      }
+        }
+
+      #[Route('/statistiquecategory',name:'statis1')]
+    
+        public function statistiqueuser(CategoryrecRepository $rep){
+            $navis=0;
+            $nfeedback=0;
+            $nrapport=0;
+            $nautre =0;
+            $items= new Categoryrec();
+            $items = $rep->findAll();
+            foreach($items as $item){
+                if($item->getCategory()=='avis'){
+                    $navis=$navis+1;
+                }elseif ($item->getCategory()=='feeeedback') {
+                    $nfeedback=$nfeedback+1;
+                }elseif ($item->getCategory()=='rapport') {
+                   $nrapport=$nrapport+1;
+                }else {
+                    $nautre=$nautre+1;
+
+                }
+            }
+            $pieChart = new PieChart();
+            $pieChart->getData()->setArrayToDataTable(
+            [
+                ['Pac Man', 'Percentage'],
+                ['avis', $navis],
+                ['feeeedback', $nfeedback],
+                ['rapport', $nrapport],
+                ['autre', $nautre]
+            ]
+            );
+            $pieChart->getOptions()->setTitle('le nombre de reclamation en pourcentage');
+            $pieChart->getOptions()->setHeight(500);
+            $pieChart->getOptions()->setWidth(900);
+            $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+            $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+            $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+            $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+            $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+    
+    
+            $pieSlice1 = new PieSlice();
+            //$pieSlice1->getOptions()->setTitle('Admin');
+            $pieSlice1->setColor('yellow');
+            $pieSlice2 = new PieSlice();
+            $pieSlice2->setColor('red');
+            $pieSlice3 = new PieSlice();
+            $pieSlice3->setColor('blue');
+            
+            $pieSlice4 = new PieSlice();
+            $pieSlice4->setColor('green');
+            $pieChart->getOptions()->setSlices([$pieSlice1, $pieSlice2,$pieSlice3,$pieSlice4]);
+    
+            $pieChart->getOptions()->setHeight(500);
+            $pieChart->getOptions()->setWidth(900);
+            $pieChart->getOptions()->getTooltip()->setTrigger('none');
+            return $this->render('categoryrec/statistique.html.twig',array('pieChart' => $pieChart));
+        }
 }

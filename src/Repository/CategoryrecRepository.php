@@ -38,6 +38,14 @@ class CategoryrecRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getNB()
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('COUNT(c.category) AS category')
+            ->groupBy('category');
+            return $qb->getQuery()->getResult();
+    }
+
 
 //    /**
 //     * @return Categoryrec[] Returns an array of Categoryrec objects

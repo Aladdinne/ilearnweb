@@ -86,7 +86,9 @@ class ReclamationController extends AbstractController
     function Ajout(ManagerRegistry $doctrine,Request $request,CategoryrecRepository $repo,FlashyNotifier $flashy,SessionInterface $session){
         $reclamation=new Reclamation;
         $form=$this->createFormBuilder($reclamation)
+
        // ->add('datereclamation')
+       //->add('category',ChoiceType::class, [ 'choices' => [ 'avis', 'feeeedback', 'rapport' ,'autre' ], ])
         ->add('contenu')
         //->add('iduser')
 
@@ -135,7 +137,7 @@ class ReclamationController extends AbstractController
             $mail->addAddress('wissem.hammouda@esprit.tn', 'Wissem hammouda');// Target email
 
 
-           //$mail->send();
+           $mail->send();
             return $this->redirectToRoute('aff12');
         }
         return $this->render('reclamation/Ajout.html.twig',['f'=>$form->createView()]);
@@ -188,9 +190,10 @@ class ReclamationController extends AbstractController
         return $id;
     }  
     #[Route('/searchReclamation', name: 'searchReclamation')]
-public function searchReclamation(Request $request,NormalizerInterface $Normalizer,ReclamationRepository $sr)
+public function searchReclamation(Request $request,NormalizerInterface $Normalizer,ReclamationRepository $sr,ManagerRegistry $doctrine)
  {
- $repository = $this->getDoctrine()->getRepository(Reclamation::class);
+$reclamation=new Reclamation();
+ //$repository = $this->getDoctrine()->getRepository(Reclamation::class);
 $requestString=$request->get('searchValue');
 $reclamation = $sr->findReclamationByContenu($requestString);
 $jsonContent = $Normalizer->normalize($reclamation, 'json',['groups'=>'reclamation']);
