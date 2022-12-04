@@ -3,7 +3,14 @@
 {% block body %}
 
     {{ form_start(FormFormation, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_row(FormFormation.recaptcha) }}
+    {# must be the same name of this put on the FormBuilder #}
+
+    {{ form_errors(FormFormation.recaptcha) }}
+    <br>
     {{ form_widget(FormFormation) }}
+
+    {# That will display the error of the captcha to user #}
     {{ form_end(FormFormation) }}
 
 

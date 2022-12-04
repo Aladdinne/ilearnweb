@@ -3,6 +3,11 @@
 {% block body %}
 
     {{ form_start(FormCour, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_row(FormCour.recaptcha) }}
+    {# must be the same name of this put on the FormBuilder #}
+
+    {{ form_errors(FormCour.recaptcha) }}
+    <br>
     {{ form_widget(FormCour) }}
     {{ form_end(FormCour) }}
 

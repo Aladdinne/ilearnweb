@@ -3,16 +3,20 @@
 namespace App\Form;
 
 use App\Entity\Cour;
-use App\Entity\Formation;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 
 class CourType extends AbstractType
 {
@@ -23,11 +27,20 @@ class CourType extends AbstractType
             'label' => 'Nom Cour'])
             ->add('nomformateur', TextType::class, [
                 'label' => 'Nom Formateur'])
-            ->add('pdf',UrlType::class, [
-                'label' => 'Lien pdf'])
-            ->add('video', UrlType::class, [
-                'label' => 'Lien video'])
+            ->add('pdfFile',VichFileType::class, [
+                'label' => ' pdf',
+                'required' => false,
+                'download_uri' => true,
+                ])
+
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image cour',
+                'required' => false,
+                'image_uri' => true,
+            ])
+
             ->add('idformation')
+            ->add("recaptcha", ReCaptchaType::class)
             ->add('ajout',SubmitType::class)
         ;
     }

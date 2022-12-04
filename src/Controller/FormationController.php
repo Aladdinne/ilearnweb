@@ -3,10 +3,16 @@
 namespace App\Controller;
 
 
+use App\Entity\Cour;
 use App\Entity\Formation;
 
 use App\Form\FormationType;
-use App\Form\FormationUpdateType;
+use App\Repository\FormationRepository;
+use App\Services\MailService;
+use Knp\Component\Pager\PaginatorInterface;
+use Knp\Snappy\Pdf;
+use Nzo\UrlEncryptorBundle\Annotations\ParamDecryptor;
+
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +24,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 
 
 
@@ -47,8 +55,10 @@ class FormationController extends AbstractController
             $em = $doctrine->getManager();
             $em ->persist($formation);
             $em ->flush();
+
             $this ->addFlash('success',"Formation ".$formation->getNomformation()."a été ajouté avec succés");
             return $this->redirectToRoute('listformation');
+
         }
 
         return $this->render("formation/addformation.html.twig",['FormFormation'=>$form->createView()]);
@@ -56,11 +66,10 @@ class FormationController extends AbstractController
     }
 
     //delete
-    #[Route('/deleteformation/{id}', name:'deleteformation')]
+    #[Route('/deleteformation/{idformation}', name:'deleteformation')]
     public function Deleteformation(ManagerRegistry $doctrine,Formation $formation= null):RedirectResponse
     {
         if($formation){
-
         $em=$doctrine->getManager();
         $em->remove($formation);
         $em->flush();
@@ -72,7 +81,8 @@ class FormationController extends AbstractController
     }
 
     // update
-    #[Route('/updateformation/{id}', name:'updateformation')]
+    #[Route('/updateformation/{idformation}', name:'updateformation')]
+    #[ParamDecryptor(["idformation"])]
     public function updateformation (ManagerRegistry $doctrine, Request $request, Formation $formation)
     {
         if(!$formation){
@@ -101,6 +111,7 @@ class FormationController extends AbstractController
 
         ->add('prix', MoneyType::class,[
             'label' => 'Prix'])
+            ->add("recaptcha", ReCaptchaType::class)
 
         ->add('Modifier', SubmitType::class)
         ->getForm();
@@ -115,10 +126,68 @@ class FormationController extends AbstractController
         return $this->render("formation/addformation.html.twig",['FormFormation'=>$form->createView()]);
 
     }
-
+///affichage du client
     #[Route('/listfcl', name: 'listformationclient')]
-    public function listformationCl(ManagerRegistry $doctrine){
+    public function listformationCl(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator){
         $formations = $doctrine ->getRepository(Formation::class)->findAll();
+        $formations = $paginator->paginate(
+            $formations, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            4/*limit per page*/
+        );
         return $this->render("formation/clientf.html.twig", array('listf'=>$formations));
     }
+
+
+
+
+
+    ///mail
+    #[Route('/formationmail', name:'formationmail')]
+    public function mailformation(MailService $mailService,Request $request):Response
+    {
+        $mailname= $request->get('clemail');
+        $mailcontent= $request->get('contentf');
+        $mailService->sendEmail('khoualdia.mohamed@esprit.tn',$mailname,'Demande de renseignement',$mailcontent);
+       return $this->redirectToRoute('listformationclient');
+
+    }
+
+    ///PDF
+    #[Route('/pdf_download', name:'pdfFormation')]
+    public function downloadPdf(Request $request,ManagerRegistry $doctrine,Pdf $snappy){
+
+        $formation = $doctrine ->getRepository(Formation::class)->findAll();
+        //$snappy=$this->get("knp_snappy.pdf");
+        $html = $this->renderView("formation/pdf_formation.html.twig", array('listformation'=>$formation));
+        $filename = "custom_pdf";
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'=>'application/pdf',
+                'Content-Disposition'=>'inline; filename="'.$filename.'.pdf"'
+            )
+        );
+    }
+
+//Recherche
+    #[Route('/searchbyn}', name: 'searchbyn')]
+    public function searchbyn(FormationRepository $repository, Request $request,PaginatorInterface $paginator){
+        $motcle= $request->get('motcle');
+        $formations=$repository->Searchbyn($motcle);
+        $formations = $paginator->paginate(
+            $formations, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            4/*limit per page*/
+
+        );
+        return $this->render("formation/clientf.html.twig", array('listf'=>$formations));
+    }
+
+
+
+
+
+
 }

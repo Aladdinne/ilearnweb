@@ -6,6 +6,7 @@ use App\Entity\Lignecommande;
 use App\Entity\Command;
 use App\Entity\Formation;
 use App\Entity\User;
+use App\Form\CommandType;
 use App\Repository\LignecommandeRepository;
 use App\Repository\FormationRepository;
 use App\Repository\CommandRepository;
@@ -13,8 +14,11 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use PDO;
 
 class LignecommandeController extends AbstractController
 {
@@ -63,5 +67,55 @@ class LignecommandeController extends AbstractController
         $em->remove($lignecommande);
         $em->flush();
         return $this->redirectToRoute('fff');
+    }
+    #[Route('/Add/{id}', name:'addl')]
+    function add($id,SessionInterface $session){
+        /* $session = $this->requestStack->getSession();*/
+        $panier = $session->get('panier',[]);
+
+        $pdo =  new PDO('mysql:host=localhost;dbname=ilearn;charset=utf8', 'root', '', [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
+
+        $sqll =  "SELECT MAX(idcommand)  FROM command ;";
+        $stm = $pdo->query($sqll);
+        $idc= $stm->fetch();
+        $sql ="INSERT INTO lignecommande (idlignecommand, idcommand, idformation, prix) VALUES (NULL,( SELECT MAX(idcommand)  FROM command ), $id, (SELECT prix FROM formation WHERE idformation=$id));";
+
+
+        if(!empty($panier[$id])){
+
+            $panier[$id] = 1;
+
+
+        }else{
+            $panier[$id] = 1;
+            $smt = $pdo->query($sql);
+
+        }
+        $session->set('panier',$panier);
+        /*dd($session->get('panier'));*/
+        return $this->redirectToRoute ('listformationclient');
+
+    }
+    #[Route('/panier',name:'pan-cart')]
+    public function panier(SessionInterface $session,FormationRepository $formationRepository){
+        $panier = $session->get('panier',[]);
+        $panierWithData = [];
+
+        foreach($panier as $id =>$quantity){
+            $panierWithData[] = [ 'product' => $formationRepository->find($id),
+                'qunatity' =>$quantity
+            ];
+
+        }
+        $total=0;
+        foreach($panierWithData as $item){
+            $totalItem = $item['product']->getPrix();
+            $total += $totalItem;
+        }
+        //dd($panierWithData);
+        return $this->render('lignecommande/elem.html.twig', ['items' => $panierWithData,'total' => $total]);
     }
 }

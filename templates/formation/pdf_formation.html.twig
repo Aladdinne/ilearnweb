@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+        body {
+
+            font-family: "Jost", sans-serif
+
+        }
+
+        .container{
+            margin-top:200px;
+        }
+        .card {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0px solid transparent;
+            border-radius: 0px;
+        }
+
+
+        .card-body {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            padding: 1.25rem;
+        }
+
+        .card .card-title {
+            position: relative;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: #e1edff;
+            border: #2f3742;
+        }
+
+        * {
+            outline: none;
+        }
+
+        .table th, .table thead th {
+            font-weight: 1000;
+        }
+
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+
+        .table th {
+            padding: 1rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+
+        .table th, .table thead th {
+            font-weight: 500;
+        }
+
+
+        th {
+            text-align: inherit;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+<h1 style="color: #0d6efd;font-family: Arial, sans-serif" >Ilearn</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3 class="card-title m-b-0">Détails des formations</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Nom formation</th>
+                            <th scope="col">Date de creation</th>
+                            <th scope="col">Duree</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Prix $</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody class="customtable">
+                        {%  for f in listformation %}
+                            <tr>
+                                <td>{{ f.nomformation}}</td>
+                                <td>{{ f.datecreation|date('d-m-Y') }}</td>
+                                <td>{{ f.duree }}</td>
+                                <td>{{ f.category }}</td>
+                                <td>{{ f.prix }}</td>
+
+                            </tr>
+                        {%  endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
+

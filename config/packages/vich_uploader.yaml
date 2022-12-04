@@ -1,0 +1,24 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        cour_image:
+            uri_prefix: /uploads/cour
+            upload_destination: '%kernel.project_dir%/public/uploads/cour'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+
+        cour_pdf:
+            uri_prefix: /uploads/courPdf
+            upload_destination: '%kernel.project_dir%/public/uploads/courPdf'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+

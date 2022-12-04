@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use App\Repository\CourRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CourRepository::class)]
+#[Vich\Uploadable]
 #[UniqueEntity('nomcour',message: "Ce cour existe déja")]
 class Cour
 {
@@ -27,12 +30,21 @@ class Cour
     private ?string $nomformateur = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: "veillez remplir ce champ ")]
+
     private ?string $pdf = null;
 
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    #[Vich\UploadableField(mapping: "cour_pdf", fileNameProperty: "pdf")]
+    private ?File $pdfFile = null;
+
+
+
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: "veillez remplir ce champ ")]
     private ?string $video = null;
+
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    #[Vich\UploadableField(mapping: "cour_image", fileNameProperty: "video")]
+    private ?File $imageFile = null;
 
 
     #[ORM\Column(length: 150)]
@@ -72,11 +84,9 @@ class Cour
         return $this->pdf;
     }
 
-    public function setPdf(string $pdf): self
+    public function setPdf(?string $pdf): void
     {
         $this->pdf = $pdf;
-
-        return $this;
     }
 
     public function getVideo(): ?string
@@ -84,11 +94,9 @@ class Cour
         return $this->video;
     }
 
-    public function setVideo(string $video): self
+    public function setVideo(?string $video): void
     {
         $this->video = $video;
-
-        return $this;
     }
 
     public function getIdformation(): ?int
@@ -102,6 +110,50 @@ class Cour
 
         return $this;
     }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $File
+     */
+
+    public function setPdfFile(?File $File = null): void
+    {
+        $this->pdfFile = $File;
+
+    }
+
+    public function getPdfFile(): ?File
+    {
+        return $this->pdfFile;
+    }
+
+
 
 
 }

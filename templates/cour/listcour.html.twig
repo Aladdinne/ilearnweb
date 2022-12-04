@@ -176,7 +176,7 @@
                         <div class="col-sm-6">
 
                             <a href=" {{ path('listformation')}}" class="btn btn-success" ><i class="material-icons">&#xe042;</i> <span>Retour</span></a>
-                            <a href=" {{ path('addcour',{id:idd })}}"class="btn btn-success" ><i class="material-icons"title="Add">&#xE147;</i><span>Ajouter</span></a>
+                            <a href=" {{ path('addcour',{id:idd | nzo_encrypt})}}"class="btn btn-success" ><i class="material-icons"title="Add">&#xE147;</i><span>Ajouter</span></a>
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                         <th>Nom Cour</th>
                         <th>Nom Formateur</th>
                         <th>Lien Pdf</th>
-                        <th>Lien Video</th>
+                        <th>Nom image</th>
                         <th>Action</th>
 
                     </tr>
@@ -206,8 +206,8 @@
                             <td>{{ c.pdf}}</td>
                             <td>{{ c.video }}</td>
                             <td>
-                                <a href="{{path('updatecour',{id:c.idcour,idd:idd})}}" class="edit" ><i class="material-icons"  title="Edit">&#xE254;</i></a>
-                                <a href="{{path('deletecour',{id:c.idcour,idd:idd})}}" class="delete" ><i class="material-icons"  title="Delete">&#xE872;</i></a>
+                                <a href="{{path('updatecour',{id:c.idcour | nzo_encrypt,idd:idd | nzo_encrypt})}}" class="edit" ><i class="material-icons"  title="Edit">&#xE254;</i></a>
+                                <a href="{{path('deletecour',{idcour:c.idcour,iddel:idd | nzo_encrypt})}}" class="delete" ><i class="material-icons"  title="Delete">&#xE872;</i></a>
 
 
                             </td>

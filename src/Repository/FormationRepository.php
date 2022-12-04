@@ -39,6 +39,36 @@ class FormationRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function Searchbyn($n)
+    {
+        $req=$this->createQueryBuilder('e')
+
+            ->Where('e.category like :n')
+            ->orderBy('e.nomformation', 'ASC')
+            ->setParameter('n','%'.$n.'%')
+            ->getQuery() ;
+        return $req->getResult();
+    }
+
+    public function ordrebyprixasc() {
+
+        $req=$this->createQueryBuilder('e')
+            ->orderBy('e.prix', 'ASC')
+            ->getQuery() ;
+        return $req->getResult();
+    }
+
+    public function ordrebyprixdesc() {
+
+        $em=$this->getEntityManager();
+        return $em->createQuery('select e from App\Entity\Formation e order by e.prix DESC')
+            ->getResult();
+
+    }
+
+
+
 //    /**
 //     * @return Formation[] Returns an array of Formation objects
 //     */
@@ -63,4 +93,6 @@ class FormationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
 }

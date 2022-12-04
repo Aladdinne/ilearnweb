@@ -1,0 +1,7 @@
+nzo_encryptor:
+    secret_key: '%env(NZO_ENCRYPTOR_SECRET)%'
+    secret_iv:  '%env(NZO_ENCRYPTOR_IV)%'
+    cipher_algorithm: 'aes-256-ctr'
+    base64_encode: TRUE                       # optional, default: TRUE
+    format_base64_output: TRUE                # optional, default: TRUE, used only when 'base64_encode' is set to TRUE
+    random_pseudo_bytes: TRUE                    # optional, default: TRUE (generate a random encrypted text output each time => MORE SECURE !)

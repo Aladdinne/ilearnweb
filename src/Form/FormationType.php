@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 
 class FormationType extends AbstractType
 {
@@ -36,6 +37,7 @@ class FormationType extends AbstractType
                     'physics'=>'physics',],])
             ->add('prix', MoneyType::class,[
                 'label' => 'Prix'])
+            ->add("recaptcha", ReCaptchaType::class)
             ->add('ajout',SubmitType::class)
 
         ;
