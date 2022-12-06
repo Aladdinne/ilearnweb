@@ -1,0 +1,182 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+<style>
+table, tr, td ,th {
+  border: 3px solid black;
+  padding-left: 20px;  
+}
+table{
+    width:100%;
+    height:30%;
+}
+tr{
+  height:30%;
+}
+button{
+  padding-left:20px;
+  padding-top:120px;
+  padding-right:20px;
+}
+</style>
+<!--
+<table>
+<tr>
+        <th>nom devoir</th>
+        <th>duree devoir</th>
+        <th>date de creation</th>
+        <th>contenu</th>
+        <th>category</th>
+        <th>resultat</th>
+        <th>popup</th>
+        <th>Questions</th>
+</tr>
+
+{% for i in cc %}
+<tr>
+        <td>{{i.namedevoir}}</td>
+        <td>{{i.dureedevoir}}</td>
+        <td>{{i.datecreation}}</td>
+        <td>{{i.contenu}}</td>
+        <td>{{i.category}}</td>
+        <td> <a href="{{path('resultatdevoir',{id:i.iddevoir})}}"`> QRcode  </td>
+        <td> <a href="#"  data-toggle="modal" data-target="#mymodal"  >popup qrcode</a></td>
+        <td> <a href="{{path('app_question2',{id:i.iddevoir})}}"> questions</td>
+</tr>
+
+{% endfor %}-->
+
+
+        <div class="modal fade"  id="mymodal">
+                <img src="/public/assets/qrcode.png" alt="img"/>
+                <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal -header">
+                                  <h1>title</h1>
+                            </div>
+
+                                <img src="/public/assets/qrcode.png" width="104" height="104" alt="img"/>
+
+                        </div>
+                </div>
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js" integrity="sha512-g2PN+aYR0KupTVwea5Ppqw4bxWLLypWdd+h7E0ydT8zF+/Y2Qpk8Y1SnzVw6ZCVJPrgB/91s3VfhVhP7Y4+ucw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+        import {setContent} from "../../public/assets/vendors/tinymce";
+
+        $(document).ready(function(){
+                setContent(qr_code_data_uri(resultat))
+                setTimeout(function(){},2000);
+                $("#mymodal").on("click", function() {
+                        $.ajax(
+                                {type: "GET",
+                                        url: "{{ path('resultatdevoir',{id:2}) }}",
+
+                                        success: function() {
+
+                                        },
+                                        error: function(x, e) {
+
+                                        }
+                                });
+                });
+        })
+</script>
+
+</table>
+
+        <div class="sidebar-search">
+                <div class="input-group custom-search-form">
+                        <label for="search"></label><input type="text" id="search" class="form-control" placeholder="Suche..." >
+                </div>
+                <!-- /input-group -->
+                <div>
+<table border ="1" id="t" class="table table-hover table-dark">
+<thead class="thead-dark">
+<tr>
+        <th>nom devoir</th>
+        <th>duree devoir</th>
+        <th>date de creation</th>
+        <th>contenu</th>
+        <th>category</th>
+        <th>resultat</th>
+        <th>popup</th>
+        <th>Questions</th>
+</tr>
+</thead>
+<tbody id="all">
+                {% for i in cc %}
+                        <tr>
+                                <td>{{i.namedevoir}}</td>
+                                <td>{{i.dureedevoir}}</td>
+                                <td>{{i.datecreation}}</td>
+                                <td>{{i.contenu}}</td>
+                                <td>{{i.category}}</td>
+                                <td> <a href="{{path('resultatdevoir',{id:i.iddevoir})}}"`> QRcode  </td>
+                                <td> <a href="#"  data-toggle="modal" data-target="#mymodal"  >popup qrcode</a></td>
+                                <td> <a href="{{path('app_question2',{id:i.iddevoir})}}"> questions</td>
+                        </tr>
+
+                {% endfor %}
+</tbody>
+<tbody id="searchtab">
+</tbody>
+</table>
+</div>
+
+        </div>
+        <ul class="nav" id="side-menu">
+                <li>
+                        <a href="#"> Entities<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level" id="entitiesNav">
+                        </ul>
+                </li>
+        </ul>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+                jQuery(document).ready(function() {
+                        var searchRequest = null;
+                        $("#search").keyup(function() {
+                                var minlength = 3;
+                                var that = this;
+                                var value = $(this).val();
+                                var entitySelector = $("#entitiesNav").html('');
+                                if (value.length >= minlength ) {
+                                        if (searchRequest != null)
+                                                searchRequest.abort();
+                                        searchRequest = $.ajax({
+                                                type: "GET",
+                                                url: "{{ path('searchdevoir') }}",
+                                                data: {
+                                                        'q' : value
+                                                },
+                                                dataType: "text",
+                                                success: function(msg){
+                                                        //we need to check if the value is the same
+                                                        if (value===$( that).val()) {
+                                                                var result = JSON.parse(msg);
+                                                                $.each(result, function(key, arr) {
+                                                                        $.each(arr, function(id, value) {
+                                                                                if (key === 'devoir') {
+                                                                                        if (id !== 'error') {
+                                                                                                entitySelector.append('<li> <a href="/question/'+id+'">'+value+'</a></li>');
+                                                                                        } else {
+                                                                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                                                        }
+                                                                                }
+                                                                        });
+                                                                });
+                                                        }
+                                                }
+                                        });
+                                }
+                        });
+                });
+        </script>
+
+{% endblock %}
+

@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\RendezvousRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RendezvousRepository::class)]
 class Rendezvous
@@ -16,34 +15,25 @@ class Rendezvous
     private ?int $idrdv = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\GreaterThan("today" )]
     private ?\DateTimeInterface $daterdv = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: 'Ecrire une duree')]
     private ?string $dureerdv = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'Ecrire votre numéro de telephone')]
-    #[Assert\Length(min: 8,max: 15 ,maxMessage : 'post.too_long_content',minMessage: 'contenu court min 8 caractere')]
     private ?int $tel = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: 'Ecrire un motif')]
-    #[Assert\Length(min: 10, minMessage: 'contenu court min 10 caractere')]
     private ? string $motif = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: 'Ecrire etat')]
-    #[Assert\Length(min: 5, minMessage: 'contenu court min 5 caractere')]
-    private ?string $etatrdv = "en attendant";
+    private ?string $etatrdv = null;
 
     
     #[ORM\Column]
     private ?int $idformateur = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'post.blank_content')]
     private ?int $idclient = null;
 
     public function getIdrdv(): ?int
@@ -134,7 +124,6 @@ class Rendezvous
 
         return $this;
     }
-    
 
 
 }

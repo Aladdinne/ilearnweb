@@ -6,8 +6,13 @@ use App\Repository\EvenementRepository;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
+#[UniqueEntity('sujetev')]
+
 class Evenement
 {
     #[ORM\Id]
@@ -16,21 +21,30 @@ class Evenement
     private ?int $idevenement = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "veuillez remplir ce champ !")]
+    #[Assert\Length(min: 2, minMessage: 'veuillez avoir au moins 2 caractères !' , max:10,maxMessage:'veuillez avoir au maximum 10 caractères !')]
     private ?string $nomEvenement = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "veuillez remplir ce champ !")]
+    #[Assert\Length(min: 2, minMessage: 'veuillez avoir au moins 2 caractères !' , max:10,maxMessage:'veuillez avoir au maximum 10 caractères !')]
     private ?string $sujetev = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $dateev = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+
     private ?DateTimeInterface $heureev = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "veuillez remplir ce champ !")]
+    #[Assert\Length(min: 2, minMessage: 'veuillez avoir au moins 2 caractères !' , max:10,maxMessage:'veuillez avoir au maximum 10 caractères !')]
     private ?string $lieuev = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "veuillez remplir ce champ !")]
+    #[Assert\Length(min: 2, minMessage: 'veuillez avoir au moins 2 caractères !' , max:10,maxMessage:'veuillez avoir au maximum 10 caractères !')]
     private ?string $nomcreateurev = null;
 
     public function getIdevenement(): ?int
