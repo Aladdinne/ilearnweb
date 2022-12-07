@@ -41,6 +41,23 @@
             "./migrations/.gitignore"
         ]
     },
+<<<<<<< HEAD
+    "knplabs/knp-snappy-bundle": {
+        "version": "1.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "c81bdcf4a9d4e7b1959071457f9608631865d381"
+        }
+    },
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+=======
+<<<<<<< HEAD
+    "endroid/qr-code-bundle": {
+        "version": "4.1.1"
+=======
     "google/recaptcha": {
         "version": "1.2",
         "recipe": {
@@ -50,8 +67,29 @@
             "ref": "e5a4aa21f2e98d7440ae9aab6b56e307f99dd084"
         }
     },
+<<<<<<< HEAD
     "mercuryseries/flashy-bundle": {
         "version": "v5.1.0"
+=======
+<<<<<<< HEAD
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+=======
+    "karser/karser-recaptcha3-bundle": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.1",
+            "ref": "c51ce07c10331d506762efe25b6f5843c1a5ea17"
+        },
+        "files": [
+            "./config/packages/karser_recaptcha3.yaml"
+        ]
+>>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
+>>>>>>> main
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
     },
     "phpunit/phpunit": {
         "version": "9.5",
@@ -265,6 +303,9 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/ux-chartjs": {
+        "version": "v2.6.0"
     },
     "symfony/validator": {
         "version": "5.4",

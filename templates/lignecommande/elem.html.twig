@@ -1,0 +1,98 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+<script src="https://kit.fontawesome.com/7574080bc2.js" crossorigin="anonymous"></script>
+<style>
+table,td,th {
+  border: 2px solid black;
+  padding-left: 20px;
+  margin: auto;
+  
+}
+fieldset{
+    margin:0 auto;
+      width:80%;
+    height:50%;
+    padding-top: 30px;
+ padding-bottom:30px;
+   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+h1{
+  margin: auto;
+  width: 50%;
+}
+.iconn {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 150px;
+   position: absolute;
+  right: 200px;
+}
+.iconn:hover {
+  background-color: #3e8e41;
+}
+
+.icon {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 150px;
+   position: absolute;
+  right: 20px;
+}
+.icon:hover {
+  background-color: #e22221;
+}
+</style>
+<div class="panier">
+<h1>Votre Elements Commandes</h1>
+</br>
+
+
+{% if items | length > 0 %}
+<fieldset>
+    <table class"table">
+        <thead>
+            <tr>
+                <th>Nomformation</th>
+                <th>Description</th>
+                <th>DateCreation</th>
+                <th>Duree</th>
+                <th>Category</th>
+                <th>Prix</th>
+            </tr>
+        <tbody id="myTable">
+          {% for item in items %}
+            
+          
+            <tr>
+                <td>{{ item.product.nomformation}}</td>
+                <td>{{ item.product.description}}</td>
+                <td>{{ item.product.datecreation|date('Y-m-d')}}</td>
+                <td>{{ item.product.duree}}</td>
+                <td>{{ item.product.Category}}</td>
+                <td>{{ item.product.prix}}</td>
+                <td> <a href="{{path('removepanier',{'id':item.product.idformation})}}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i> </a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" style=" text-align: right;"><h5>Total :</h5>    </td>
+                <td><h5>{{ total }} Dt</h5></td>
+                <td></td>
+        </tfoot>
+    </table>
+    </fieldset>
+    </br>
+    <button class="iconn"><a href="{{path('validercommande',{'id':1})}}">validercommande</button>
+    <button class="icon"><a href="{{path('fmn')}}">Retour</button>
+    
+    {% else %}
+    <p>Surprise,c'est vide !</p>
+{% endif %}
+</div>
+{% endblock %}

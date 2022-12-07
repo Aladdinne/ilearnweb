@@ -5,11 +5,18 @@ table, th, td {
 }
 </style>
 <table>
-{% for i in cc %}
+{% for i in ll %}
 <tr>
 <td>
 {{i.prix}}
 </td>
+{% for j in ff %}
+{% if i.idformation == j.idformation %}
+<td>
+{{j.nomformation}}
+</td>
+{% endif %}
+{% endfor %}
 </tr>
 {% endfor %}
 </table>

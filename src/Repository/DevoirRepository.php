@@ -38,6 +38,50 @@ class DevoirRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+//
+//   query resultat select DISTINCTROW d.namedevoir , q.numquestion, r.idreponse ,r.note from devoir d inner join question q inner join reponse r
+//on d.iddevoir=q.iddevoir and q.idquestion=r.idquestion
+//where d.iddevoir=3 and r.idetudiant=2;
+//
+
+    public function resultat(int $idd,int$ide):array
+    {
+        $em=$this->getEntityManager();
+        $query=$em->createQueryBuilder();
+        $query->select('r.note')
+            ->distinct(true)
+            ->from('App\Entity\devoir','d')
+            ->innerJoin('App\Entity\question','q','WITH','q.iddevoir=d.iddevoir')
+            ->innerJoin('App\Entity\Reponse','r','WITH','r.idquestion=q.idquestion')
+            ->where('d.iddevoir=:inputdevoir')
+            ->andWhere('r.idetudiant=:inputetudiant')
+            ->setParameter('inputdevoir',$idd)
+            ->setParameter('inputetudiant',$ide)
+        ;
+
+        return $query->getQuery()->getArrayResult() ;
+    }
+
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT d
+                FROM App\Entity\Devoir d
+                WHERE d.namedevoir LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
+    public function countcategorydevoir():array{
+        $em=$this->getEntityManager();
+        $query=$em->createQueryBuilder();
+        $query->select( 'd.category as categ','COUNT(d.category) as counting')
+            ->from('App\Entity\devoir','d')
+            ->groupBy('d.category');
+        return $query->getQuery()->getArrayResult() ;
+    }
+
+
 
 //    /**
 //     * @return Devoir[] Returns an array of Devoir objects

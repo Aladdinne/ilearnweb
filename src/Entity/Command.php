@@ -25,8 +25,22 @@ class Command
     private ?string $etat = null;
 
     
+<<<<<<< HEAD
     #[ORM\ManyToOne(inversedBy: 'comm')]
     private ?User $iduser;
+=======
+<<<<<<< HEAD
+    #[ORM\ManyToOne(inversedBy: 'comm')]
+    private ?User $iduser;
+=======
+    #[ORM\Column]
+<<<<<<< HEAD
+    private ?int $iduser;
+=======
+    private int $iduser;
+>>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
+>>>>>>> main
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 
     public function getIdcommand(): ?int
     {

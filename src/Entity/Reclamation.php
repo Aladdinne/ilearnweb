@@ -3,13 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\ReclamationRepository;
-use DateTime;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-//use PhpParser\Node\Expr\Cast\String_;
-use Symfony\Component\Validator\Constraints as Assert;
-//use Symfony\Component\Validator\Constraints\Date;
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
@@ -17,38 +13,44 @@ class Reclamation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $idreclamation = null;
+    private $idreclamation;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?DateTime $datereclamation = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?DateTimeInterface $datereclamation = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: "ecrire le contenue")]
-    #[Assert\Length(min:8,max:150,maxMessage:'le contenue est trop long',minMessage:'Le contenue est tres court')]
     private ?string $contenu = null;
 
     #[ORM\Column(length: 150)]
-    #[Assert\NotBlank(message: "Modifier l'etat")]
     private ?string $etatreclamation = 'non-traite';
 
+<<<<<<< HEAD
  
     #[ORM\Column]
     //#[Assert\NotBlank(message: "ecrire votre Id")]
     private ?int  $iduser = null;
+=======
+    
+    #[ORM\OneToOne(inversedBy: 'rec')]
+    private ?User $iduser = null;
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 
-    #[ORM\Column]
-   // #[Assert\NotBlank(message: "entre un id valide")]
-    private ?int $idcategory = null;
+    
+    #[ORM\ManyToOne(inversedBy: 'categoryrec')]
+    private ?Categoryrec $idcategory = null;
 
     public function getIdreclamation(): ?int
     {
         return $this->idreclamation;
     }
+<<<<<<< HEAD
     public function __construct()
 {
     $datetime=new \DateTime('now');
     $this->date =date_format($datetime, 'Y-m-d');
 }
+=======
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 
     public function getDatereclamation(): ?\DateTimeInterface
     {
@@ -57,7 +59,7 @@ class Reclamation
 
     public function setDatereclamation(?\DateTimeInterface $datereclamation): self
     {
-        $this->datereclamation =$datereclamation;
+        $this->datereclamation = $datereclamation;
 
         return $this;
     }
@@ -86,30 +88,35 @@ class Reclamation
         return $this;
     }
 
-    public function getIduser(): ?int
+    public function getIduser(): ?User
     {
         return $this->iduser;
     }
 
-    public function setIduser(int $iduser): self
+    public function setIduser(?User $iduser): self
     {
         $this->iduser = $iduser;
 
         return $this;
     }
 
-   public function getIdcategory(): ?int
+    public function getIdcategory(): ?Categoryrec
     {
         return $this->idcategory;
     }
 
-    public function setIdcategory(int $idcategory): self
+    public function setIdcategory(?Categoryrec $idcategory): self
     {
         $this->idcategory = $idcategory;
 
         return $this;
     }
+<<<<<<< HEAD
       
 
      
+=======
+
+
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 }

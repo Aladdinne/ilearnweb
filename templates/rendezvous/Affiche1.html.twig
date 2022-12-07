@@ -1,15 +1,93 @@
+
+{% extends "base.html.twig" %}
+{% block body %}
 <style>
-table, th, td {
+table, tr, td ,th {
   border: 3px solid black;
-  padding: 0px;
+  padding-left: 20px;  
 }
+table{
+    width:90%;
+    height:30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      margin: auto;
+}
+tr{
+  height:30%;
+}
+<<<<<<< HEAD
+th{
+  color:black;
+  text-shadow: 3px;
+  background-color: #3215;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+button{
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      margin: auto;
+}
+=======
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 </style>
+<h2>->Votre liste de rendez vous</h2>
+</br>
 <table>
-{% for i in cc %}
 <tr>
+<th>Nom Client
+</th>
+<th>Date de rendzvous
+</th>
+<th>Durée
+</th>
+<th>Telephone
+</th>
+<th>Motif</th>
+<th>Etat</th>
+<th>Modifier</th>
+<th>Supprimer</th>
+</tr>
+<tr>
+{% for i in rr %}
+{% if i.idclient == ii %}
+{% for j in cc %}
+{% if i.idclient == j.iduser %}
+<td>
+{{j.nom}}
+</td>
+{% endif %}
+{% endfor %}
 <td>
 {{i.daterdv|date('Y-m-d')}}
 </td>
+<td>
+{{i.dureerdv}}
+</td>
+<td>
+{{i.tel}}
+</td>
+<td>
+{{i.motif}}
+</td>
+<td>
+{{i.etatrdv}}
+</td>
+        <td><a href="{{path('Update',{id:i.idrdv})}}">Modifier</td>
+        <td><a href="{{path('remove',{id:i.idrdv})}}">Remove</td>
 </tr>
+{% endif %}
 {% endfor %}
 </table>
+<div class="center">
+<button type="button"><a href="{{path('ajoutrendezvous')}}">Ajoute</button>
+<<<<<<< HEAD
+</div>
+{% endblock %}
+
+=======
+{% endblock %}
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5

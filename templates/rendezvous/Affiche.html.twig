@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<style>
+
+th{
+  color:white;
+  text-shadow: 3px;
+  background-color: #3215;
+}
+
+</style>
+
+
+
+<div>
+<h3>Les RendezVous : </h3>
+<input type="text" value="" id="myInput" class="form-control" placeholder="Search...">
+<table  border ="1" id="t" class="table table-hover table-dark">
+ <thead class="thead-dark">
+<tr>
+<th>Nom Client
+</th>
+<th>Date de rendzvous
+</th>
+<th>Durée
+</th>
+<th>Telephone
+</th>
+<th>Motif</th>
+<th>Etat</th>
+<th>Modifier</th>
+</tr>
+<tbody id="myTable">
+<tr>
+{% for i in rrr %}
+{% for j in ccc %}
+{% if i.idclient == j.iduser %}
+<td>
+{{j.nom}}
+</td>
+{% endif %}
+{% endfor %}
+<td>
+{{i.daterdv|date('Y-m-d')}}
+</td>
+<td>
+{{i.dureerdv}}
+</td>
+<td>
+{{i.tel}}
+</td>
+<td>{{i.motif}}</td>
+<td>
+{{i.etatrdv}}
+</td>
+        <td><a href="{{path('Updaterdvv',{id:i.idrdv})}}">Modifier</td>
+</tr>
+{% endfor %}
+</tbody>
+<tbody id="searchtab">
+</tbody>
+</table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

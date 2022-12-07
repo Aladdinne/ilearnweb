@@ -24,12 +24,12 @@ class Commentaire
     #[ORM\Column(length: 150)]
     private ?string $emailcommentaire = null;
 
-    #[ORM\Column]
-    private ?int $nickname = null;
-
+    #[ORM\Column(length: 150)]
+    private ?String $nickname = null;
+/*
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $createdAt = null;
-
+*/
     #[ORM\Column]
     private ?bool $rgpd = null;
 
@@ -37,7 +37,7 @@ class Commentaire
     {
         return $this->idcommentaire;
     }
-
+/*
     public function getParentId(): ?int
     {
         return $this->parentId;
@@ -49,7 +49,7 @@ class Commentaire
 
         return $this;
     }
-
+*/
     public function getContentcommentaire(): ?string
     {
         return $this->contentcommentaire;
@@ -74,18 +74,18 @@ class Commentaire
         return $this;
     }
 
-    public function getNickname(): ?int
+    public function getNickname(): ?string
     {
         return $this->nickname;
     }
 
-    public function setNickname(int $nickname): self
+    public function setNickname(string $nickname): self
     {
         $this->nickname = $nickname;
 
         return $this;
     }
-
+/*
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -97,7 +97,7 @@ class Commentaire
 
         return $this;
     }
-
+*/
     public function isRgpd(): ?bool
     {
         return $this->rgpd;
