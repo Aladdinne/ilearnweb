@@ -71,6 +71,10 @@
     "mercuryseries/flashy-bundle": {
         "version": "v5.1.0"
 =======
+<<<<<<< HEAD
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+=======
     "karser/karser-recaptcha3-bundle": {
         "version": "0.1",
         "recipe": {
@@ -84,7 +88,11 @@
         ]
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 >>>>>>> main
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/main
+=======
 >>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
     },
     "phpunit/phpunit": {
         "version": "9.5",

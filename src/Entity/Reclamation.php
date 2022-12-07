@@ -24,9 +24,20 @@ class Reclamation
     #[ORM\Column(length: 150)]
     private ?string $etatreclamation = 'non-traite';
 
+<<<<<<< HEAD
+ 
+    #[ORM\Column]
+    //#[Assert\NotBlank(message: "ecrire votre Id")]
+    private ?int  $iduser = null;
+=======
     
     #[ORM\OneToOne(inversedBy: 'rec')]
     private ?User $iduser = null;
+<<<<<<< HEAD
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
 
     
     #[ORM\ManyToOne(inversedBy: 'categoryrec')]
@@ -36,6 +47,18 @@ class Reclamation
     {
         return $this->idreclamation;
     }
+<<<<<<< HEAD
+    public function __construct()
+{
+    $datetime=new \DateTime('now');
+    $this->date =date_format($datetime, 'Y-m-d');
+}
+=======
+<<<<<<< HEAD
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
 
     public function getDatereclamation(): ?\DateTimeInterface
     {
@@ -96,6 +119,16 @@ class Reclamation
 
         return $this;
     }
+<<<<<<< HEAD
+      
+
+     
+=======
 
 
+<<<<<<< HEAD
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
 }

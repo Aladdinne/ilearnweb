@@ -13,7 +13,20 @@ return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
+    VictorPrdh\RecaptchaBundle\RecaptchaBundle::class => ['all' => true],
     MercurySeries\FlashyBundle\MercurySeriesFlashyBundle::class => ['all' => true],
+    CMEN\GoogleChartsBundle\CMENGoogleChartsBundle::class => ['all' => true],
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
+    MercurySeries\FlashyBundle\MercurySeriesFlashyBundle::class => ['all' => true],
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 =======
 <<<<<<< HEAD
     Endroid\QrCodeBundle\EndroidQrCodeBundle::class => ['all' => true],
@@ -28,5 +41,9 @@ return [
     Karser\Recaptcha3Bundle\KarserRecaptcha3Bundle::class => ['all' => true],
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 >>>>>>> main
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/main
+=======
 >>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 ];

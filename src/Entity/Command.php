@@ -29,12 +29,21 @@ class Command
     #[ORM\ManyToOne(inversedBy: 'comm')]
     private ?User $iduser;
 =======
+<<<<<<< HEAD
+    #[ORM\ManyToOne(inversedBy: 'comm')]
+    private ?User $iduser;
+=======
     #[ORM\Column]
 <<<<<<< HEAD
     private ?int $iduser;
 =======
     private int $iduser;
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
+>>>>>>> main
+<<<<<<< HEAD
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
 >>>>>>> main
 
     public function getIdcommand(): ?int
@@ -78,12 +87,12 @@ class Command
         return $this;
     }
 
-    public function getIduser(): ?int
+    public function getIduser(): ?User
     {
         return $this->iduser;
     }
 
-    public function setIduser(?int $iduser): self
+    public function setIduser(?User $iduser): self
     {
         $this->iduser = $iduser;
 

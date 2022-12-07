@@ -44,8 +44,20 @@ class UserRepository extends ServiceEntityRepository
         //return $query->getResult();
         return $this->createQueryBuilder('u')->where('u.username  =:username')
 <<<<<<< HEAD
+<<<<<<< HEAD
         ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
         ->setParameter('userpwd',$userpwd)->getQuery()->getResult();
+    }
+=======
+=======
+>>>>>>> main
+<<<<<<< HEAD
+        ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
+        ->setParameter('userpwd',$userpwd)->getQuery()->getResult();
+<<<<<<< HEAD
+    }
+=======
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 =======
 <<<<<<< HEAD
             ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
@@ -83,6 +95,11 @@ class UserRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('u')->select('count(u.iduser)')->where('u.role =:role')
         ->setParameter('role',$role)->getQuery()->getResult();
     }
+>>>>>>> main
+<<<<<<< HEAD
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
 >>>>>>> main
 //    /**
 //     * @return User[] Returns an array of User objects
