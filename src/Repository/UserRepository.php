@@ -46,11 +46,15 @@ class UserRepository extends ServiceEntityRepository
 <<<<<<< HEAD
         ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
         ->setParameter('userpwd',$userpwd)->getQuery()->getResult();
+<<<<<<< HEAD
     }
+=======
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 =======
 <<<<<<< HEAD
             ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
             ->setParameter('userpwd',$userpwd)->getQuery()->getResult();
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
     }
 
 =======
