@@ -184,6 +184,12 @@ class FormationController extends AbstractController
         );
         return $this->render("formation/clientf.html.twig", array('listf'=>$formations));
     }
+///admin
+    #[Route('/listformationG', name: 'listformationG')]
+    public function listformationAdmin(ManagerRegistry $doctrine){
+        $formations = $doctrine ->getRepository(Formation::class)->findAll();
+        return $this->render("formation/listformationG.html.twig", array('listformation'=>$formations));
+    }
 
 
 

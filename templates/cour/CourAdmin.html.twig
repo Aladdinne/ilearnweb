@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "baseadmin.html.twig" %}
 {% block body %}
     <!DOCTYPE html>
     <html lang="en">
@@ -175,8 +175,7 @@
                         </div>
                         <div class="col-sm-6">
 
-                            <a href=" {{ path('listformation')}}" class="btn btn-success" ><i class="material-icons">&#xe042;</i> <span>Retour</span></a>
-                            <a href=" {{ path('addcour',{id:idd | nzo_encrypt})}}"class="btn btn-success" ><i class="material-icons"title="Add">&#xE147;</i><span>Ajouter</span></a>
+                            <a href=" {{ path('listformationG')}}" class="btn btn-success" ><i class="material-icons">&#xe042;</i> <span>Retour</span></a>
                         </div>
                     </div>
                 </div>
@@ -185,14 +184,10 @@
                     <thead>
                     <tr>
 
-
-
                         <th>Nom Cour</th>
                         <th>Nom Formateur</th>
-                        <th>Pdf</th>
+                        <th> Pdf</th>
                         <th>Nom image</th>
-                        <th>Action</th>
-
                     </tr>
                     </thead>
                     <tbody>
@@ -205,12 +200,7 @@
                             <td>{{ c.nomformateur }}</td>
                             <td>{{ c.pdf}}</td>
                             <td>{{ c.video }}</td>
-                            <td>
-                                <a href="{{path('updatecour',{id:c.idcour | nzo_encrypt,idd:idd | nzo_encrypt})}}" class="edit" ><i class="material-icons"  title="Edit">&#xE254;</i></a>
-                                <a href="{{path('deletecour',{idcour:c.idcour,iddel:idd | nzo_encrypt})}}" class="delete" ><i class="material-icons"  title="Delete">&#xE872;</i></a>
 
-
-                            </td>
                         </tr>
                     {%  endfor %}
                     </tbody>
@@ -220,11 +210,7 @@
             </div>
         </div>
     </div>
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            <h2><b>{{ message }}</b></h2>
-        </div>
-    {% endfor %}
+
     <!-- Edit Modal HTML -->
 
 

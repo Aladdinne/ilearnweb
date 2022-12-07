@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "baseadmin.html.twig" %}
 {% block body %}
     <!DOCTYPE html>
     <html lang="en">
@@ -25,7 +25,7 @@
                 background: #fff;
                 padding: 20px 25px;
                 border-radius: 3px;
-                min-width: 1380px;
+                min-width: 1000px;
                 box-shadow: 0 1px 1px rgba(0,0,0,.05);
             }
             .table-title {
@@ -165,19 +165,17 @@
     </head>
     <body>
 
+
     <div class="container-xl">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Gestion <b>des cours</b></h2>
+                            <h2>Gestion <b>des formations</b></h2>
                         </div>
-                        <div class="col-sm-6">
 
-                            <a href=" {{ path('listformation')}}" class="btn btn-success" ><i class="material-icons">&#xe042;</i> <span>Retour</span></a>
-                            <a href=" {{ path('addcour',{id:idd | nzo_encrypt})}}"class="btn btn-success" ><i class="material-icons"title="Add">&#xE147;</i><span>Ajouter</span></a>
-                        </div>
+
                     </div>
                 </div>
 
@@ -186,45 +184,43 @@
                     <tr>
 
 
-
-                        <th>Nom Cour</th>
-                        <th>Nom Formateur</th>
-                        <th>Pdf</th>
-                        <th>Nom image</th>
+                        <th>Nom formation</th>
+                        <th>Description</th>
+                        <th>Date de creation</th>
+                        <th>Duree</th>
+                        <th>Category</th>
+                        <th>Prix</th>
                         <th>Action</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    {%  for c in listcour %}
+                    {%  for f in listformation %}
                         <tr>
 
 
-
-                            <td>{{ c.nomcour}}</td>
-                            <td>{{ c.nomformateur }}</td>
-                            <td>{{ c.pdf}}</td>
-                            <td>{{ c.video }}</td>
+                            <td>{{ f.nomformation}}</td>
+                            <td>{{ f.description }}</td>
+                            <td>{{ f.datecreation|date('d-m-Y') }}</td>
+                            <td>{{ f.duree }}</td>
+                            <td>{{ f.category }}</td>
+                            <td>{{ f.prix }}</td>
                             <td>
-                                <a href="{{path('updatecour',{id:c.idcour | nzo_encrypt,idd:idd | nzo_encrypt})}}" class="edit" ><i class="material-icons"  title="Edit">&#xE254;</i></a>
-                                <a href="{{path('deletecour',{idcour:c.idcour,iddel:idd | nzo_encrypt})}}" class="delete" ><i class="material-icons"  title="Delete">&#xE872;</i></a>
-
+                                <a href="{{path('listcourAdmin',{idfff:f.idformation | nzo_encrypt })}}" class="accesscour" ><i class="material-icons"  title="Accédez cour">&#xe873;</i></a>
 
                             </td>
                         </tr>
                     {%  endfor %}
                     </tbody>
+                    <tbody id="searchtab">
+                    </tbody>
                 </table>
-
-
             </div>
         </div>
     </div>
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            <h2><b>{{ message }}</b></h2>
+
         </div>
-    {% endfor %}
+
     <!-- Edit Modal HTML -->
 
 

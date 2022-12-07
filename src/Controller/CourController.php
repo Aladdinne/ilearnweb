@@ -152,6 +152,14 @@ class CourController extends AbstractController
 
     }
 
+    ////admin
+    #[Route('/listcourAdmin/{idfff}', name: 'listcourAdmin')]
+    #[ParamDecryptor(["idfff"])]
+    public function listcourAdmin(ManagerRegistry $doctrine, $idfff){
+        $cours = $doctrine ->getRepository(Cour::class)->findBy(['idformation'=>$idfff]);
+        return $this->render("cour/CourAdmin.html.twig", array('listcour'=>$cours));
+    }
+
 
 
 
