@@ -1,4 +1,7 @@
 {
+    "cmen/google-charts-bundle": {
+        "version": "5.0.1"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -47,6 +50,10 @@
             "ref": "e5a4aa21f2e98d7440ae9aab6b56e307f99dd084"
         }
     },
+<<<<<<< HEAD
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+=======
     "karser/karser-recaptcha3-bundle": {
         "version": "0.1",
         "recipe": {
@@ -58,6 +65,7 @@
         "files": [
             "./config/packages/karser_recaptcha3.yaml"
         ]
+>>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
     },
     "phpunit/phpunit": {
         "version": "9.5",
@@ -311,5 +319,17 @@
     },
     "twig/extra-bundle": {
         "version": "v3.4.0"
+    },
+    "victor-prdh/recaptcha-bundle": {
+        "version": "1.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "f604d862b3ce4434d131a0e9b3a2eb7bb1784aff"
+        },
+        "files": [
+            "./config/packages/recaptcha.yaml"
+        ]
     }
 }

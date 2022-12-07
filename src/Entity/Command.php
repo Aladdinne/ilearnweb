@@ -32,8 +32,13 @@ class Command
     private ?string $etat = "encour";
 
     
+<<<<<<< HEAD
+    #[ORM\ManyToOne(inversedBy: 'comm')]
+    private ?User $iduser;
+=======
     #[ORM\Column]
     private int $iduser;
+>>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 
     public function getIdcommand(): ?int
     {
