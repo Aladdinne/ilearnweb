@@ -1,0 +1,126 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+
+
+    <!------ Include the above in your HEAD tag ---------->
+
+
+    <div class="container">
+        <form method="post" action="{{ path('searchbyn') }}" >
+            <input type="text"   class="form-control border-light" style="padding: 30px 25px; border:#0d6efd" placeholder="Chercher par Cataegory(it,math,physics)" name="motcle">
+            <br>
+            <input  type="submit" class="btn btn-success" value="Rechercher">
+        </form>
+        <br>
+
+
+    </div>
+    <br>
+    <br>
+    {%for f in listf %}
+        <ul>
+            <div id="products" class="row view-group">
+                <div class="item col-xs-4 col-lg-4">
+                    <div class="thumbnail card">
+
+                        <div class="caption card-body">
+                            <h4 class="group card-title inner list-group-item-heading" style="font-family: Arial, sans-serif">
+                                {{ f.nomformation }}</h4>
+                            <p class="group inner list-group-item-text" style="font-family: Arial, sans-serif">
+                                <b>Desc: </b>{{ f.description }}</p>
+                            <p class="group inner list-group-item-text" style="font-family: Arial, sans-serif">
+                                <b>Durée: </b> {{ f.duree }}</p>
+                            <p class="group inner list-group-item-text" style="font-family: Arial, sans-serif">
+                                <b>Durée: </b> {{ f.category }}</p>
+                            <p class="group inner list-group-item-text" style="font-family: Arial, sans-serif">
+                                <b>Date Creation: </b> {{ f.datecreation |date('d-m-Y') }}</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6" style="font-family: Arial, sans-serif">
+                                    <p class="lead">
+                                        <b>Prix: </b>{{ f.prix }} $</p>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6">
+                                    <a href="{{path('listcourC',{idf:f.idformation | nzo_encrypt})}}" class="btn btn-success" >Cours</a>
+                                    <br>
+                                    <br>
+                                    <a class="btn btn-success" href="{{path('addl',{id:f.idformation})}}">Ajouter au panier</a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+
+    {%endfor %}
+    <br>
+    <br>
+
+
+    <div class="col-xs-12 col-md-20">
+        <a class="btn btn-success" href="{{path('pan-cart')}}">Panier</a>
+    </div>
+    <br>
+    <br>
+    <form   action="{{path('formationmail')}}" method="post">
+        <h3>Renseignements <span class="badge bg-primary">Ilearn</span></h3>
+        <h5>Si vous avez des questions à un formateur l'envoyez un email</h5>
+        <div class="form-group">
+            <label for="email">Email Formateur</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" name="clemail">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Votre demande de renseignement</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="contentf"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary"  >Envoyer</button>
+    </form>
+
+
+
+    <style>
+        .view-group {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .thumbnail
+        {
+            margin-bottom: 30px;
+            padding: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            border-radius: 0px;
+        }
+
+        .item.list-group-item .img-event {
+            float: left;
+            width: 30%;
+        }
+
+        .item.list-group-item .list-group-image
+        {
+            margin-right: 10px;
+        }
+        .item.list-group-item .thumbnail
+        {
+            margin-bottom: 0px;
+            display: inline-block;
+        }
+        .item.list-group-item .caption
+        {
+            float: left;
+            width: 70%;
+            margin: 0;
+        }
+
+
+    </style>
+
+{% endblock %}

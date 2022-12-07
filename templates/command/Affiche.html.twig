@@ -1,15 +1,61 @@
+{% extends "base.html.twig" %}
+{% block body %}
 <style>
-table, th, td {
+table, tr, td ,th {
   border: 3px solid black;
-  padding: 0px;
+  padding-left: 20px;  
+}
+table{
+    width:100%;
+    height:30%;
+}
+tr{
+  height:30%;
+}
+button{
+  padding-left:20px;
+  padding-top:120px;
+  padding-right:20px;
 }
 </style>
 <table>
+<tr>
+<th>User
+</th>
+<th>Total
+</th>
+<th>Date De Commande
+</th>
+<th>Etat
+</th>
+<th>Detail</th>
+<th>Modifier</th>
+<th>Supprimer</th>
+</tr>
 {% for i in cc %}
 <tr>
+{% for j in uu %}
+{% if i.iduser == j.iduser %}
+<td>
+{{j.nom}}
+</td>
+{% endif %}
+{% endfor %}
 <td>
 {{i.total}}
 </td>
+<td>
+{{i.datecommand|date('Y-m-d')}}
+</td>
+<td>
+{{i.etat}}
+</td>
+        <td><a href="{{path('fc',{id:i.idcommand})}}">Detail</td>
+        <td><a href="{{path('Update',{id:i.idcommand})}}">Modifier</td>
+        <td><a href="{{path('remove',{id:i.idcommand})}}">Remove</td>
 </tr>
 {% endfor %}
 </table>
+<button type="button"><a href="{{path('ajoutcommand')}}">Ajoute</button>
+{% endblock %}
+

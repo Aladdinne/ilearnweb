@@ -30,11 +30,11 @@ class Rendezvous
     private ?string $etatrdv = null;
 
     
-    #[ORM\ManyToOne(inversedBy: 'user')]
-    private ?User $idformateur = null;
+    #[ORM\Column]
+    private ?int $idformateur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?User $idclient = null;
+    #[ORM\Column]
+    private ?int $idclient = null;
 
     public function getIdrdv(): ?int
     {
@@ -101,24 +101,24 @@ class Rendezvous
         return $this;
     }
 
-    public function getIdformateur(): ?User
+    public function getIdformateur(): ?int
     {
         return $this->idformateur;
     }
 
-    public function setIdformateur(?User $idformateur): self
+    public function setIdformateur(?int $idformateur): self
     {
         $this->idformateur = $idformateur;
 
         return $this;
     }
 
-    public function getIdclient(): ?User
+    public function getIdclient(): ?int
     {
         return $this->idclient;
     }
 
-    public function setIdclient(?User $idclient): self
+    public function setIdclient(?int $idclient): self
     {
         $this->idclient = $idclient;
 

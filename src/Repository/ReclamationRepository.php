@@ -38,6 +38,7 @@ class ReclamationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+<<<<<<< HEAD
     public function findReclamationByContenu($contenu){
          return $this->createQueryBuilder ('reclamation')
                 ->where('reclamation.contenu LIKE :contenu')
@@ -45,6 +46,8 @@ class ReclamationRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getResult();
                  }
+=======
+>>>>>>> refs/remotes/origin/main
 
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects

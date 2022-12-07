@@ -1,0 +1,37 @@
+<table> 
+
+<tr>
+
+<th>Contenu</th>
+<th>email </th>
+<th>nickname</th>
+
+<th>Delete</th>
+<th>Update</th>
+
+</tr>
+
+{% for x in xx %}
+
+<tr>
+<td> {{x.contentcommentaire}} </td>
+<td> {{x.emailcommentaire	}} </td>
+<td>  {{x.nickname}}     </td>
+<td>    <a href="{{path('dlcom',{id:x.idcommentaire})}} "> Delete    </a>  </td>
+<td>    <a href="{{path('edcom',{id:x.idcommentaire})}} "> Update    </a>  </td>
+
+ 
+
+
+
+
+
+
+
+</tr>
+
+
+
+{% endfor %}
+
+</table> 
