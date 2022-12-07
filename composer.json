@@ -13,6 +13,13 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.13",
 <<<<<<< HEAD
+        "dompdf/dompdf": "^2.0",
+        "karser/karser-recaptcha3-bundle": "^0.1.23",
+        "knplabs/knp-snappy-bundle": "^1.9",
+        "mercuryseries/flashy-bundle": "^5.1",
+        "mpdf/mpdf": "^6.1",
+=======
+<<<<<<< HEAD
         "endroid/qr-code": "^4.6",
         "endroid/qr-code-bundle": "^4.1",
 =======
@@ -22,7 +29,9 @@
         "karser/karser-recaptcha3-bundle": "^0.1.23",
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 >>>>>>> main
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
         "phpdocumentor/reflection-docblock": "^5.3",
+        "phpmailer/phpmailer": "^6.6",
         "phpstan/phpdoc-parser": "^1.13",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "5.4.*",
@@ -33,6 +42,7 @@
         "symfony/flex": "^1.17|^2",
         "symfony/form": "5.4.*",
         "symfony/framework-bundle": "5.4.*",
+        "symfony/google-mailer": "5.4.*",
         "symfony/http-client": "5.4.*",
         "symfony/intl": "5.4.*",
         "symfony/mailer": "5.4.*",
@@ -55,7 +65,11 @@
         "symfony/yaml": "5.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
+<<<<<<< HEAD
+        "twilio/sdk": "^6.43"
+=======
         "victor-prdh/recaptcha-bundle": "^1.6"
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
     },
     "config": {
         "allow-plugins": {

@@ -8,15 +8,20 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 <<<<<<< HEAD
 use Doctrine\Common\Collections\Collection;
+<<<<<<< HEAD
+use Symfony\Component\Security\Core\User\UserInterface;
+=======
 =======
 <<<<<<< HEAD
 use Symfony\Component\Validator\Constraints\Length;
 =======
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 >>>>>>> main
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+
+class User 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -129,6 +134,6 @@ class User
 
         return $this;
     }
-
+    
 
 }

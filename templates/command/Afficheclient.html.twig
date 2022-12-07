@@ -1,0 +1,69 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+<style>
+table, tr, td ,th {
+  border: 3px solid black;
+  padding-left: 20px;  
+}
+table{
+    width:90%;
+    height:30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      margin: auto;
+}
+tr{
+  height:30%;
+}
+th{
+  color:black;
+  text-shadow: 3px;
+  background-color: #3215;
+}
+
+</style>
+<h3> -> Affichage Les Commande:</h3>
+</br>
+<table>
+<tr>
+<th>User
+</th>
+<th>Total en Dt
+</th>
+<th>Date De Commande
+</th>
+<th>Etat
+</th>
+<th>Detail</th>
+{#<th>Modifier</th>#}
+<th>Supprimer</th>
+</tr>
+{% for i in cc %}
+{% if i.iduser == ii %}
+<tr>
+{% for j in uu %}
+{% if i.iduser == j.iduser %}
+<td>
+{{j.nom}}
+</td>
+{% endif %}
+{% endfor %}
+<td>
+{{i.total}}
+</td>
+<td>
+{{i.datecommand|date('Y-m-d')}}
+</td>
+<td>
+{{i.etat}}
+</td>
+        <td><a href="{{path('fcc',{id:i.idcommand})}}">Detail</td>
+     {#}   <td><a href="{{path('Updatee',{id:i.idcommand})}}">Modifier</td>#}
+        <td><a href="{{path('removee',{id:i.idcommand})}}">Supprimer</td>
+</tr>
+{% endif %}
+{% endfor %}
+</table>
+{#<button type="button"><a href="{{path('ajoutcommandd')}}">Ajoute</button>
+<button type="button"><a href="{{path('pdfcreate')}}">PDF</button>#}
+{% endblock %}
+

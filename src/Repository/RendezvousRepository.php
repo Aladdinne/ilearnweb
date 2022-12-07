@@ -38,6 +38,15 @@ class RendezvousRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findRendezVousByDaterdv($daterdv)
+    { return $this->createQueryBuilder('rendezvous')
+        ->where('rendezvous.daterdv LIKE :daterdv')
+        ->setParameter('daterdv','%'.$daterdv.'%')
+        ->getQuery()
+        ->getResult();
+ 
+    }
+       
 
 //    /**
 //     * @return Rendezvous[] Returns an array of Rendezvous objects
