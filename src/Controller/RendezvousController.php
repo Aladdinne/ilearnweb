@@ -5,9 +5,7 @@ namespace App\Controller;
 //include './vendor/autoload.php';
 
 use App\Entity\Rendezvous;
-use App\Entity\User;
 use App\Form\RendezvousType;
-use App\Form\RendezvoussType;
 use App\Repository\UserRepository;
 use App\Repository\RendezvousRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,13 +13,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\HttpFoundation\Request;
+<<<<<<< HEAD
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Twilio\Rest\Client;
 use function PHPSTORM_META\type;
+=======
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 
 class RendezvousController extends AbstractController
 {
@@ -40,23 +39,25 @@ class RendezvousController extends AbstractController
         $rendezvous = $rep->findall();
         return $this->render('rendezvous/Affiche1.html.twig',['rr'=>$rendezvous,'cc'=>$user,'ii'=>$id]);
     }
-    #[Route('/AfficheRendezvouss',name:'fffr')]
-    function Affiche1 (RendezvousRepository $rep,UserRepository $repp ){
-        $user = $repp->findAll();
-        $rendezvous = $rep->findall();
-        return $this->render('rendezvous/Affiche.html.twig',['rrr'=>$rendezvous,'ccc'=>$user]);
-    }
     #[Route('/Ajoutrendezvous',name:'ajoutrendezvous')]
     function Ajout(SessionInterface $session,ManagerRegistry $doctrine,Request $request){
         $rendezvous=new Rendezvous;
+<<<<<<< HEAD
         $auth = $session->get('auth',[]);
         $user=new User;
+=======
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
         $form=$this->createFormBuilder($rendezvous)
             ->add('daterdv')
             ->add('dureerdv')
             ->add('tel')
             ->add('motif')
+<<<<<<< HEAD
            // ->add('idclient') 
+=======
+            ->add('etatrdv')
+            ->add('idclient')
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
             ->add('Ajout',SubmitType::class)
         ->getForm();
         $form->handleRequest($request);
@@ -77,21 +78,25 @@ class RendezvousController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('ffr');
         }
+<<<<<<< HEAD
         /* 
        
  
         //print($message->sid);*/
         return $this->render('rendezvous/Ajoutrdv.html.twig',['ff'=>$form->createView()]);
+=======
+        return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
         
       }
-      #[Route('/Deleterdv/{id}', name:'removerdv')]
+      #[Route('/Delete/{id}', name:'remove')]
     function delete(ManagerRegistry $doctrine,Rendezvous $rendezvous){
         $em=$doctrine->getManager();
         $em->remove($rendezvous);
         $em->flush();
         return $this->redirectToRoute('ffr');
     }
-    #[Route('/Updaterdv/{id}', name:'Updaterdv')]
+    #[Route('/Update/{id}', name:'Update')]
     function Update(ManagerRegistry $doctrine,Rendezvous $rendezvous,Request $req){
       $form=$this->createForm(RendezvousType::class,$rendezvous)
       ->add('Update',SubmitType::class);       
@@ -101,8 +106,9 @@ class RendezvousController extends AbstractController
       $em->flush();
   return $this->redirectToRoute('ffr');
   }
-  return $this->render('rendezvous/Ajoutrdv.html.twig',['ff'=>$form->createView()]);
+  return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
     }
+<<<<<<< HEAD
     #[Route('/Updaterdvv/{id}', name:'Updaterdvv')]
     function Updatee(ManagerRegistry $doctrine,Rendezvous $rendezvous,Request $req){
       $form=$this->createForm(RendezvoussType::class,$rendezvous)
@@ -128,4 +134,6 @@ class RendezvousController extends AbstractController
 
     }
 
+=======
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 }

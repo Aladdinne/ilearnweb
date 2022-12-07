@@ -1,0 +1,41 @@
+{% extends 'indexs.html.twig' %}
+{% block body %}
+<style> table,tr,td,th{border:1px solid black}</style>
+<table class="table table-hover table-dark">
+<tr> 
+    
+    <th> NomArticle</th>
+    
+    <th> DateCreation</th>
+    <th> Contenu</th>
+    <th> EtatArticle</th>
+    <th> Supprimer</th>
+    <th> Modifier</th>
+    
+</tr>
+{% for i in article %}
+<tr>
+
+<td>
+{{i.nomarticle}}
+</td>
+
+<td>
+{{i.datecreation|date('Y-m-d')}}
+</td>
+<td>
+{{i.contenu}}
+</td>
+<td>
+{{i.etatarticle}}
+</td>
+<td>
+<a href="{{path('Deletearticle',{'id':i.idarticle})}}"class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+</td>
+<td>
+<a href="{{path('modifierarticle',{'id':i.idarticle})}}" <i class="fa-sharp fa-solid fa-pen"></i></a>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

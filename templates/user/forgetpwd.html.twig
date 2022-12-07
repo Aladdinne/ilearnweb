@@ -1,0 +1,42 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+<fieldset>
+<legend><centre><h2><b>Reset Password</b></h2></centre></legend><br>
+<style>
+h2 ,td{color:red;}
+fieldset{
+margin-top:10px;
+margin-left:400px;
+margin-right:400px;
+margin-buttom:10px;}
+#form_Inscrire{margin-top:40%}
+</style>
+{{form_start(form)}}
+   <table>
+    <tr>
+        <td>{{form_label(form.username,"User Name")}}</td>
+        <td>{{form_widget(form.username)}}</td>
+        <td>{{form_errors(form.username)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.email,"Email")}}</td>
+        <td>{{form_widget(form.email)}}</td>
+        <td>{{form_errors(form.email)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.userpwd,"Password")}}</td>
+        <td>{{form_widget(form.userpwd)}}</td>
+        <td>{{form_errors(form.userpwd)}}</td>
+    </tr>
+
+   </table>
+   
+        
+        {{form_widget(form.captcha)}}
+        {{form_errors(form.captcha)}}
+    
+
+
+{{form_end(form)}}
+</fieldset>
+{% endblock %}

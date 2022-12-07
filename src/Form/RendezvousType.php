@@ -16,7 +16,7 @@ class RendezvousType extends AbstractType
             ->add('dureerdv')
             ->add('tel')
             ->add('motif')
-            /*->add('etatrdv')*/
+            ->add('etatrdv')
            /* ->add('idformateur')  */
             ->add('idclient')
         ;

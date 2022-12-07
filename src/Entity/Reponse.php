@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ReponseRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReponseRepository::class)]
 class Reponse
@@ -14,6 +15,8 @@ class Reponse
     private ?int $idreponse = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message:"donne pas vide!!")]
+
     private ?string $contenu = null;
 
     #[ORM\Column]
@@ -24,10 +27,12 @@ class Reponse
 
     
     #[ORM\ManyToOne(inversedBy: 'reponse')]
+    #[ORM\JoinColumn(referencedColumnName: "idquestion",name: "idquestion")]
     private ?Question $idquestion = null;
 
     
     #[ORM\ManyToOne(inversedBy: 'reponses')]
+    #[ORM\JoinColumn(referencedColumnName: "iduser",name: "idetudiant")]
     private ?User $idetudiant = null;
 
     public function getIdreponse(): ?int

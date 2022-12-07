@@ -1,4 +1,5 @@
-{% extends "indexs.html.twig" %}
+
+{% extends "base.html.twig" %}
 {% block body %}
 <style>
 table, tr, td ,th {
@@ -14,6 +15,7 @@ table{
 tr{
   height:30%;
 }
+<<<<<<< HEAD
 th{
   color:black;
   text-shadow: 3px;
@@ -29,6 +31,8 @@ button{
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
       margin: auto;
 }
+=======
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 </style>
 <h2>->Votre liste de rendez vous</h2>
 </br>
@@ -66,18 +70,24 @@ button{
 <td>
 {{i.tel}}
 </td>
-<td>{{i.motif}}</td>
+<td>
+{{i.motif}}
+</td>
 <td>
 {{i.etatrdv}}
 </td>
-        <td><a href="{{path('Updaterdv',{id:i.idrdv})}}">Modifier</td>
-        <td><a href="{{path('removerdv',{id:i.idrdv})}}">Remove</td>
+        <td><a href="{{path('Update',{id:i.idrdv})}}">Modifier</td>
+        <td><a href="{{path('remove',{id:i.idrdv})}}">Remove</td>
 </tr>
 {% endif %}
 {% endfor %}
 </table>
 <div class="center">
 <button type="button"><a href="{{path('ajoutrendezvous')}}">Ajoute</button>
+<<<<<<< HEAD
 </div>
 {% endblock %}
 
+=======
+{% endblock %}
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5

@@ -2,11 +2,22 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+<<<<<<< HEAD
 use Doctrine\Common\Collections\Collection;
+<<<<<<< HEAD
 use Symfony\Component\Security\Core\User\UserInterface;
+=======
+=======
+<<<<<<< HEAD
+use Symfony\Component\Validator\Constraints\Length;
+=======
+>>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
+>>>>>>> main
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 
@@ -18,18 +29,30 @@ class User
     private ?int $iduser = null;
 
     #[ORM\Column(length: 150)]
+    //#[Assert\NotBlank(message:"Doit saisir le nom") ]
     private ?string $nom = null;
 
     #[ORM\Column(length: 150)]
+    //#[Assert\NotBlank(message:"Doit saisir un username") ]
     private ?string $username = null;
 
     #[ORM\Column(length: 150)]
-    private ?int $userpwd = null;
+<<<<<<< HEAD
+=======
+    /*#[Assert\NotBlank(message:"Doit saisir un password")]
+    #[Assert\Length(min:5,
+                    max:15,
+                    minMessage:'le mot de passe doit contenir au min 5 caractère',
+                    maxMessage:'le mot de passe doit contenir au max 15 caractère',) ]*/
+>>>>>>> main
+    private ?string $userpwd = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface$daten;
 
     #[ORM\Column(length: 150)]
+   // #[Assert\NotBlank(message:"Doit saisir un email") ]
+   // #[Assert\Email(message:" is not a valid email")]
     private ?string $email = null;
 
     #[ORM\Column(length: 150)]

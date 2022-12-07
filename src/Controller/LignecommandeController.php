@@ -9,20 +9,13 @@ use App\Entity\User;
 use App\Repository\LignecommandeRepository;
 use App\Repository\FormationRepository;
 use App\Repository\CommandRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\Persistence\ManagerRegistry;
-use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 class LignecommandeController extends AbstractController
 {
-    
     #[Route('/lignecommande', name: 'app_lignecommande')]
     public function index(): Response
     {
@@ -40,6 +33,7 @@ class LignecommandeController extends AbstractController
         $formation = $repp->findAll();
         return $this->render('lignecommande/Affiche.html.twig',['cm'=>$command,'ff'=>$formation,'ll'=>$lignecommande]);
     }
+<<<<<<< HEAD
     #[Route('/AfficheLignee/{id}',name:'fcc')]
     function Affichess (LignecommandeRepository $rep ,FormationRepository $repp,CommandRepository $reep,$id){
         $lignecommande = new Lignecommande();
@@ -155,4 +149,6 @@ class LignecommandeController extends AbstractController
     }
 
     
+=======
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 }
