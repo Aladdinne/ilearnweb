@@ -1,0 +1,24 @@
+{% extends 'indexs.html.twig' %}
+{% block body %}
+<table border ='1' class="table table-hover table-dark">
+<tr> 
+    
+    <th> NomArticle</th>
+    
+    
+    <th> Contenu</th>
+    
+</tr>
+{% for i in arc %}
+<tr>
+
+<td>
+{{i.nomarticle}}
+</td>
+<td>
+{{i.contenu}}
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

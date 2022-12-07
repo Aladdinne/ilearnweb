@@ -43,10 +43,42 @@ class UserRepository extends ServiceEntityRepository
         //$query=$em->createQuery('select u fromApp\Entity\User u where u.username=:username and u.userpwd=:userpwd');
         //return $query->getResult();
         return $this->createQueryBuilder('u')->where('u.username  =:username')
+<<<<<<< HEAD
             ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
             ->setParameter('userpwd',$userpwd)->getQuery()->getResult();
     }
 
+=======
+        ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
+        ->setParameter('userpwd',$userpwd)->getQuery()->getResult();
+    }
+    public function forgetpwd($username,$email){
+        return $this->createQueryBuilder('u')->where('u.username  =:username')
+        ->andwhere('u.email =:email')->setParameter('username',$username)
+        ->setParameter('email',$email)->getQuery()->getResult();
+   
+    }
+    public function updatepwd($username,$email,$pwd){
+        $this->update('u')->set('u.userpwd',$pwd)
+        ->where('u.username =:username')->andWhere('u.email =:email')
+        ->setParameter('username',$username)->setParameter('email',$email)->getQuery()->execute();
+    }
+    public function findUser($username){
+        return $this->createQueryBuilder('u')->where('u.username LIKE :username')
+        ->setParameter('username','%' .$username. '%')->getQuery()->getResult();
+    }
+    public function trier(){
+        return $this->createQueryBuilder('u')->orderBy('u.role')->getQuery()->getResult();
+    }
+    public function countuser(){
+        return $this->createQueryBuilder('u')->select('count(u.iduser)')->groupBy('u.role')
+        ->getQuery()->getResult();
+    }
+    public function countuser1($role){
+        return $this->createQueryBuilder('u')->select('count(u.iduser)')->where('u.role =:role')
+        ->setParameter('role',$role)->getQuery()->getResult();
+    }
+>>>>>>> main
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
