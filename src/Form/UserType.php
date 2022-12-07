@@ -30,7 +30,11 @@ class UserType extends AbstractType
             ->add('daten')
             ->add('email',EmailType::class)
             ->add('role',ChoiceType::class,['choices' => ['formateur'=>true,'etudiant'=>false,],])
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84:src/Form/UserType.php
+=======
+>>>>>>> refs/remotes/origin/main:src/Form/UserType.php
+>>>>>>> main
         ;
     }
 

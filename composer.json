@@ -13,14 +13,21 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.13",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "mercuryseries/flashy-bundle": "^5.1",
 =======
+=======
+>>>>>>> main
 <<<<<<< HEAD
+<<<<<<< HEAD
+        "mercuryseries/flashy-bundle": "^5.1",
+=======
         "dompdf/dompdf": "^2.0",
         "karser/karser-recaptcha3-bundle": "^0.1.23",
         "knplabs/knp-snappy-bundle": "^1.9",
         "mercuryseries/flashy-bundle": "^5.1",
         "mpdf/mpdf": "^6.1",
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 =======
 <<<<<<< HEAD
         "endroid/qr-code": "^4.6",
@@ -32,6 +39,9 @@
         "karser/karser-recaptcha3-bundle": "^0.1.23",
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 >>>>>>> main
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/main
+=======
 >>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
         "phpdocumentor/reflection-docblock": "^5.3",
@@ -70,14 +80,20 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "victor-prdh/recaptcha-bundle": "^1.6"
 =======
+=======
+>>>>>>> main
 <<<<<<< HEAD
         "twilio/sdk": "^6.43"
 =======
         "victor-prdh/recaptcha-bundle": "^1.6"
 >>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> main
     },
     "config": {
         "allow-plugins": {

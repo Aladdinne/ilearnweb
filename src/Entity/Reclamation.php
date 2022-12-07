@@ -33,7 +33,11 @@ class Reclamation
     
     #[ORM\OneToOne(inversedBy: 'rec')]
     private ?User $iduser = null;
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
 
     
     #[ORM\ManyToOne(inversedBy: 'categoryrec')]
@@ -50,7 +54,11 @@ class Reclamation
     $this->date =date_format($datetime, 'Y-m-d');
 }
 =======
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
 
     public function getDatereclamation(): ?\DateTimeInterface
     {
@@ -118,5 +126,9 @@ class Reclamation
 =======
 
 
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
 }

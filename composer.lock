@@ -5,12 +5,20 @@
         "This file is @generated automatically"
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
     "content-hash": "92c887eacf2d02749cb20c9fb11b2493",
     "packages": [
         {
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
     "content-hash": "ffb69e9715a9ddbd2b4cdfae66da51ef",
+>>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
 =======
 <<<<<<< HEAD
     "content-hash": "1fdd06a2167658ec8a07911a238d91b7",
@@ -80,7 +88,11 @@
     "packages": [
         {
 >>>>>>> main
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
             "name": "cmen/google-charts-bundle",
             "version": "5.0.1",
             "source": {
@@ -188,7 +200,11 @@
         {
 =======
 >>>>>>> main
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
             "name": "doctrine/annotations",
             "version": "1.13.3",
             "source": {
@@ -2247,6 +2263,9 @@
         {
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 >>>>>>> main
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/main
+=======
 >>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
             "name": "laminas/laminas-code",
@@ -2316,7 +2335,10 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
 <<<<<<< HEAD
             "name": "masterminds/html5",
             "version": "2.7.6",
@@ -2389,7 +2411,10 @@
         {
 =======
 >>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> main
             "name": "mercuryseries/flashy-bundle",
             "version": "v5.1.0",
             "source": {
@@ -8602,7 +8627,11 @@
                 }
             },
 =======
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
             "name": "symfony/twig-pack",
             "version": "v1.0.1",
             "source": {
@@ -8625,7 +8654,11 @@
 <<<<<<< HEAD
 =======
 >>>>>>> main
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -8651,7 +8684,11 @@
             "support": {
                 "source": "https://github.com/symfony/ux-chartjs/tree/v2.6.0"
 =======
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
             "description": "A Twig pack for Symfony projects",
             "support": {
                 "issues": "https://github.com/symfony/twig-pack/issues",
@@ -8659,7 +8696,11 @@
 <<<<<<< HEAD
 =======
 >>>>>>> main
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
             },
             "funding": [
                 {
@@ -8683,7 +8724,11 @@
 =======
             "time": "2020-10-19T08:46:41+00:00"
 >>>>>>> main
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
         },
         {
             "name": "symfony/validator",
@@ -9279,7 +9324,10 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
 <<<<<<< HEAD
             "name": "twilio/sdk",
             "version": "6.43.3",
@@ -9309,7 +9357,10 @@
                 "psr-4": {
                     "Twilio\\": "src/Twilio/"
 =======
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> main
             "name": "victor-prdh/recaptcha-bundle",
             "version": "1.6.2",
             "source": {
@@ -9342,9 +9393,13 @@
                 "psr-4": {
                     "VictorPrdh\\RecaptchaBundle\\": "src/"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
+>>>>>>> main
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -9354,7 +9409,10 @@
             "authors": [
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
 <<<<<<< HEAD
                     "name": "Twilio API Team",
                     "email": "api@twilio.com"
@@ -9369,7 +9427,10 @@
             ],
             "time": "2022-11-16T20:10:35+00:00"
 =======
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> main
                     "name": "Victor Prudhomme",
                     "email": "contact@victor-prdh.com"
                 }
@@ -9381,9 +9442,13 @@
             },
             "time": "2022-09-23T16:11:14+00:00"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> ae22cea8f9cdcf653139a274fbefdb0dd0d0e7c5
+>>>>>>> main
         },
         {
             "name": "webmozart/assert",

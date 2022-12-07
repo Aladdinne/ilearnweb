@@ -40,7 +40,11 @@ class Command
     private int $iduser;
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 >>>>>>> main
+<<<<<<< HEAD
 >>>>>>> 078c388824bb1ea755dd5d30634ea302c0539f84
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> main
 
     public function getIdcommand(): ?int
     {
