@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use App\Repository\CommandRepository;
 use DateTimeInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
 class Command
@@ -19,14 +23,22 @@ class Command
     private ?DateTimeInterface $datecommand = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ecrire total')]
+    #[Assert\Length(min: 2, minMessage: 'Contenue est vide')]
     private ?int $total = null;
 
     #[ORM\Column(length: 150)]
-    private ?string $etat = null;
+    #[Assert\NotBlank(message: 'post.blank_content')]
+    private ?string $etat = "encour";
 
     
+<<<<<<< HEAD
     #[ORM\ManyToOne(inversedBy: 'comm')]
     private ?User $iduser;
+=======
+    #[ORM\Column]
+    private int $iduser;
+>>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
 
     public function getIdcommand(): ?int
     {
@@ -69,12 +81,12 @@ class Command
         return $this;
     }
 
-    public function getIduser(): ?User
+    public function getIduser(): ?int
     {
         return $this->iduser;
     }
 
-    public function setIduser(?User $iduser): self
+    public function setIduser(?int $iduser): self
     {
         $this->iduser = $iduser;
 

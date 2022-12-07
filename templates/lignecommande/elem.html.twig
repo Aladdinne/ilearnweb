@@ -1,0 +1,48 @@
+<script src="https://kit.fontawesome.com/7574080bc2.js" crossorigin="anonymous"></script>
+<style>
+table,td,th {
+  border: 1px solid black;
+  padding-left: 20px;  
+}
+</style>
+<h1>Votre Elements Commandes</h1>
+
+{% if items | length > 0 %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nomformation</th>
+                <th>Description</th>
+                <th>DateCreation</th>
+                <th>Duree</th>
+                <th>Category</th>
+                <th>Prix</th>
+            </tr>
+        <tbody>
+          {% for item in items %}
+            
+          
+            <tr>
+                <td>{{ item.product.nomformation}}</td>
+                <td>{{ item.product.description}}</td>
+                <td>{{ item.product.datecreation|date('Y-m-d')}}</td>
+                <td>{{ item.product.duree}}</td>
+                <td>{{ item.product.Category}}</td>
+                <td>{{ item.product.prix}}</td>
+                <td> <a href="{{path('removepanier',{'id':item.product.idformation})}}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i> </a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" style=" text-align: right;">Total :   </td>
+                <td>{{ total }} Dt</td>
+                <td></td>
+        </tfoot>
+    </table>
+    <button class="icon"><a href="{{path('validercommande',{'id':1})}}">validercommande</button>
+    {% else %}
+    <p>Surprise,c'est vide !</p>
+{% endif %}
+

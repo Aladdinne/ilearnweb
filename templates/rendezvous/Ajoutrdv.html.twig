@@ -1,0 +1,72 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+<style>
+table{
+    width:100%;
+    height:30%;
+    
+}
+td{
+    padding:10px;
+}
+h3{
+    color:white;
+    padding:10px;
+}
+label{
+    text-shadow: 2px  ;
+    color:white;
+}
+fieldset{
+    
+    margin-left:400px;
+    margin-right:350px;
+    margin-bottom:1px;
+    padding:30px;
+    background-image: url({{asset('img/ab.jpg')}});
+}
+
+
+{#button{
+    margin-top:20%;
+    margin-left:45%;
+    margin-right:50%;
+    margin-bottom:25%;
+    padding:10px;
+
+}#}
+</style>
+{{form_start(ff,{'attr':{'novalidate':'novalidate'}})}}
+<fieldset>
+<h3>    Ajouter Rendezvous :</h3>
+<table>
+    <tr>
+        <td>{{form_label(ff.daterdv,"Date:  ")}}</td>
+        <td>{{form_widget(ff.daterdv)}}</td>
+        <td>{{form_errors(ff.daterdv)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(ff.dureerdv,"Durer:  ")}}</td>
+        <td>{{form_widget(ff.dureerdv)}}</td>
+        <td>{{form_errors(ff.dureerdv)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(ff.tel,"telephone:  ")}}</td>
+        <td>{{form_widget(ff.tel)}}</td>
+        <td>{{form_errors(ff.tel)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(ff.motif,"Motif:   ")}}</td>
+        <td>{{form_widget(ff.motif)}}</td>
+        <td>{{form_errors(ff.motif)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(ff.idclient,"ID:   ")}}</td>
+        <td>{{form_widget(ff.idclient)}}</td>
+        <td>{{form_errors(ff.idclient)}}</td>
+    </tr>
+</table>
+
+{{form_end(ff)}}
+</fieldset>
+{% endblock %}

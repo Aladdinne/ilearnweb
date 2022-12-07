@@ -1,0 +1,21 @@
+{% extends "indexs.html.twig" %}
+{% block body %}
+<table border ="1"style="border:1px solid black;margin-left:auto;margin-right:auto;" class="table table-striped table-dark">
+<tr>
+<th>idcategory</th>
+<th>category</th>
+<th>Suprimer</th>
+<th>Modifier</th>
+</tr>
+{% for i in kk %}
+
+    <tr>
+    <td>{{i.idcategory}}</td>
+    <td>{{i.category}}</td>
+     <td><a href="{{path('DD12',{id:i.idcategory})}}">delete</td>
+    <td><a href="{{path('update1',{id:i.idcategory})}}">update</td>
+    </tr>
+{% endfor %}
+</table>
+<button type="button"><a href="{{path('ajoutcateg')}}">Retour</button>
+{% endblock %}

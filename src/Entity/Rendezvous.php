@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RendezvousRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RendezvousRepository::class)]
 class Rendezvous
@@ -15,26 +16,35 @@ class Rendezvous
     private ?int $idrdv = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\GreaterThan("today" )]
     private ?\DateTimeInterface $daterdv = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: 'Ecrire une duree')]
     private ?string $dureerdv = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ecrire votre numéro de telephone')]
+    #[Assert\Length(min: 8,max: 15 ,maxMessage : 'post.too_long_content',minMessage: 'contenu court min 8 caractere')]
     private ?int $tel = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: 'Ecrire un motif')]
+    #[Assert\Length(min: 10, minMessage: 'contenu court min 10 caractere')]
     private ? string $motif = null;
 
     #[ORM\Column(length: 150)]
-    private ?string $etatrdv = null;
+    #[Assert\NotBlank(message: 'Ecrire etat')]
+    #[Assert\Length(min: 5, minMessage: 'contenu court min 5 caractere')]
+    private ?string $etatrdv = "en attendant";
 
     
-    #[ORM\ManyToOne(inversedBy: 'user')]
-    private ?User $idformateur = null;
+    #[ORM\Column]
+    private ?int $idformateur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?User $idclient = null;
+    #[ORM\Column]
+    #[Assert\NotBlank(message: 'post.blank_content')]
+    private ?int $idclient = null;
 
     public function getIdrdv(): ?int
     {
@@ -101,29 +111,30 @@ class Rendezvous
         return $this;
     }
 
-    public function getIdformateur(): ?User
+    public function getIdformateur(): ?int
     {
         return $this->idformateur;
     }
 
-    public function setIdformateur(?User $idformateur): self
+    public function setIdformateur(?int $idformateur): self
     {
         $this->idformateur = $idformateur;
 
         return $this;
     }
 
-    public function getIdclient(): ?User
+    public function getIdclient(): ?int
     {
         return $this->idclient;
     }
 
-    public function setIdclient(?User $idclient): self
+    public function setIdclient(?int $idclient): self
     {
         $this->idclient = $idclient;
 
         return $this;
     }
+    
 
 
 }
