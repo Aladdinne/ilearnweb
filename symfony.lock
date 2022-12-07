@@ -41,6 +41,10 @@
             "./migrations/.gitignore"
         ]
     },
+<<<<<<< HEAD
+    "endroid/qr-code-bundle": {
+        "version": "4.1.1"
+=======
     "google/recaptcha": {
         "version": "1.2",
         "recipe": {
@@ -66,6 +70,7 @@
             "./config/packages/karser_recaptcha3.yaml"
         ]
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
+>>>>>>> main
     },
     "phpunit/phpunit": {
         "version": "9.5",
@@ -147,15 +152,6 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
-    },
-    "symfony/google-mailer": {
-        "version": "5.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "4.4",
-            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
-        }
     },
     "symfony/mailer": {
         "version": "5.4",
@@ -279,6 +275,9 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/ux-chartjs": {
+        "version": "v2.6.0"
     },
     "symfony/validator": {
         "version": "5.4",

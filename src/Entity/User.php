@@ -4,14 +4,16 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+<<<<<<< HEAD
+use Doctrine\Common\Collections\Collection;
+=======
 <<<<<<< HEAD
 use Symfony\Component\Validator\Constraints\Length;
 =======
 >>>>>>> 8b4ef130ec757feb7d04e3bd39120ab95229a729
+>>>>>>> main
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -30,11 +32,14 @@ class User
     private ?string $username = null;
 
     #[ORM\Column(length: 150)]
+<<<<<<< HEAD
+=======
     /*#[Assert\NotBlank(message:"Doit saisir un password")]
     #[Assert\Length(min:5,
                     max:15,
                     minMessage:'le mot de passe doit contenir au min 5 caractère',
                     maxMessage:'le mot de passe doit contenir au max 15 caractère',) ]*/
+>>>>>>> main
     private ?string $userpwd = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -47,9 +52,6 @@ class User
 
     #[ORM\Column(length: 150)]
     private ?string $role = null;
-
-    #[ORM\OneToMany(targetEntity: Reclamation::class, mappedBy: 'iduser')]
-    private Collection $rec;
 
     public function getIduser(): ?int
     {
@@ -127,20 +129,6 @@ class User
 
         return $this;
     }
-    public function __construct()
-    {
-        $this->rec = new ArrayCollection();
-    }
-    
-    /**
-     * @return Collection<int, Reclamation>
-     */
-    public function getReclamation(): Collection
-    {
-        return $this->rec;
-    }
-   
-
 
 
 }

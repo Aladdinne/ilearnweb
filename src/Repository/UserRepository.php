@@ -43,6 +43,12 @@ class UserRepository extends ServiceEntityRepository
         //$query=$em->createQuery('select u fromApp\Entity\User u where u.username=:username and u.userpwd=:userpwd');
         //return $query->getResult();
         return $this->createQueryBuilder('u')->where('u.username  =:username')
+<<<<<<< HEAD
+            ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
+            ->setParameter('userpwd',$userpwd)->getQuery()->getResult();
+    }
+
+=======
         ->andwhere('u.userpwd =:userpwd')->setParameter('username',$username)
         ->setParameter('userpwd',$userpwd)->getQuery()->getResult();
     }
@@ -72,6 +78,7 @@ class UserRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('u')->select('count(u.iduser)')->where('u.role =:role')
         ->setParameter('role',$role)->getQuery()->getResult();
     }
+>>>>>>> main
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

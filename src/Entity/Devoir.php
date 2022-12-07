@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\DevoirRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DevoirRepository::class)]
 class Devoir
@@ -13,21 +15,32 @@ class Devoir
     #[ORM\Column]
     private ?int $iddevoir = null;
 
+
+    #[Assert\NotBlank(message:"donne pas vide!!")]
+    #[Assert\Length(min: 2,minMessage: 'name plus que 2 character')]
     #[ORM\Column(length: 150)]
     private ?string $namedevoir = null;
 
+
+    #[Assert\NotBlank(message:"donne pas vide!!")]
     #[ORM\Column(length: 150)]
     private ?string $dureedevoir = null;
 
+
+    #[Assert\NotBlank(message:"donne pas vide!!")]
     #[ORM\Column(length: 150)]
     private ?string $datecreation = null;
 
+
+    #[Assert\NotBlank(message:"donne pas vide!!")]
     #[ORM\Column(length: 150)]
     private ?string $contenu = null;
 
     #[ORM\Column(length: 150)]
     private ?string $category = null;
 
+    #[ORM\OneToMany(mappedBy:'iddevoir',targetEntity: Question::class)]
+    private Collection $questions;
     public function getIddevoir(): ?int
     {
         return $this->iddevoir;

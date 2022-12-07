@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Rendezvous;
-use App\Entity\User;
 use App\Form\RendezvousType;
-use App\Form\RendezvoussType;
 use App\Repository\UserRepository;
 use App\Repository\RendezvousRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,11 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\HttpFoundation\Request;
-
-use function PHPSTORM_META\type;
 
 class RendezvousController extends AbstractController
 {
@@ -34,21 +28,15 @@ class RendezvousController extends AbstractController
         $rendezvous = $rep->findall();
         return $this->render('rendezvous/Affiche1.html.twig',['rr'=>$rendezvous,'cc'=>$user]);
     }
-    #[Route('/AfficheRendezvouss',name:'fffr')]
-    function Affiche1 (RendezvousRepository $rep,UserRepository $repp ){
-        $user = $repp->findAll();
-        $rendezvous = $rep->findall();
-        return $this->render('rendezvous/Affiche.html.twig',['rrr'=>$rendezvous,'ccc'=>$user]);
-    }
     #[Route('/Ajoutrendezvous',name:'ajoutrendezvous')]
     function Ajout(ManagerRegistry $doctrine,Request $request){
         $rendezvous=new Rendezvous;
-        $user=new User;
         $form=$this->createFormBuilder($rendezvous)
             ->add('daterdv')
             ->add('dureerdv')
             ->add('tel')
             ->add('motif')
+            ->add('etatrdv')
             ->add('idclient')
             ->add('Ajout',SubmitType::class)
         ->getForm();
@@ -59,17 +47,17 @@ class RendezvousController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('ffr');
         }
-        return $this->render('rendezvous/Ajoutrdv.html.twig',['ff'=>$form->createView()]);
+        return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
         
       }
-      #[Route('/Deleterdv/{id}', name:'removerdv')]
+      #[Route('/Delete/{id}', name:'remove')]
     function delete(ManagerRegistry $doctrine,Rendezvous $rendezvous){
         $em=$doctrine->getManager();
         $em->remove($rendezvous);
         $em->flush();
         return $this->redirectToRoute('ffr');
     }
-    #[Route('/Updaterdv/{id}', name:'Updaterdv')]
+    #[Route('/Update/{id}', name:'Update')]
     function Update(ManagerRegistry $doctrine,Rendezvous $rendezvous,Request $req){
       $form=$this->createForm(RendezvousType::class,$rendezvous)
       ->add('Update',SubmitType::class);       
@@ -79,20 +67,6 @@ class RendezvousController extends AbstractController
       $em->flush();
   return $this->redirectToRoute('ffr');
   }
-  return $this->render('rendezvous/Ajoutrdv.html.twig',['ff'=>$form->createView()]);
+  return $this->render('command/Ajout.html.twig',['ff'=>$form->createView()]);
     }
-    #[Route('/Updaterdvv/{id}', name:'Updaterdvv')]
-    function Updatee(ManagerRegistry $doctrine,Rendezvous $rendezvous,Request $req){
-      $form=$this->createForm(RendezvoussType::class,$rendezvous)
-      ->add('Update',SubmitType::class) ; 
-
-  $form->handleRequest($req);
-  if($form->isSubmitted() && $form->isValid()){
-      $em=$doctrine->getManager();
-      $em->flush();
-  return $this->redirectToRoute('fffr');
-  }
-  return $this->render('rendezvous/Ajoutrdvv.html.twig',['ff'=>$form->createView()]);
-    }
-
 }

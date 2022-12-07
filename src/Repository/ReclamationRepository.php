@@ -38,15 +38,6 @@ class ReclamationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function TrieDQL(){
-        $em=$this->getEntityManager();
-        $query=$em->createQuery('select e from App\Entity\Etudiant e ORDER BY e.Email DESC ');
-        return $query->getResult();
-    }
-
-
-
-
 
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects
